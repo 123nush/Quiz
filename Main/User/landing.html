@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Index Page</title>
+    <!-- talwind link -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link type="image/png" sizes="16x16" rel="icon" href="https://tse3.mm.bing.net/th?id=OIP.8W1AqXk8aZfMEIyeyOwvAwAAAA&pid=Api&P=0&h=180" />
+    <link rel="stylesheet" href="../../Css/landing.css">
+    <style>
+      h3 {
+    display: block;
+    width: fit-content;
+    /* font-size: 4rem; */
+    position: relative;
+    color: transparent;
+    animation: text_reveal 0.5s ease forwards;
+    animation-delay: 1s;
+}
+    </style>
+</head>
+<body>
+    <!-- <img src="https://media.tenor.com/vCMW7BYD4WkAAAAC/m.gif" alt=""> -->
+    <div id="video-container">
+      <video autoplay loop muted>
+        <source src="https://marketplace.canva.com/EAFIGPIs_0g/1/0/450w/canva-blue-abstract-electronic-circuits-instagram-reel-nNFrRp9nxrE.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+<!-- middle part -->
+<div class="container-fluid">
+  <div style="margin-top: 5.5cm;margin-bottom: 7.5cm;">
+    <div class="row align-items-center justify-content-center align-middle">
+      <div class="col-md-10 col-lg-10 d-flex flex-column align-items-center justify-content-center text-center">
+        <h3 style="color: white; font-weight: bolder;" class="p-3 mb-0">SKILL ANALYSIS QUIZ</h3>
+        <h5 style="color: white;" class="mb-3">The quiz website is designed to test your knowledge on the latest trends in the IT industry.
+           Discover the high demand fields, emerging technologies, and skills required to excel in today's IT jobs.
+          So why are you waiting for<br> <strong>Put Your Tech Skills To The Test!!!</strong></h5>
+
+      </div>
+    </div>
+    <div class="row align-items-center justify-content-center  text-center">
+      <div class="col-md-4 col-lg-4 p-3 mx-auto">
+        <button  onclick="location.href='register.php'" type="button" class="btn btn-outline-light btn-info btn-lg text-dark" style="font-weight: bolder;height: 50px;width: 110px;">Register</button>
+        <button onclick="location.href='login.php'" type="button" class="btn  btn-lg text-dark bg-blue-500 hover:bg-blue-300" style="font-weight: bolder;height: 50px;width: 110px;background-color: #3498db">Login</button>
+      </div>
+    </div>
+  </div>
+<!-- about us -->   
+ <!-- last div -->
+  <!-- <div class="row  align-items-center justify-content-center content ">
+    <div class="col-md-4 col-lg-5 p-3 col-md-auto mx-auto " id="showcase-left">
+      
+      <img class="img-fluid"  src="https://media.tenor.com/vCMW7BYD4WkAAAAC/m.gif" alt="" >
+      
+    </div>
+    <div class="col-md-4 col-lg-5 p-3 col-md-auto mx-auto " id="showcase-right">
+      
+        <p style="font-weight: bolder;">
+        In Information technology(IT) there are many trending jobs for which people prepares themselves. 
+        But sometimes they find difficult that what is to study and from where to start , sometimes they can’t
+        recognize in which skill they are good. So this quiz platform help such people to solve all above problems.
+        With the help of this website  people can easily choose correct path ,
+        more specifically from the interview point of view they can prepare themselves in organize way.
+      </p>
+      
+    </div>
+  </div> -->
+
+<!-- why my quiz -->
+<div class="row  align-items-center justify-content-center content ">
+  <div class="col-md-4 col-lg-5 p-3 col-md-auto mx-auto ">
+    <h4>1 Engagement</h4>
+    <p style="background-color: rgb(0, 179, 255);">Interactive quizzes keep learners engaged and motivated throughout the learning process</p>
+  </div>
+  <div class="col-md-4 col-lg-5 p-3 col-md-auto mx-auto ">
+    <h4>2 Assessment</h4>
+    <p>Users can assess their knowledge and identify areas thet require further improvement</p>
+  </div>
+</div>
+<div class="row  align-items-center justify-content-center content ">
+  <div class="col-md-4 col-lg-5 p-3 col-md-auto mx-auto ">
+    <h4>1 Engagement</h4>
+    <p style="background-color: rgb(0, 179, 255);">Interactive quizzes keep learners engaged and motivated throughout the learning process</p>
+  </div>
+  <div class="col-md-4 col-lg-5 p-3 col-md-auto mx-auto ">
+    <h4>2 Assessment</h4>
+    <p>Users can assess their knowledge and identify areas thet require further improvement</p>
+  </div>
+</div>
+<!-- <footer>
+  <p class="text-center">Copyright &copy;2023</p>
+</footer> -->
+</div>
+<script>
+$(document).ready(function () {
+    // Flag to check if animations have been triggered
+    var animationsTriggered = false;
+
+    function animateImage() {
+        if (!animationsTriggered) {
+            $('#showcase-left').animate({ marginTop: '-=20px', opacity: 0, rotate: '+=15deg' }, 1000, 'easeInOutBounce', function () {
+                $('#showcase-left').animate({ marginTop: '+=20px', opacity: 1, rotate: '-=15deg' }, 1000, 'easeInOutBounce', function () {
+                    // Call the function recursively to create a continuous loop
+                    animateImage();
+                });
+            });
+            animationsTriggered = true;
+        }
+    }
+
+    function animateDiv() {
+        if (!animationsTriggered) {
+            $('#showcase-right').animate({ marginTop: '-=20px', opacity: 0, rotate: '-=15deg' }, 1000, 'easeInOutBounce', function () {
+                $('#showcase-right').animate({ marginTop: '+=20px', opacity: 1, rotate: '+=15deg' }, 1000, 'easeInOutBounce', function () {
+                    // Call the function recursively to create a continuous loop
+                    animateDiv();
+                });
+            });
+            animationsTriggered = true;
+        }
+    }
+
+    // Bind the functions to the scroll event
+    $(window).on('scroll', animateImage);
+    $(window).on('scroll', animateDiv);
+});
+
+
+
+</script>
+</body>
+
+</html>

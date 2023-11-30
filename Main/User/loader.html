@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  font-family: 'Source Sans Pro', sans-serif;
+  color:white;
+ }
+
+ .container{
+  width: 100vw;
+  /* height: 100vh; */
+  background-color: #27ae60;
+ }
+
+ .box{
+  /*position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);*/
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+ }
+
+ .spinner{
+  height: 50px;
+  width: 50px;
+  border: 5px solid #062c6e;
+  border-top: 4px solid white;
+  border-radius: 50%;
+
+  transition-property: transform;
+  animation-name: rotate;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+ }
+
+ @keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+
+ }
+
+ #para{
+width: 100%;
+text-align: center;
+ }
+    </style>
+</head>
+<body>
+    <div id="loadingDiv" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <div class="spinner">
+            <div class="bulb"></div>
+        </div>
+    </div>
+
+    <script>
+        $(window).on('load', function(){
+            $('#main').hide();
+            setTimeout(removeLoader, 2000); //wait for page load PLUS two seconds.
+        });
+
+        function removeLoader(){
+            $( "#loadingDiv" ).fadeOut(500, function() {
+                // fadeOut complete. Remove the loading div
+                $( "#loadingDiv" ).remove(); //makes page more lightweight 
+                $('#main').show();
+            });
+        }
+    </script>
+</body>
+</html>

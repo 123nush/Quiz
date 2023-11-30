@@ -1,0 +1,226 @@
+{
+    "type":"module",
+    "job_profile": [{
+ 
+    "job_profile_name":"Artificial Intelligence",
+    "Description":"Artificial intelligence (AI) engineers are responsible for developing, programming and training the complex networks of algorithms that make up AI so that they can function like a human brain. This role requires combined expertise in software development, programming, data science and data engineering",
+    "technologies":["Natural language generation","Speech recognition","Virtual agents","Decision management","Biometrics","Machine learning","Robotic process automation","Peer-to-peer network","Deep learning platforms","AL-optimized hardware"],
+    "update_date":"2023-08-04"
+
+    },{
+        "job_profile_name":"Database Administrator",
+        "Description":"Database Administrators are professionals who ensure that all databases, including those for financial or customer information, stay up-to-date with policies and procedures in place to protect against data loss.",
+        "technologies":["SQL","UNIX","Linux","Oracle","Windows Operating System","Data Analysis","Microsoft Access","HTML"],
+        "update_date":"2023-08-04"
+
+    },{
+        "job_profile_name":"Data Analyst",
+        "Description":"A Data Analyst is a professional who collects and analyzes data across the business to make informed decisions or assist other team members and leadership in making sound decisions.",
+        "technologies":["SQL","Statistical programming","Machine learning","Probability and statistics","Data management","Statistical visualization","Econometrics"],
+        "update_date":"2023-08-04"
+
+    },{
+        "job_profile_name":"Android Developer",
+        "Description":"An Android developer is responsible for developing applications for devices powered by the Android operating system. Due to the fragmentation of this ecosystem, an Android developer must pay special attention to the application’s compatibility with multiple versions of Android and device types.",
+        "technologies":["Programming Language Kotlin"," Android Jetpack","Instant Android Apps","Augmented Reality","Artificial Intelligence and Machine Learning "," Ethereum Integration","Cloud Computing","Integration of the Internet of Things (IoT)","Integration of Chatbots"," Enhancements to Security Using Biometrics"],
+        "update_date":"2023-08-04"
+
+    },{
+        "job_profile_name":"Software Engineer",
+        "Description":"A Software Engineer is an IT professional who designs, develops and maintains computer software at a company. They use their creativity and technical skills and apply the principles of software engineering to help solve new and ongoing problems for an organization.",
+        "technologies":["Coding languages"," Android Jetpack","Instant Android Apps","Augmented Reality","Artificial Intelligence and Machine Learning "," Ethereum Integration","Cloud Computing","Integration of the Internet of Things (IoT)","Integration of Chatbots"," Enhancements to Security Using Biometrics"],
+        "update_date":"2023-08-04"
+
+    }
+],
+"User":[
+    {
+        "username":"123nush",
+        "name":"Anushka",
+        "password":"anushka111",
+        "email":"anushka@gmail.com",
+        "user_type":"a"
+    },
+    {
+        "username":"sanika18",
+        "name":"sanika",
+        "password":"sanika111",
+        "email":"sanika@gmail.com",
+        "user_type":"o"
+    },
+    {
+        "username":"Strokes",
+        "name":"Ben Strokes",
+        "password":"john123",
+        "email":"Strokes@gmail.com",
+        "user_type":"o"
+    },
+{
+        "username":"Pitter",
+        "name":"Pitter Glitter",
+        "password":"jane123",
+        "email":"Pitter@gmail.com",
+        "user_type":"o"
+    },
+{
+        "username":"jenny",
+        "name":"Jenny shrof",
+        "password":"jenny234",
+        "email":"jenny@gmail.com",
+        "user_type":"o"
+    }
+
+],
+"Review":[{
+    "review_id": 101,
+    "job_profile_suggested": "Software Engineer",
+    "reason_for_job_profile": "Trending job",
+    "suggestion_for_system": null,
+    "username":"sanika18"
+},{
+    "review_id": 102,
+    "job_profile_suggested": "Data Analyst",
+    "reason_for_job_profile": "High demand",
+    "suggestion_for_system": null,
+    "username":"Strokes"
+},
+{
+    "review_id": 103,
+    "job_profile_suggested": "Product Manager",
+    "reason_for_job_profile": "Good salary",
+    "suggestion_for_system": null,
+    "username":"jenny"
+},
+{
+    "review_id": 104,
+    "job_profile_suggested": "Software Developer",
+    "reason_for_job_profile": "Trending job",
+    "suggestion_for_system": null,
+    "username":"Pitter"
+},
+{
+    "review_id": 105,
+    "job_profile_suggested": "Data Scientist",
+    "reason_for_job_profile": "Trending job",
+    "suggestion_for_system": null,
+    "username":"Strokes"
+}
+
+],
+"Result":[{
+    "result_id": 1,
+    "attained_questions":10,
+    "correct_ans":8,
+    "incorrect_ans":2,
+    "score": 8,
+    "username":"sanika18"
+},
+{ "result_id": 2,
+"attained_questions":8,
+"correct_ans":7,
+"incorrect_ans":1,
+"score": 7,
+"username":"Strokes"},
+{ "result_id": 3,
+"attained_questions":9,
+"correct_ans":6,
+"incorrect_ans":3,
+"score": 6,
+"username":"Pitter"},
+{"result_id": 4,
+"attained_questions":10,
+"correct_ans":8,
+"incorrect_ans":2,
+"score": 8,
+"username":"jenny"},
+{"result_id": 5,
+"attained_questions":9,
+"correct_ans":7,
+"incorrect_ans":2,
+"score": 7,
+"username":"sanika18"}
+],
+"Quiz":[{
+    "quiz_id":501,
+    "quiz_date":"2023-08-10",
+    "no_of_questions":10,
+    "result_id":3,
+    "job_profile_name":"Database Administrator",
+    "username":"jenny",
+    "sa_id":"5001"
+},
+{ "quiz_id":502, 
+"quiz_date":"2023-08-11",
+"no_of_questions":10,
+"result_id":2,
+"job_profile_name":"Software Engineer",
+"username":"Pitter",
+"sa_id":"5002" }
+
+,{ "quiz_id":503,
+ "quiz_date":"2023-08-12",
+ "no_of_questions":10,
+ "result_id":1,
+ "job_profile_name":"Android Developer",
+ "username":"sanika18",
+ "sa_id":"5003"}
+
+,{ "quiz_id":504, 
+"quiz_date":"2023-08-13",
+"no_of_questions":10,
+"result_id":4,
+"job_profile_name":"Data Analyst",
+"username":"Pitter",
+"sa_id":"5004"}
+
+,{ "quiz_id":505, "quiz_date":"2023-08-14",
+"no_of_questions":10,
+"result_id":1,
+"job_profile_name":"Artificial Intelligence",
+"username":"Strokes",
+"sa_id":"5005"}],
+
+"question_answer":[{
+    "question_id":1001,
+    "question":"Select function which will be used for grouping purpose in Pandas",
+    "difficulty_level":"simple",
+    "option_1":"cut()",
+    "option_2":"sum()",
+    "option_3":"pivot()",
+    "option_4":"head()",
+    "correct_answer_description":"pandas.pivot(index, columns, values) function produces pivot table based on 3 columns of the DataFrame. Uses unique values from index / columns and fills with values."
+},
+{ "question_id":1002, "question":"Which method can be used to drop duplicate values in a Pandas DataFrame?", "difficulty_level":"simple", "option_1":"dropduplicates()", "option_2":"removeduplicates()", "option_3":"deleteduplicates()", "option_4":"eliminateduplicates()", "correct_answer_description":"The drop_duplicates() method is used to drop duplicate values in a Pandas DataFrame." }
+
+,{ "question_id":1003, "question":"What is the purpose of the info() method in Pandas?", "difficulty_level":"simple", "option_1":"Displays information about the data types, memory usage, and non-null values", "option_2":"Sorts the data in ascending order", "option_3":"Calculates the cumulative sum of the data", "option_4":"Converts categorical data into numerical data", "correct_answer_description":"The info() method in Pandas displays information about the data types, memory usage, and non-null values in a DataFrame."}
+
+,{ "question_id":1004, "question":"Which method can be used to rename columns in a Pandas DataFrame?", "difficulty_level":"simple", "option_1":"renamecolumns()", "option_2":"changecolumnnames()", "option_3":"altercolumnnames()", "option_4":"rename()", "correct_answer_description":"The rename() method is used to rename columns in a Pandas DataFrame." }
+
+,{ "question_id":1005, "question":"How can missing values be handled in a Pandas DataFrame?", "difficulty_level":"simple", "option_1":"dropmissing()", "option_2":"fillblanks()", "option_3":"ignoremissing()", "option_4":"fillna()", "correct_answer_description":"The fillna() method can be used to fill missing values in a Pandas DataFrame." }],
+"Score_Analysis":[{
+    "sa_id":"5001",
+    "Analysis":"performed well in logical reasoning, have to focus on topics related to data visualization",
+    "username":"sanika18"
+},
+{
+    "sa_id":"5002",
+    "Analysis":"performed exceptionally in coding tasks, should work on effective communication",
+    "username":"jenny"
+},
+{
+    "sa_id":"5003",
+    "Analysis":"showed good understanding of statistics, need to work on problem-solving skills" ,
+    "username":"sanika18"
+},
+{
+    "sa_id":"5004",
+    "Analysis":"struggled with critical thinking questions, need to improve analytical skills" ,
+    "username":"Strokes"
+},
+{
+    "sa_id":"5001",
+    "Analysis":"demonstrated strong knowledge in data manipulation, should practice more on statistical testing" ,
+    "username":"Pitter"
+}
+]
+}

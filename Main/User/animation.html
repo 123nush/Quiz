@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Include necessary libraries -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <style>
+        .animated-div {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            border-radius: 50%;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div id="showcase-left" class="animated-div" style="left: 0;">
+    <h2>Anushka</h2></div>
+    <div id="showcase-right" class="animated-div" style="left: 200px;">
+    <h1>Dalvi</h1></div>
+
+    <script>
+        $(document).ready(function () {
+            // Flag to check if animations have been triggered
+            var animationsTriggered = false;
+
+            function animateImage() {
+                if (!animationsTriggered) {
+                    $('#showcase-left').animate({
+                        left: '+=50px',
+                        top: '+=50px',
+                        opacity: 0
+                    }, {
+                        step: function (now, fx) {
+                            if (fx.prop === 'left' || fx.prop === 'top') {
+                                $(this).css('transform', 'rotate(' + (now / 5) + 'deg)');
+                            }
+                        },
+                        duration: 1000,
+                        complete: function () {
+                            $('#showcase-left').animate({
+                                left: '-=50px',
+                                top: '-=50px',
+                                opacity: 1
+                            }, {
+                                step: function (now, fx) {
+                                    if (fx.prop === 'left' || fx.prop === 'top') {
+                                        $(this).css('transform', 'rotate(' + (now / 5) + 'deg)');
+                                    }
+                                },
+                                duration: 1000,
+                                complete: function () {
+                                    // Call the function recursively to create a continuous loop
+                                    animateImage();
+                                }
+                            });
+                        }
+                    });
+                    animationsTriggered = true;
+                }
+            }
+
+            function animateDiv() {
+                if (!animationsTriggered) {
+                    $('#showcase-right').animate({
+                        left: '-=50px',
+                        top: '+=50px',
+                        opacity: 0
+                    }, {
+                        step: function (now, fx) {
+                            if (fx.prop === 'left' || fx.prop === 'top') {
+                                $(this).css('transform', 'rotate(' + (now / 5) + 'deg)');
+                            }
+                        },
+                        duration: 1000,
+                        complete: function () {
+                            $('#showcase-right').animate({
+                                left: '+=50px',
+                                top: '-=50px',
+                                opacity: 1
+                            }, {
+                                step: function (now, fx) {
+                                    if (fx.prop === 'left' || fx.prop === 'top') {
+                                        $(this).css('transform', 'rotate(' + (now / 5) + 'deg)');
+                                    }
+                                },
+                                duration: 1000,
+                                complete: function () {
+                                    // Call the function recursively to create a continuous loop
+                                    animateDiv();
+                                }
+                            });
+                        }
+                    });
+                    animationsTriggered = true;
+                }
+            }
+
+            // Trigger animations on scroll
+            $(window).on('scroll', function () {
+                animateImage();
+                animateDiv();
+            });
+        });
+    </script>
+</body>
+</html>

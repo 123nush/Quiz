@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Index Page</title>
+    <link type="image/png" sizes="16x16" rel="icon" href="https://tse3.mm.bing.net/th?id=OIP.8W1AqXk8aZfMEIyeyOwvAwAAAA&pid=Api&P=0&h=180" />
+    <link rel="stylesheet" href="../../Css/landing.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div id="load_data"><h2>This is going to be change...</h2><br></div>
+        <p id="change">I will change you</p>
+        <p id="change_post">Heyyy heyy hey you will gone</p>
+        <button class="btn btn-success" id="btn-click">Click On It</button>
+        <button class="btn btn-primary" onclick="myfunction()">Click Me</button>
+        <button class="btn btn-danger" id="get_jq">Get Method</button>
+        <button class="btn btn-danger" id="post_jq">Post Method</button>
+
+    </div>
+
+    <script>
+        // using javascript
+        function myfunction(){
+            var req=new XMLHttpRequest();
+            req.open('GET','load.html','true');
+            req.send();
+            req.onreadystatechange=function(){
+                if(req.readyState== 4 && req.status==200){
+                    document.getElementById('load_data').innerHTML=req.responseText;
+                }
+            }
+        }
+        // using  simple jQuery
+        $(document).ready(function(){
+            $("#btn-click").click(function(){
+                $("#load_data").load('load.html',function(){
+                    alert("This is done");
+                });
+            })
+        });
+        //using $.get()
+        $(document).ready(function(){
+            $('#get_jq').click(function(){
+                $.get('load.html',function(data,status){
+                    $("#change").html(data);
+                    alert(status);
+                })
+                
+            })
+        })
+        // using $.post()
+        $(document).ready(function(){
+            $('#post_jq').click(function(){
+                $.post('load1.php',{
+                    name:"SPM",
+                    subs:"boaring subject"
+                },function(data,status){
+                    $('#change_post').html(data);
+                    alert(status);
+                })
+            })
+        });
+    </script>
+</body>
+</html>
