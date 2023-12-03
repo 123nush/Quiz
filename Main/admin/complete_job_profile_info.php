@@ -29,9 +29,7 @@
             <?php
             require_once('../admin/admin_navbar.html');
             ?>
-            <div class="col-lg-6 col-md-6 mb-5" >
-            <img src="../../Images/register.PNG" class="img-fluid" alt="">
-            </div>
+            
                 <?php
                 require_once('../connection/connect.php');
                 if (isset($_GET['profile_job'])) {
@@ -49,7 +47,7 @@
                     {
                    // echo(mysqli_num_rows($result_of_job_tasks_info));
                         ?>
-                        <div class="col-lg-6 col-md-6 mb-5" >
+                        <div class="col-lg-6  col-md-6 mb-5" >
                             <div class="rounded p-3  text-white" style="cursor: pointer; transition: all 0.3s;background-color: #100a4d;">
                                 <!-- Your card content -->
                                 <h5 class="card-title">Job Profile Name :  <?php echo $row_of_query['job_profile_name']; ?></h5>
@@ -84,7 +82,9 @@
                 <?php
                 }
                 ?>
-   
+            <div class="col-lg-5  col-md-6 mb-5" >
+            <img src="../../Images/register.PNG" class="img-fluid h-100 w-100" alt="">
+            </div>
         </div>
 </div>
    

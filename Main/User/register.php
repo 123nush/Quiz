@@ -16,6 +16,22 @@
     <link type="image/png" sizes="16x16" rel="icon" href="https://tse3.mm.bing.net/th?id=OIP.8W1AqXk8aZfMEIyeyOwvAwAAAA&pid=Api&P=0&h=180" />
     <link rel="stylesheet" href="../../Css/landing.css">
 </head>
+<style>
+    @media (min-width: 768px) {
+  sizing {
+    width: 500px; /* Example width */
+  /* height: 300px; Example height */
+  border: 1px solid #ccc; /* Example border */
+  }
+}
+@media (max-width: 767px) {
+  sizing {
+    width: 300px; /* Example width */
+  /* height: 200px; Example height */
+  border: 1px solid #ccc; /* Example border */
+  }
+}
+</style>
 <body>
     <!-- <div class="loader-container">
     <?php
@@ -64,7 +80,7 @@
         </div>
     
     <!-- <div class="container w-75 mt-5 mb-5 shadow p-3 mb-5 bg-body" style="border-radius: 20px"> -->
-    <div class="container w-50  shadow mt-5 mb-5 bg-body mb-5" style="border-radius: 20px">
+    <div class="container sizing  shadow mt-5 mb-5 bg-body mb-5" style="border-radius: 20px">
 
             <div class="row text-dark ">
     <!-- <h4 class="text-center fw-bolder">Create Your Account!!!</h4> -->

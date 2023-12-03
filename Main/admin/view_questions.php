@@ -55,6 +55,10 @@
                 <div class="modal-content" style="background-color: #100a4d;">
                     <div class="modal-body">
                     <form>
+                        <div class="mb-3" style="display: none;">
+                            <label for="question_id" class="form-label">Question ID</label>
+                            <input type="text" class="form-control" id="question_id" required>
+                        </div>
                         <div class="mb-3">
                             <label  class="form-label">Select Job Profile Name</label>
                             <select class="form-select" id="update_job_profile_question">
@@ -89,7 +93,7 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="update_question" class="form-label">update_</label>
+                            <label for="update_question" class="form-label">Question</label>
                             <input type="text" class="form-control" id="update_question" required >
                             <div id="update_questionVerify" class="form-text"></div>  
                         </div>
@@ -122,7 +126,7 @@
                     </div>
                     <div class="modal-footer justify-content-center">
                         <button type="button" class="btn  btn-outline-primary text-light " data-bs-dismiss="modal">Cancel</button>
-                        <button type="button"  class="btn btn-outline-primary text-light " id="update_question" name="update_question">Update Question</button>
+                        <button type="button"  class="btn btn-outline-primary text-light " id="update_question_submit" name="update_question">Update Question</button>
                         
                     </div>
                 </div>

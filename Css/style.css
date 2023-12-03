@@ -1,0 +1,32 @@
+body {
+    overflow: hidden;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+div {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+h1 {
+    font-size: 4.3em;
+    letter-spacing: -4px;
+    font-weight: 700;
+    color: #7e2ea0;
+    text-align: center;
+}
+
+.cssanimation, .cssanimation span {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+.cssanimation span { display: inline-block }
+
+.leWaterWave span { animation: leWaterWave .2s linear infinite }
+@keyframes leWaterWave {
+    50% { transform: skewY(1deg) skewX(-1deg) scale(1.06) }
+}

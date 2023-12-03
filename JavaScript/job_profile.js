@@ -170,7 +170,7 @@ $(document).ready(function(){
         e.preventDefault();
         var buttonId = $(this).attr('id');
         var profileNameUpdate = buttonId.replace('update_job_profile_info', '');
-        e.preventDefault();
+        
         $.ajax({
                     type: 'POST',
                     url: 'admin_ajax.php', 
@@ -208,6 +208,7 @@ $(document).ready(function(){
                         console.error(error);
                     }
                 });
+                e.preventDefault();
     });
     //code to update job_profile_data
     $('#update_job_profile').on('click',function(e){

@@ -18,7 +18,35 @@
     <link rel="stylesheet" href="../../Css/landing.css">
     
 </head>
-<body>
+<style>
+    .background-image {
+  /* Set the background image */
+  background-image: url('../../Images/back4.png');
+  /* Adjust the size and position of the background */
+  background-size: cover; /* or 'contain' based on your preference */
+  background-position: center center;
+  opacity: 1; /* Adjust the opacity value (0 to 1) */
+  width: 100vw; /* Adjust as needed */
+  height: 100vh; /* Adjust as needed */
+  z-index: -1;
+}
+@media (min-width: 768px) {
+  sizing {
+    width: 500px; /* Example width */
+  height: 300px; /* Example height */
+  border: 1px solid #ccc; /* Example border */
+  }
+}
+/* Adjust margin for smaller screens (mobile) */
+@media (max-width: 767px) {
+  sizing {
+    width: 300px; /* Example width */
+  height: 200px; /* Example height */
+  border: 1px solid #ccc; /* Example border */
+  }
+}
+</style>
+<body >
     <!-- <div class="loader-container">
     <?php
    
@@ -53,25 +81,24 @@
             </div>
         </div>
     
-    <div class="container w-50 mt-5 mb-5 shadowmb-5 bg-body" style="border-radius: 20px">
-    <!-- <h4 class="text-center fw-bolder">Login To System!!!</h4> -->
+    <div class="container sizing mt-5 mb-5 shadowmb-5 bg-body" style="border-radius: 20px">
             <div class="row text-dark ">
-            <div class=" col-md-5 col-lg-6 mx-auto" style="background-color:#1a75ff;">
-                <!-- <img src="https://1.bp.blogspot.com/-aGY128_uhLA/YOiVbVdX-DI/AAAAAAAAAFI/wqvpHrmEgK86934cxNkOS9jbDFwh9rkTQCLcBGAsYHQ/s720/bigstock-Man-Having-an-Online-Registrat-73738582-720x537.jpg"
-                alt="Registraion Image" class="img-fluid h-auto" > -->
-                <!-- <img src="../../Images/register.PNG"
-                alt="Registraion Image" class="img-fluid h-auto"  id="i1"> -->
-                <h3 class="p-3 text-center fw-bolder mt-5 text-light">Welcome Back!</h3>
-                <h5 class="p-3 text-center fw-bolder mt-3 text-light"> Discover your tech strengths and weaknesses with our quiz
-</h5>
-                <p class="text-center mt-3 text-light">
-                
-                        <!-- Enter your personal details and start your journey with us -->
-                        <a href="register.php"  class="text-light m-2 p-3" >Don't have an account?<br><br>
-                            <button class="btn btn-outline-light ">Register</button> </a>
-                </p>
-                
-            </div>
+                <div class=" col-md-5 col-lg-6 mx-auto" style="background-color:#1a75ff;">
+                    <!-- <img src="https://1.bp.blogspot.com/-aGY128_uhLA/YOiVbVdX-DI/AAAAAAAAAFI/wqvpHrmEgK86934cxNkOS9jbDFwh9rkTQCLcBGAsYHQ/s720/bigstock-Man-Having-an-Online-Registrat-73738582-720x537.jpg"
+                    alt="Registraion Image" class="img-fluid h-auto" > -->
+                    <!-- <img src="../../Images/register.PNG"
+                    alt="Registraion Image" class="img-fluid h-auto"  id="i1"> -->
+                    <h3 class="p-3 text-center fw-bolder mt-5 text-light">Welcome Back!</h3>
+                    <h5 class="p-3 text-center fw-bolder mt-3 text-light"> Discover your tech strengths and weaknesses with our quiz
+                    </h5>
+                    <p class="text-center mt-3 text-light">
+                    
+                            <!-- Enter your personal details and start your journey with us -->
+                            <a href="register.php"  class="text-light m-2 p-3" >Don't have an account?<br><br>
+                                <button class="btn btn-outline-light ">Register</button> </a>
+                    </p>
+                    
+                </div>
                 <div class="col-md-5 col-lg-6 p-3 mb-5 mt-5 mx-auto align-items-center justify-content-center">
                 <form>
                     <div class="mb-3">
@@ -98,16 +125,7 @@
                     <button type="submit" class="btn btn-primary" id="submit">Submit</button>
                 </form>
             </div>
-            <!-- <div class="p-3 col-md-4 col-lg-5 mx-auto"> -->
-                <!-- <img src="https://1.bp.blogspot.com/-aGY128_uhLA/YOiVbVdX-DI/AAAAAAAAAFI/wqvpHrmEgK86934cxNkOS9jbDFwh9rkTQCLcBGAsYHQ/s720/bigstock-Man-Having-an-Online-Registrat-73738582-720x537.jpg"
-                alt="Registraion Image" class="img-fluid h-auto" > -->
-                <!-- <img src="../../Images/register.PNG"
-                alt="Registraion Image" class="img-fluid h-auto"  id="i1"> -->
-                
-            <!-- </div> -->
-        <!-- <p class="text-center mt-5"> -->
-                        <!-- <a href="register.php"  class="link-dark">Don't have an account? Register</a> -->
-                    <!-- </p> -->
+         
         </div>
     </div>
 </div>

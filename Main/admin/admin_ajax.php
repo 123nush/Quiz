@@ -249,13 +249,13 @@ if (!empty($_POST['question_id_to_delete'])){
         echo(mysqli_error($con));
     }
 }
-
+//code to get all data related to questions in order to show in update question modal
 if (!empty($_POST['question_id_to_update'])){
     $selected_question_id=mysqli_real_escape_string($con,$_POST['question_id_to_update']);
     $get_question_info="SELECT * from `question_answer` where question_id='$selected_question_id'";
     $result_of_question=mysqli_query($con,$get_question_info);
     if(mysqli_num_rows($result_of_question) > 0){
-        $Question_Answer = mysqli_fetch_assoc($result_of_job_profile);
+        $Question_Answer = mysqli_fetch_assoc($result_of_question);
         $Questions= [
             'job_profile_name' => $Question_Answer['job_profile_name'],
             'difficulty_level'=> $Question_Answer['difficulty_level'],
@@ -266,8 +266,49 @@ if (!empty($_POST['question_id_to_update'])){
             'option_3' =>$Question_Answer['option_3'],
             'option_4' =>$Question_Answer['option_4'],
             'answer_description'=>$Question_Answer['correct_answer_description'],
+            'job_profiles' => [],
         ];
+        $get_all_jobs="SELECT job_profile_name from `job_profile`";
+        $result_of_job_profile=mysqli_query($con,$get_all_jobs);
+        if(mysqli_num_rows($result_of_job_profile)){
+            while($job = mysqli_fetch_assoc($result_of_job_profile)){
+                $Questions['job_profiles'][] = $job;
+            }
+        }
         echo json_encode($Questions);
     }
+}
+//code to update question data
+if(!empty($_POST['question_id']) &&
+        !empty($_POST['update_job_profile_question'])&&
+        !empty($_POST['update_difficulty_level_for_question']) &&
+        !empty($_POST['update_question']) &&
+        !empty($_POST['update_category'])&&
+        !empty($_POST['update_option1'])&&
+        !empty($_POST['update_option2'])&&
+        !empty($_POST['update_option3'])&&
+        !empty($_POST['update_option4'])&&
+        !empty($_POST['update_answer_description'])){
+        $question_id =mysqli_real_escape_string($con,$_POST['question_id']);
+        $update_job_profile_question=mysqli_real_escape_string($con,$_POST['update_job_profile_question']);
+        $update_difficulty_level_for_question=mysqli_real_escape_string($con,$_POST['update_difficulty_level_for_question']);
+        $update_question=mysqli_real_escape_string($con,$_POST['update_question']);
+        $update_category=mysqli_real_escape_string($con,$_POST['update_category']);
+        $update_option1=mysqli_real_escape_string($con,$_POST['update_option1']);
+        $update_option2=mysqli_real_escape_string($con,$_POST['update_option2']);
+        $update_option3=mysqli_real_escape_string($con,$_POST['update_option3']);
+        $update_option4=mysqli_real_escape_string($con,$_POST['update_option4']);
+        $update_answer_description=mysqli_real_escape_string($con,$_POST['update_answer_description']);
+        $query_to_update_question="UPDATE `question_answer` set difficulty_level='$update_difficulty_level_for_question',
+        question='$update_question',category='$update_category',option_1='$update_option1',option_2='$update_option2',
+        option_3='$update_option3',option_4='$update_option4',correct_answer_description='$update_answer_description',
+        job_profile_name='$update_job_profile_question' where question_id='$question_id'";
+        if(mysqli_query($con,$query_to_update_question)){
+            echo('question updated successsfully');
+        }
+        else{
+            // echo("Hello");
+            echo("Error:".mysqli_error($con));
+        }
 }
 ?>
