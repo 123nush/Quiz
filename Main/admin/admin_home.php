@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link type="image/png" sizes="16x16" rel="icon" href="https://tse3.mm.bing.net/th?id=OIP.8W1AqXk8aZfMEIyeyOwvAwAAAA&pid=Api&P=0&h=180" />
     <script src='../../JavaScript/job_profile.js'></script>
+    <script src='../../JavaScript/question.js'></script>
+
     <style>
     /* Additional CSS */
     .job_role {
@@ -37,6 +39,37 @@
 </style>
 </head>
 <body>
+    <!-- modal to select difficulty level -->
+<div class="modal fade" id="difficulty_level_selection_modal_to_view_questions" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content" style="background-color: #100a4d;">
+            <div class="modal-body">
+            <form>
+                <label class="form-check-label text-light" >Select Difficulty Level</label><br>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="easy" name="options" value="easy">
+                    <label class="form-check-label text-light" for="easy">Easy</label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="medium" name="options" value="medium">
+                    <label class="form-check-label text-light" for="medium">Medium</label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="hard" name="options" value="hard">
+                    <label class="form-check-label text-light" for="hard">Hard</label>
+                </div>
+            </form>
+            </div>
+            <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-outline-primary w-25" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-outline-primary w-25" id="difficulty_level_selected" name="difficulty_level_selected">Next</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
         <!-- modal to add new job profie information -->
 <div class="modal fade text-light" id="new_job_profile_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog modal-dialog-centered w-75 mx-auto">
@@ -72,7 +105,7 @@
                     <div class="modal-footer justify-content-center">
                         <button type="button" class="btn btn-outline-primary text-light" data-bs-dismiss="modal">Cancel</button>
                         <button type="button"  class="btn btn-outline-primary text-light" id="submit_info" name="submit_info">Add Info</button>
-                        
+            
                     </div>
                 </div>
             </div>
@@ -245,7 +278,7 @@
                         </div>
                         <p class="card-text">Last Update Date:<?php echo date("d M Y", strtotime($row_of_query['update_date'])); ?></p>
                         <form style="display: none;">
-                            <input type="text" class="text-white bg-dark profile_name"  name="profile_name" value="<?php echo $row_of_query['job_profile_name']; ?>">
+                            <input type="text" class="text-white bg-dark profile_name"  id="profile_name" name="profile_name" value="<?php echo $row_of_query['job_profile_name']; ?>">
                         </form>
                         <div class="row justify-content-center">
                             <div class="col-md-6 col-lg-6  d-flex justify-content-between">
@@ -255,8 +288,11 @@
                             </div>
                             <div class="col-md-6 col-lg-6  d-flex justify-content-between mt-md-0 mt-3">
                                 <button type="button" class="btn btn-outline-light mx-2 delete-job-profile" data-profile-id="<?php echo $row_of_query['job_profile_name']; ?>" data-bs-toggle="modal" data-bs-target="#delete_job_profile_modal">Delete Info</button>
-                                <a href="view_questions.php?profile_job=<?php echo $profile_job?>" ><button type="button" class="btn btn-outline-light mx-2 "  id="view_questions<?php echo $row_of_query['job_profile_name']; ?>" 
-                                name="view_more_info" >View Questions</button></a>
+                        
+                                <button type="button" class="btn btn-outline-light mx-2" id="view_questions<?php echo $row_of_query['job_profile_name']; ?>" 
+                                data-bs-toggle="modal" data-bs-target="#difficulty_level_selection_modal_to_view_questions" name="view_questions">
+                                View Questions
+                                </button>
                                 
                             </div>
                         </div>

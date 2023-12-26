@@ -6,9 +6,9 @@ if(!empty($_POST['send_email']) && !empty($_POST['send_username']) && !(empty($_
         $email = $_POST['send_email'];
         $username=$_POST['send_username'];
         $otp=$_POST['otp'];
-        echo '<script>';
-        echo($otp);
-        echo '</script>';
+        // echo '<script>';
+        // echo($otp);
+        // echo '</script>';
         $get_user_name = "SELECT * FROM `USER` WHERE `email` = '$email' ";
         $execute_query = mysqli_query($con,$get_user_name);
         if(mysqli_num_rows($execute_query)>0)
@@ -63,24 +63,23 @@ if(!empty($_POST['send_email']) && !empty($_POST['send_username']) && !(empty($_
 </div>
   </div>
   <script>
-        // var otp;
+    // console.log("Sending emial");
     function sendEmail(){
             Email.send({
-            Host : "smtp.elasticemail.com",
-            Username : "dalvianushka999@gmail.com",
-            Password : "4DBA9547DE4797862A68118EF305B0452740",
+            SecureToken:"f2f3cfda-66c6-4625-b3cb-01d2c950bda6",
             To : <?php echo($email); ?>,
             From : "dalvianushka999@gmail.com",
             Subject : "Reset password for skill analysis quiz",
-            Body : document.getElementById('emailContent').innerHTML()
+            Body : document.getElementById('emailContent').innerHTML
         }).then(
         message => {
-            // Alert or perform other actions upon successful sending of the email
-            alert("OTP sent successfully on "+$email );
+            alert("OTP sent successfully on "+<?php echo($email); ?>);
         }
         );
     }
     sendEmail();
+    // console.log("email send");
+
         </script>
   <?php
 }

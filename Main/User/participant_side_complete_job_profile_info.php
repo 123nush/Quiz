@@ -10,7 +10,7 @@
   crossorigin="anonymous"></script>
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <title>Job Profile</title>
+    <title>Home Page</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" >
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link type="image/png" sizes="16x16" rel="icon" href="https://tse3.mm.bing.net/th?id=OIP.8W1AqXk8aZfMEIyeyOwvAwAAAA&pid=Api&P=0&h=180" />
@@ -27,7 +27,7 @@
 <div class="main">
         <div class="row justify-content-center">
             <?php
-            require_once('../admin/reduced_navbar.html');
+            require_once('../User/user_navbar.html');
             ?>
             
                 <?php
@@ -49,48 +49,44 @@
                         <div class="col-lg-6  col-md-6 mb-5" id="infoColumn">
                             <div class="rounded p-3  text-white" style="cursor: pointer; transition: all 0.3s;background-color: #100a4d;">
                                 <!-- Your card content -->
-                                <h4 class="card-title" style="text-align: center;color:black;background-color:yellow" ><?php echo $row_of_query['job_profile_name']; ?></h4>
+                                <h4 class="card-title  fs-4 fw-bolder" style="text-align: center;color:black;background-color:yellow" ><?php echo $row_of_query['job_profile_name']; ?></h4>
                                 <p class="card-text">
                                     <span  style="font-size:large;" class="fw-bolder">Description:</span>
                                     <?php echo $row_of_query['role']; ?>
                                 </p>
                                 <p class="card-text">
-                                    <span  style="font-size:large;" class="fw-bolder">Last Update Date:</span>
-                                    <?php echo date("d M Y", strtotime($row_of_query['update_date'])); ?>
-                                </p>
-                                <p class="card-text">
-                                <span  style="font-size:large;" class="fw-bolder"> Tasks:</span><br>
-                                <ul>
-                                <?php
-                            if(mysqli_num_rows($result_of_job_tasks_info)>0 )
-                            {
-                            while($row_of_tasks = mysqli_fetch_assoc($result_of_job_tasks_info))
-                            {    
-                                ?>
-                                        <li><?php echo $row_of_tasks['task']; ?></li>
-                            <?php
-                                }
-                            ?>
-                             </ul>
-                            </p> 
+                                        <span  style="font-size:large;" class="fw-bolder"> Tasks:</span><br>
+                                        <ul>
+                                        <?php
+                                    if(mysqli_num_rows($result_of_job_tasks_info)>0 )
+                                    {
+                                    while($row_of_tasks = mysqli_fetch_assoc($result_of_job_tasks_info))
+                                    {    
+                                        ?>
+                                                <li><?php echo $row_of_tasks['task']; ?></li>
+                                    <?php
+                                        }
+                                    ?>
+                                    </ul>
+                                </p> 
                             <?php
                             }
                             ?>
-                            <p class="card-text">
-                            <span  style="font-size:large;" class="fw-bolder">Skills Required:</span><br>
-                            <ul>
-                            <?php
-                            if(mysqli_num_rows($result_of_job_tech_info)>0 )
-                            {
-                            while($row_of_tech = mysqli_fetch_assoc($result_of_job_tech_info))
-                            {    
-                                ?>
-                                       <li><?php echo $row_of_tech['technology']; ?></li> 
-                            <?php
-                                }
-                            ?>
-                            </ul>
-                            </p>
+                                <p class="card-text">
+                                    <span  style="font-size:large;" class="fw-bolder">Skills Required:</span><br>
+                                    <ul>
+                                    <?php
+                                    if(mysqli_num_rows($result_of_job_tech_info)>0 )
+                                    {
+                                    while($row_of_tech = mysqli_fetch_assoc($result_of_job_tech_info))
+                                    {    
+                                        ?>
+                                            <li><?php echo $row_of_tech['technology']; ?></li> 
+                                    <?php
+                                        }
+                                    ?>
+                                    </ul>
+                                </p>
                             <?php
                             }
                     ?>    

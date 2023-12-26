@@ -1,12 +1,14 @@
 //code to send otp only when username and email match
-
 $(document).ready(function(){
     var otp;
+    var email;
+    var send_email;
+    var send_username;
     otp = Math.floor(1000 + Math.random() * 9000);
-    
 $('#section2').hide();
 $('#section3').hide();
-$('#sendotp').on('click',function(e){
+$('#sendotp').hide();
+$('#CrossCheckUser').on('click',function(e){
     e.preventDefault();
     var email_message=$('#email').val();
     var username_message=$('#username').val();
@@ -24,34 +26,28 @@ $('#sendotp').on('click',function(e){
             if(data==1)
             {
                 $('#verify').text("Valid details!Check your mail").css("color", "green");
-                // function sendEmail(){
-                $.ajax({
-                    type:'POST',
-                    url:'email.php',
-                    data:{send_email:$email,send_username:$username,otp:otp},
-                    success:function(data){
-                        console.log($('#emailContent').html());
-                    },
-                    error:function(){
-                        console.log(response.status);
-                    }
-
-                })
-                
-                $('#section2').show();
-            //     sendEmail();
-            // }//functionn sendEmail() ends here
-
+                $('#CrossCheckUser').hide();
+                $('#sendotp').show();
             }
             else
             {
                 $('#verify').text("Hello "+username_message+" your email and username not matched with registerd data in system").css("color", "red");
+                $('#sendotp').hide();
             }
         },
         error: function() {
             console.log(response.status);
         },
     })
+    e.preventDefault();
+})
+$('#sendotp').on('click',function(e){
+    e.preventDefault();
+    email=$('#email').val();
+    send_email=$('#email').val();
+    send_username=$('#username').val();
+    sendEmail(send_email,otp,send_username);
+    $('#section2').show();
     e.preventDefault();
 })
 //code to verify oto
@@ -182,6 +178,26 @@ $('#resetpassword').on('click',function(e){
     e.preventDefault();
 
 })
+function moveClass()
+    {
+        $('#emailTemp').html(" ");
+    }
+      function sendEmail(send_email,otp,send_username)
+      {
+        $.ajax({
+            type: 'POST',
+            url:'email.php',
+            data:{send_email:send_email,send_username:send_username,otp:otp},
+            success: function(data){
+                console.log(data);
+                $('#emailTemp').html(data);
+                setInterval(moveClass, 2000); 
+            },
+            error: function() {
+                console.log(response.status);
+            },
+        })
+      }
 
 })
 

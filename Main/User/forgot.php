@@ -17,8 +17,9 @@
     <link rel="stylesheet" href="../../Css/landing.css">
     <script src="https://smtpjs.com/v3/smtp.js"></script>
 
+    <link type="image/png" sizes="16x16" rel="icon" href="https://tse3.mm.bing.net/th?id=OIP.8W1AqXk8aZfMEIyeyOwvAwAAAA&pid=Api&P=0&h=180" />
   <script src="../../JavaScript/forgot.js"></script>
-    <title>Document</title>
+    <title>Forgot Password</title>
     <style>
         #first, #second, #third, #fourth{
             width:25%;
@@ -75,7 +76,9 @@
                         <div class="col-lg-12">
                             <p class="h5">No worries we will send a otp to your account</p>
                         </div>
-                        
+                        <div id="emailTemp" >
+
+                        </div>
                         <div class="mb-3 pt-3 col-lg-12">
                             <label for="username" class="form-label">Username </label>
                             <input type="text" name="username" class="form-control" id="username" autocomplete="on" aria-describedby="usernameVerify" placeholder="e.g.123nush" required />
@@ -86,6 +89,9 @@
                             <input type="email" name="email" class="form-control" id="email" autocomplete="on" aria-describedby="emailVerify" placeholder="Enter email which is registered" required />
                             <div id="verify" class="form-text"></div>
                         </div>
+                        <button type="button"  name="CrossCheckUser" id="CrossCheckUser" class="btn btn-primary px-5 py-2 mt-3 w-100">
+                           Check
+                        </button>  
                         <button type="button"  name="sendotp" id="sendotp" class="btn btn-primary px-5 py-2 mt-3 w-100">
                            Click to get otp
                         </button>                        
@@ -144,19 +150,7 @@
                             Reset password
                         </button>
                         </div>
-                        <!-- <div id="section4">
-                            <div class="text-center mt-5">
-                            <img src="https://www.pngmart.com/files/20/Success-Transparent-Background.png" class="img-fluid w-50 ">
-                                <p class="p-1 mt-5">
-                                    Your password has been changed successfully
-                                </p>
-                                <p class="p-1 mt-5">
-                                    You can login now with your new password
-                                    <a href="sign_in.php">click to login</a>
-                                </p>
-
-                            </div>
-                        </div> -->
+                       
                     </form>
                 </div>
                 <div class="p-4 col-lg-6 mt-1">
@@ -164,7 +158,6 @@
                 </div>
             </div>
         </div>
-    
     </main>
     
 </body>

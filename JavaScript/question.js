@@ -5,6 +5,35 @@ $(document).ready(function(){
         $('#yes_delete_quetion').data('profile-id', profileID);
         e.preventDefault();
     });
+    var difficulty_level_to_view_questions;
+    var job_profile_name_to_see_question;
+    var buttonId;
+    $("[id^=view_questions").on('click',function(e){
+        e.preventDefault();
+        buttonId = $(this).attr('id');
+        job_profile_name_to_see_question= buttonId.replace('view_questions', '');
+        e.preventDefault();
+    })
+    //code to select difficulty level to see questions
+    $('#difficulty_level_selected').on('click', function(e) {
+        e.preventDefault();
+        let radios = document.querySelectorAll('input[name="options"]');
+        let isChecked = Array.from(radios).some(radio => radio.checked);
+        if (!isChecked) {
+            alert('Select a difficulty level of questions first');
+            console.log(job_profile_name_to_see_question);
+        } else {
+            console.log(job_profile_name_to_see_question);
+
+            radios.forEach(radio => {
+                if (radio.checked) {
+                    difficulty_level_to_view_questions=radio.value;
+                }
+            })
+            window.location.href = "../admin/view_questions.php?job_profile=" + job_profile_name_to_see_question + "&difficulty=" + difficulty_level_to_view_questions;
+        };
+        e.preventDefault();
+    });
     // code to delete questions
     $('#yes_delete_quetion').on('click', function(e) {
         e.preventDefault();

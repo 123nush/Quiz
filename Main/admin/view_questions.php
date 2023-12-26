@@ -19,11 +19,19 @@
     <style>
     /* Additional CSS */
     .ans_description {
-        height: 300px;
+        height: 150px;
         overflow-y: auto;
     }
 
     .ans_description::-webkit-scrollbar {
+        width: 0; /* Hide scrollbar */
+    }
+    .options {
+        height: 150px;
+        overflow-y: auto;
+    }
+
+    .options::-webkit-scrollbar {
         width: 0; /* Hide scrollbar */
     }
     .rounded:hover {
@@ -133,60 +141,98 @@
             </div>
         </div>
 
-<div class="main">
-        <div class="row justify-content-center">
-            <?php
-            require_once('../admin/admin_navbar.html');
+        <div class="main">
+    <div class="row justify-content-center">
+        <?php
+        require_once('../admin/reduced_navbar.html');
+        ?>
+    </div>
+    <div class="row justify-content-center">
+        <?php
+        require_once('../connection/connect.php');
+        if (isset($_GET['job_profile']) && isset($_GET['difficulty'])) {
+            $job_profile_name = $_GET['job_profile'];
+            $difficulty_level=$_GET['difficulty'];
             ?>
+            <div class="col-md-6 col-lg-8 m-auto">
+            <h3 class="text-center">Questions on <?php echo $job_profile_name ;?>  With Difficulty Level <?php echo $difficulty_level?></h3>
             </div>
-                <?php
-                require_once('../connection/connect.php');
-                if (isset($_GET['profile_job'])) {
-                    $job_profile_name=$_GET['profile_job'];
-                    $question_answer_table="SELECT * FROM `question_answer` where job_profile_name='$job_profile_name'";
-                    $result_of_question_answer_table_query=mysqli_query($con,$question_answer_table);
-                    if(mysqli_num_rows($result_of_question_answer_table_query)>0){
-                        while($row=mysqli_fetch_assoc($result_of_question_answer_table_query)){
-                            ?>
-                            <div class="col-lg-5 col-md-6 mb-5 m-auto" >
-                                <div class="rounded p-3  text-white card" style="cursor: pointer; transition: all 0.3s;background-color: #100a4d;">
-                                    <!-- Your card content -->
-                                    <p class="card-title">Category of question : <?php echo $row['category']; ?></p>
-                                    <p class="card-title">Question : <?php echo $row['question']; ?></p>
-                                    <p class="card-title">Difficulty Level : <?php echo $row['difficulty_level']; ?></p>
-                                    <p class="card-title">Option 1 : <?php echo $row['option_1']; ?></p>
-                                    <p class="card-title">Option 2 : <?php echo $row['option_2']; ?></p>
-                                    <p class="card-title">Option 3 : <?php echo $row['option_3']; ?></p>
-                                    <p class="card-title">Option 4 : <?php echo $row['option_4']; ?></p>
-                                    <div class="ans_description" style="height: 100px; overflow-y: auto;">
-                                    <p class="card-title">Answer Description : <?php echo $row['correct_answer_description']; ?></p>
+        <?php
+            $question_answer_table = "SELECT * FROM `question_answer` where job_profile_name='$job_profile_name' and difficulty_level='$difficulty_level' ";
+            $result_of_question_answer_table_query = mysqli_query($con, $question_answer_table);
+            if (mysqli_num_rows($result_of_question_answer_table_query) > 0) {
+                while ($row = mysqli_fetch_assoc($result_of_question_answer_table_query)) {
+        ?>
+    
+                    <div class="col-md-6 col-lg-6 mb-5">
+                        <div class="rounded p-3 text-white card" style="cursor: pointer; transition: all 0.3s;background-color: #100a4d;height: 300px;">
+                                    <p class="card-title">
+                                        <span class="fw-bolder">Category of question :</span>
+                                        <?php echo $row['category']; ?>
+                                    </p>
+                                    <p class="card-title">
+                                        <span class="fw-bolder">Question :</span>
+                                        <?php echo $row['question']; ?>
+                                    </p>
+                                    <p class="card-title">
+                                        <span class="fw-bolder">Difficulty Level:</span>
+                                        <?php echo $row['difficulty_level']; ?>
+                                    </p>
+                                    <div class="row justify-content-center" class="options" style="height: 150px; overflow-y: auto;">
+                                        <div class="col-md-6 col-lg-6  d-flex justify-content-between">
+                                            <p class="card-title">
+                                            <span style="background-color: yellow; color: black;" class="fw-bold">Option 1 :</span>
+                                            <?php echo $row['option_1']; ?>
+                                            </p>
+                                            <p class="card-title">
+                                            <span style="background-color: lightblue; color: black;"  class="fw-bold">Option 2 :</span>
+                                            <?php echo $row['option_2']; ?>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6  d-flex justify-content-between mt-md-0 mt-3">
+                                            <p class="card-title">
+                                            <span style="background-color: lightgreen; color: black;"  class="fw-bold">Option 3 :</span>
+                                            <?php echo $row['option_3']; ?>
+                                            </p>
+                                            <p class="card-title">
+                                            <span style="background-color: pink; color: black;"  class="fw-bold">Option 4 :</span>
+                                            <?php echo $row['option_4']; ?>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="ans_description" style="height: 150px; overflow-y: auto;">
+                                    <p class="card-title">
+                                        <span class="fw-bolder">Answer Description : </span>
+                                        <?php echo $row['correct_answer_description']; ?>
+                                    </p>
                                     </div>
                                     <div class="row justify-content-center">
+                                        <div class="col-md-6 col-lg-6 m-auto  d-flex justify-content-center">
+                                        </div>
                                         <div class="col-md-6 col-lg-6 m-auto  d-flex justify-content-center">
                                             <button type="button" class="btn btn-outline-light mx-2" id="update_question_info<?php echo $row['question_id']; ?>" name="update_question_info" >Update Question</button>
                                             <button type="button" class="btn btn-outline-light mx-2 delete-question" data-profile-id="<?php echo $row['question_id']; ?>" data-bs-toggle="modal" data-bs-target="#delete_question_modal">Delete Question</button>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <?php
-                        }
-                        
-                    }
-                    else{
-                        echo "
-                        <div class='col-lg-5 col-md-5 mt-5 m-auto'>
-                        <div class='container d-flex align-items-center justify-content-center ' style='border-radius:20px;height:50vh'>
-                        <div style='border-radius:20px'>
-                        <h2 class='text-center'>Questions are not Available</h2>
                         </div>
-                        </div>
-                        </div>";
-            
-                    }
+                    </div>
+        <?php
                 }
-                ?>
-        </div>
+            } else {
+                echo "
+                <div class='col-md-6 col-lg-6 mt-5'>
+                    <div class='container d-flex align-items-center justify-content-center' style='border-radius:20px;height:50vh'>
+                        <div style='border-radius:20px'>
+                            <h2 class='text-center'>Questions are not Available</h2>
+                        </div>
+                    </div>
+                </div>";
+            }
+        }
+        ?>
+    </div>
 </div>
 </body>
+
 </html>

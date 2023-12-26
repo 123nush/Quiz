@@ -24,17 +24,18 @@ $(document).ready(function(){
             data: {username_login: $username, password_login : $password},
             success: function(data) {
                 console.log(data);
-                if(data==1)
+                if(data.trim()==='1')
                 {
-                    window.location.href = 'user_home.php';
+                    // alert(data);
+                    window.location.href = '../User/home.php';
                 }
-                else if(data==2)
+                else if(data.trim()==='2')
                 {
+                    // alert(data);
                     window.location.href = '../admin/admin_home.php';
                 }
                 else{
                     $('#failed').modal('show');
-                    
                 }
             },
             error: function() {
@@ -43,7 +44,6 @@ $(document).ready(function(){
         })
         e.preventDefault();
     })
-    
     // intended to prevent users from navigating back to the previous page in a browser's history.
     function disableBack() {
                     window.history.forward()

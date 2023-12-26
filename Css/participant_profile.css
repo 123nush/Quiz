@@ -1,0 +1,54 @@
+.nav-item a {
+    display: block;
+    padding: 10px 15px;
+    border-radius: 10px; /* Rounded shape */
+    transition: background-color 0.3s; /* Smooth transition */
+    background-color: #66a3ff; /* Default background color */
+    color: #000000; /* Default text color */
+}
+.nav-item a:hover {
+    background-color: #f0f0f0; /* Highlight background color on hover */
+}
+.nav-item a.active {
+    background-color: #ffcc00; /* Highlight background color when active */
+    color: #ffffff; /* Text color on active */
+}
+.person-shape {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.circle-profile {
+    width: 100px;
+    height: 100px;
+    background-color: #333; /* Adjust color as needed */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.circle-profile a {
+    color: white;
+    text-decoration: none;
+}
+.upper-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.nav-link {
+    padding: 5px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+/* Custom CSS to split columns evenly */
+.split-column {
+    width: 50%; /* Split the column width */
+    text-align: center; /* Adjust text alignment as needed */
+    vertical-align: middle; /* Align content vertically */
+}
+table.table-hover{
+    border-collapse: separate;
+    border-spacing: 0 15px; /* Adjust the vertical spacing here */
+}

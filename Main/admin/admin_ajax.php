@@ -20,10 +20,7 @@ if (
     $job_profile_information = mysqli_real_escape_string($con, $_POST['job_profile_information']);
     $technologiesArray = $_POST['technologies'];
     $tasksArray = $_POST['tasks'];
-
-
     $currentdate = date('Y-m-d');
-
     // Insert job profile information
     $qurey_to_insert_job_profile_info = "INSERT INTO `job_profile` (job_profile_name, role, update_date) VALUES ('$job_profile_name', '$job_profile_information', '$currentdate')";
     
@@ -207,9 +204,9 @@ if(!empty($_POST['job_profile_question'])&&
         !empty($_POST['option4'])&&
         !empty($_POST['answer_description'])){
             function generateUniqueID() {
-                $id = mt_rand(10000, 99999);
+                $id = mt_rand(10000, 69999);
                 while (in_array($id, $_SESSION['generated_ids'] ?? [])) {
-                    $id = mt_rand(10000, 99999);
+                    $id = mt_rand(10000, 69999);
                 }
                 $_SESSION['generated_ids'][] = $id; // Store the generated ID
                 return $id;
