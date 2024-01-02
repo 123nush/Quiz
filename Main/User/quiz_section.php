@@ -35,7 +35,7 @@
     .rounded:hover {
         transform: translateY(-10px); /* Example of a pop-up effect */
         box-shadow: 0 5px 15px rgba(0, 0, 0.3, 0.3); /* Example of a shadow effect */
-        background-color: #073763; /* Example of a color change on hover */
+        /* background-color: #073763; Example of a color change on hover */
     }
     /* .float_nav{
     position: fixed;
@@ -97,21 +97,29 @@
             $get_job_profile_info="SELECT * from `job_profile`";
             $result_of_job_profile_info = mysqli_query($con,$get_job_profile_info);
             if(mysqli_num_rows($result_of_job_profile_info)>0)
+            $jobs=[];
             {
                 while($row_of_query = mysqli_fetch_assoc($result_of_job_profile_info))
                 {
                     $profile_job=$row_of_query['job_profile_name'];
+                    $jobs[]=$row_of_query['job_profile_name'].trim(' ');
                     ?>
-                        <div class="col-lg-4 col-md-6 mb-5" >
-                        <div class="rounded p-3  text-white card" style="cursor: pointer; transition: all 0.3s;background-color: #100a4d;height: 250px;">
+                        <div class=" job-profile-container col-lg-4 col-md-6 mb-5 p-3" >
+
+                        <div class="rounded p-3  text-dark card" style="cursor: pointer; transition: all 0.3s;height: 330px;">
                             <!-- Your card content -->
-                            <h5 class="card-title">Job Profile Name :  <?php echo $row_of_query['job_profile_name']; ?></h5>
-                            <div class="job_role" style="height: 100px; overflow-y: auto;">
-                                <p class="card-text">Role:<?php echo $row_of_query['role']; ?></p>
+                            <div class="job-heading rounded d-flex justify-content-center align-items-center" >
+                                <h5 class="card-title my-5 text-center" >
+                                    <?php echo $row_of_query['job_profile_name']; ?>
+                                </h5>
+                                <img src="" alt="" style="height: 100px;width: 100px;" class="job-profile-image">
                             </div>
-                        
+
+                            <div class="job_role" style="height: 100px; overflow-y: auto;">
+                                <p class="card-text"><span style="font-weight:bolder;font-size:large">Role:</span><?php echo $row_of_query['role']; ?></p>
+                            </div>
                             <form style="display: none;">
-                                <input type="text" class="text-white bg-dark profile_name"  name="profile_name" value="<?php echo $row_of_query['job_profile_name']; ?>">
+                                <input type="text" class="text-dark bg-dark profile_name"  name="profile_name" value="<?php echo $row_of_query['job_profile_name']; ?>">
                             </form>
                             <input type="text" id="getting_job_profile" style="display: none;">
                             <input type="text" id="getting_difficulty_level" style="display: none;">
@@ -119,9 +127,10 @@
                                 <div class="col-md-6 col-lg-6  d-flex justify-content-between">
                                 </div>          
                                 <div class="col-md-6 col-lg-6  d-flex justify-content-between" >
-                                    <a href="participant_side_complete_job_profile_info.php?profile_job=<?php echo $profile_job?>" ><button type="button" class="btn btn-outline-light mx-2 " 
+                                    <a href="participant_side_complete_job_profile_info.php?profile_job=<?php echo $profile_job?>" ><button type="button" 
+                                    class="btn rounded btn-info text-dark mx-2 " 
                                     name="view_more_info" >More Info</button></a>
-                                    <button type="button" class="btn btn-outline-light mx-2" data-bs-toggle="modal" 
+                                    <button type="button" class="btn rounded btn-info text-dark mx-2" data-bs-toggle="modal" 
                                     data-bs-target="#difficulty_level_selection_modal" id="take_a_quiz<?php echo $row_of_query['job_profile_name']; ?>" name="take_a_quiz">Take A Quiz
                                     </button>
                                 </div>
@@ -135,4 +144,45 @@
     </div>
 
 </body>
+<script>
+    $('document').ready(function(){
+        function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+    const colors = ["#ffcc00", "#66cccc", "#ff8533"];
+    const shuffledColors = shuffleArray(colors);
+
+    const jobHeadings = document.querySelectorAll(".job-heading");
+    jobHeadings.forEach(function(element, index) {
+        const colorIndex = index % shuffledColors.length;
+        element.style.backgroundColor = shuffledColors[colorIndex];
+    });
+
+    const jobProfileImages = {
+        "Cybersecurity Analyst":"cybersecurity analyst.png",
+        "Android Developer":"android developer.png",
+        "Artificial Intelligence (AI) Engineer":"artificial intelligence (AI) engineer.png",
+        "Cloud Architect":"cloud architect.png",
+        "Data Analyst": "data analyst.png",
+        "Database Administrator":"database administrator.png",
+        "DevOps Engineer":"devops engineer.png",
+        "Full Stack Developer":"full stack developer.png",
+        "IoT Specialist":"iot specialist.png",
+        "Software Engineer":"software engineer.png",
+        // "UI Designer":"ui designer.png",
+        // Add mappings for other job profiles here...
+    };
+    const jobProfiles = <?php echo json_encode($jobs); ?>;
+document.querySelectorAll('.job-profile-container').forEach((container, index) => {
+    const job = jobProfiles[index].trim(' ');
+    const imageFilename = jobProfileImages[job];
+    // container.querySelector('.card-title').textContent = job;
+    container.querySelector('.job-profile-image').src = `../../Images/${imageFilename}`;
+});
+ })
+</script>
 </html>

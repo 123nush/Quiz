@@ -33,7 +33,7 @@ body::before {
   left: 0;
   width: 100%; /* Cover the entire width */
   height: 100vh; /* Cover the entire height */
-  background: url('https://tse1.mm.bing.net/th?id=OIP.d7G07Ll9HOV5jav9wJ1FDAHaFj&pid=Api&P=0&h=180') no-repeat left top;
+  /* background: url('https://tse1.mm.bing.net/th?id=OIP.d7G07Ll9HOV5jav9wJ1FDAHaFj&pid=Api&P=0&h=180') no-repeat left top; */
   background-size: cover;
   mix-blend-mode: overlay;
   opacity: 0.3; /* Adjust the opacity to blend with the background */
@@ -43,21 +43,25 @@ body::before {
 
     </style>
 <body>
-   <div class="background-image">
+   <div class="background-image" style="background: linear-gradient(to right, #073763, #0e5a8a, #0984e3, #00a8e8, #00c6ff);">
     <div class="p-3">
     <nav class="navbar navbar-expand-lg fs-5 ">
         <div class="container-fluid ">
             <!-- <ul class="nav nav-pills mb-3 navbar-right" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">  -->
-            <a class="nav-link navbar-brand text-primary ms-3 fw-bolder text-light" data-bs-toggle="pill" type="button" role="tab" aria-controls="pills-home" aria-selected="true"
-             >Skill Analysis Quiz<button class="navbar-toggler" type="button"  name="showNav" id="showNav">
-                <i class="bi bi-filter-square-fill"></i>
+            <a class="nav-link navbar-brand text-primary ms-3 fw-bolder text-light"
+             data-bs-toggle="pill" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+             <!-- <button class="btn rounded-circle me-3" > -->
+                <img src="../../Images/logo.PNG" alt="" style="height: 30px; width: 30px;">
+            <!-- </button> -->
+             Skill Analysis Quiz<button class="navbar-toggler" type="button"  name="showNav" id="showNav">
+            <i class="bi bi-filter-square-fill"></i>
              </button></a>
              
             <!-- </li>
              </ul> -->
             <div class="collapse navbar-collapse p-3 " id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <ul class="navbar-nav ms-auto  mb-lg-0 nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item  " role="presentation">
                         <button class="nav-link text-light mx-3" id="pills-home-tab" data-bs-toggle="pill" onclick="location.href='view_reviews.php'" type="button" role="tab" aria-controls="pills-home" aria-selected="true">View Reviews</button>
                     </li>

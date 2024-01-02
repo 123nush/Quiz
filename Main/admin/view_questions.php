@@ -29,15 +29,16 @@
     .options {
         height: 150px;
         overflow-y: auto;
+        scrollbar-width: none;
+        scrollbar-color: transparent transparent;
     }
-
     .options::-webkit-scrollbar {
-        width: 0; /* Hide scrollbar */
+    width: 0;
     }
     .rounded:hover {
         transform: translateY(-10px); /* Example of a pop-up effect */
         box-shadow: 0 5px 15px rgba(0, 0, 0.3, 0.3); /* Example of a shadow effect */
-        background-color: #073763; /* Example of a color change on hover */
+        /* background-color: #073763; Example of a color change on hover */
     }
 </style>
 </head>
@@ -57,7 +58,7 @@
             </div>
     </div>
 
-
+<!-- modal to update question -->
     <div class="modal fade text-light" id="update_question_modal"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog modal-dialog-centered w-75 mx-auto">
                 <div class="modal-content" style="background-color: #100a4d;">
@@ -164,8 +165,8 @@
                 while ($row = mysqli_fetch_assoc($result_of_question_answer_table_query)) {
         ?>
     
-                    <div class="col-md-6 col-lg-6 mb-5">
-                        <div class="rounded p-3 text-white card" style="cursor: pointer; transition: all 0.3s;background-color: #100a4d;height: 300px;">
+                    <div class="col-md-6 col-lg-6 mb-5 p-3">
+                        <div class="rounded p-3 text card" style="cursor: pointer; transition: all 0.3s;height: 300px;">
                                     <p class="card-title">
                                         <span class="fw-bolder">Category of question :</span>
                                         <?php echo $row['category']; ?>
@@ -211,8 +212,8 @@
                                         <div class="col-md-6 col-lg-6 m-auto  d-flex justify-content-center">
                                         </div>
                                         <div class="col-md-6 col-lg-6 m-auto  d-flex justify-content-center">
-                                            <button type="button" class="btn btn-outline-light mx-2" id="update_question_info<?php echo $row['question_id']; ?>" name="update_question_info" >Update Question</button>
-                                            <button type="button" class="btn btn-outline-light mx-2 delete-question" data-profile-id="<?php echo $row['question_id']; ?>" data-bs-toggle="modal" data-bs-target="#delete_question_modal">Delete Question</button>
+                                            <button type="button" class="btn btn-info rounded mx-2" id="update_question_info<?php echo $row['question_id']; ?>" name="update_question_info" >Update Question</button>
+                                            <button type="button" class="btn btn-info rounded mx-2 delete-question" data-profile-id="<?php echo $row['question_id']; ?>" data-bs-toggle="modal" data-bs-target="#delete_question_modal">Delete Question</button>
                                         </div>
                                     </div>
                         </div>

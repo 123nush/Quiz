@@ -60,7 +60,7 @@ $(document).ready(function(){
         })
     })
     
-    //code to insert information in database
+    //code to insert new job profile information in database
     $('#submit_info').on('click', function(e) {
         e.preventDefault();
         $job_profile_name=$('#job_profile_name').val();
@@ -83,7 +83,8 @@ $(document).ready(function(){
         console.log(technologiesArray);
         var job_profile_name_to_check=$('#job_profile_nameVerify').text();
         if(job_profile_name_to_check!=='Job Profile Name Alredy Exists!'){
-            
+            if($job_profile_information!==''){
+            console.log($job_profile_information);
             $.ajax({
                 type: 'POST',
                 url: 'admin_ajax.php',
@@ -106,9 +107,13 @@ $(document).ready(function(){
                     console.log(response.status);
                 },
             })
+            }
+            else{
+                alert("Enter  Job Profile Information");
+            }
         }
         else{
-            alert("Enter Job Profile Name");
+            alert("Enter a new Job Profile Name");
         }
         e.preventDefault();
     });

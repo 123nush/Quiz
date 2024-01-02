@@ -211,6 +211,7 @@ if(!empty($_POST['score'])
         echo("Error".mysqli_error($con));
     }
 }
+//code to insert reviews 
 if (
     isset($_POST['suggested_job_profileArray']) &&
     isset($_POST['reason_for_job_profile']) &&
@@ -241,4 +242,58 @@ if (
         echo "Error: " . $query_to_insert_review . "<br>" . mysqli_error($con);
     }
 } 
+//code to check wheather mail is already exists when user want's to update their profile
+if(!empty($_POST['update_user_email'])){
+    $email=mysqli_real_escape_string($con,$_POST['update_user_email']);
+    $query_to_search_email_and_username = "SELECT * FROM `user` WHERE email = '$email'";
+    if(mysqli_num_rows(mysqli_query($con,$query_to_search_email_and_username))>0)
+    {
+        echo("Email already exists");
+    }else{
+        echo("New email");
+    }
+}
+//code to change user data when user want's to update their profile
+if(!empty($_POST['update_full_name'])
+&& !empty($_POST['update_email'])
+&& !empty($_POST['update_password'])
+&& !empty($_POST['update_username'])){
+    $username=mysqli_real_escape_string($con,$_POST['update_username']);
+    $update_full_name=mysqli_real_escape_string($con,$_POST['update_full_name']);
+    $update_password=mysqli_real_escape_string($con,$_POST['update_password']);
+    $update_email=mysqli_real_escape_string($con,$_POST['update_email']);
+    $query_to_update_user_data = "UPDATE `user` 
+                             SET `name` = '$update_full_name', 
+                                 `email` = '$update_email', 
+                                 `pwd` = '$update_password' 
+                             WHERE `user_name` = '$username'";
+            if (mysqli_query($con, $query_to_update_user_data)) {
+                // $affectedRows = mysqli_affected_rows($con);
+                // if ($affectedRows > 0) {
+                    echo "User Data updated successfully";
+                // } else {
+                //     echo "No changes made to user data.";
+                // }
+            } else {
+                echo "Error updating user data: " . mysqli_error($con);
+            }
+}
+if(!empty($_POST['job_profile_from_which_date_retrived'])
+&& !empty($_POST['view_history_user'])){
+    $job_profile=mysqli_real_escape_string($con,$_POST['job_profile_from_which_date_retrived']);
+    $username=mysqli_real_escape_string($con,$_POST['view_history_user']);
+    $query_to_find_dates="SELECT distinct  quiz_date FROM `quiz` WHERE `job_profile_name` ='$job_profile' and user_name='$username'";
+    $result=mysqli_query($con,$query_to_find_dates);
+    $dates = [];
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $dates[] = [
+                'quiz_date' => $row['quiz_date'] 
+            ];
+        }
+        echo json_encode($dates);
+    } else {
+        echo("No result");
+    }
+}
 ?>

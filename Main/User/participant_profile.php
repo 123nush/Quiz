@@ -16,7 +16,26 @@ session_start();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" >
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link type="image/png" sizes="16x16" rel="icon" href="../../Images/logo.PNG" />
-    <script src='../../JavaScript/review.js'></script>
+    <!-- <script src='../../JavaScript/update_user_profile.js'></script> -->
+    <!-- <script src='../../JavaScript/update_user_profile.js'></script> -->
+    <script>
+        $('document').ready(function(){
+            $('.pass_open_eye').hide();
+            $('.cpass_open_eye').hide();
+            $('.pass_icon').on('click',function(){
+        if('password' == $('#update_password').attr('type')){
+            $('#update_password').prop('type', 'text');
+            $('.pass_open_eye').show();
+            $('.pass_close_eye').hide();
+       }else{
+            $('#update_password').prop('type', 'password');
+            $('.pass_open_eye').hide();
+            $('.pass_close_eye').show();
+       }
+    })
+        })
+         
+    </script>
     <link rel="stylesheet" href="../../Css/participant_profile.css">
 </head>
 <body>
@@ -110,7 +129,18 @@ session_start();
                                         </tr>
                                         <tr >
                                             <th scope="col">Password:</th>
-                                            <td scope="col" class="split-column"><?php echo $row['pwd']?></td>
+                                            <td scope="col" class="split-column">
+                                                <div class="d-flex justify-content-center">
+                                                    <input type="password" name="update_password" class="form-control w-75 text-center" id="update_password" 
+                                                    aria-describedby="pass_verify" placeholder="Password" 
+                                                    value="<?php echo $row['pwd']?>" required autocomplete="off" readonly>
+                                                    <span class="input-group-text pass_icon" id="basic-addon1">
+                                                        <i class="bi bi-eye-fill pass_open_eye"></i>
+                                                        <i class="bi bi-eye-slash-fill pass_close_eye"></i>
+                                                    </span>
+                                                </div>
+                                                <div id="pass_verify" class="form-text"></div>
+                                            </td>
                                         </tr >
                                         <tr>
                                             <th scope="col">Total attained quiz:</th>

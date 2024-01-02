@@ -26,31 +26,43 @@
   <!-- <link rel="stylesheet" href="../../Css/style.css"> -->
     <link rel="stylesheet" href="../../Css/tailstyle.css">
     <style>
-      /* Media query for mobile */
-      @media screen and (max-width: 768px) {
-    .bg-image-container {
-      background-size: cover;
-      height: 50vw; /* Adjust the height for 50% viewport height */
-      background-image: url('../../Images/mobile_shape1.PNG');
+    .btn {
+       background-color:lightskyblue ;
     }
-      }
-      .wave-image {
-      clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+
+    .btn:hover {
+        background-color: wheat; /* Change to the color you want on hover */
     }
-    </style>
+</style>
 </head>
-<body>
+<!-- https://tse1.mm.bing.net/th?id=OIP.8Jt5hsxs9acvfhfnfkZnIwHaFj&pid=Api&P=0&h=180
+https://tse3.mm.bing.net/th?id=OIP.TOcvDZ9dH0V1fPGoTCw6wAHaDe&pid=Api&P=0&h=180 
+https://img.freepik.com/free-photo/stylish-blue-abstract-background-with-text-space_1017-46766.jpg?size=626&ext=jpg&ga=GA1.1.1270697051.1699685084&semt=ais
+https://img.freepik.com/free-vector/blue-wavy-shape-background_1055-2929.jpg?size=626&ext=jpg&ga=GA1.1.1270697051.1699685084&semt=ais
+https://img.freepik.com/free-vector/abstract-background-with-waves-glow_1182-1873.jpg?size=626&ext=jpg&ga=GA1.1.1270697051.1699685084&semt=ais
+https://img.freepik.com/premium-vector/abstract-blue-background_114588-259.jpg?w=740
+https://img.freepik.com/free-vector/light-blue-wavy-background_1035-8917.jpg?size=626&ext=jpg&ga=GA1.1.1270697051.1699685084&semt=ais
+https://img.freepik.com/free-photo/abstract-curves-background-with-bokhe-lights_1048-13405.jpg?size=626&ext=jpg&ga=GA1.1.1270697051.1699685084&semt=ais
+https://img.freepik.com/free-vector/gradient-particle-wave-background_23-2150511951.jpg?size=626&ext=jpg&ga=GA1.1.1270697051.1699685084&semt=ais-->
+<body  style="background-image: url('https://img.freepik.com/free-photo/abstract-curves-background-with-bokhe-lights_1048-13405.jpg?size=626&ext=jpg&ga=GA1.1.1270697051.1699685084&semt=ais');background-repeat: no-repeat;
+  background-size: cover;">
   <div class="row">
   
 
-   <div class="col-lg-6 col-md-12 m-auto p-0" style="height: 100vh; overflow: hidden;">
-      <!-- <div class="bg-image-container" style="height: 100%; background-image: url('../../Images/trail3.jpg'); background-size: contain; background-position: center; background-repeat: no-repeat;"> -->
-        <div class="d-flex align-items-center justify-content-center h-100">
-          <h1 style="text-align: center; color: white;">Skill Analysis Quiz</h1>
-          <img class="wave-image" src="../../Images/trail3.jpg" alt="">
+  <div class="col-lg-6 col-md-12 m-auto p-0" style="height: 100vh; overflow: hidden;">
+    <div class="d-flex flex-column align-items-center justify-content-center h-100">
+        <h1 style="text-align: center; color: black; font-size: xx-large; font-weight: bolder;">Skill Analysis Quiz</h1>
+        <div class="slide-in-left py-3">
+            <h1 class="fw-bolder" style="text-align: center; color: black;">Engage, Assess, Learn: Your Pace, Your Progress, Your Mastery.</h1>
         </div>
-      <!-- </div> -->
-    </div> 
+        <div class="slide-in-bottom mt-4">
+            <div class="d-flex justify-content-center">
+                <button onclick="location.href='register.php'" type="button" class="btn btn-lg text-dark btn-info  font-bold h-12 w-32 me-2">Sign Up</button>
+                <button onclick="location.href='login.php'" type="button" class="btn btn-lg text-dark btn-info font-bold h-12 w-32">Sign In</button>
+            </div>
+        </div>
+    </div>
+</div> 
     <div class="col-lg-6 col-md-12 d-flex flex-column align-items-center justify-content-center">
       <div id="content-container" class="col-lg-8 col-md-5 d-flex flex-column align-items-center justify-content-center" style="border-radius: 10px; height: 300px; background: linear-gradient(to bottom right, #FFA500, #FF4500);">
         <h1 id="content-heading" class="fs-5 text-center" style="font-weight: bold;">Accessible</h1>

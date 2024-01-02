@@ -80,7 +80,7 @@
         </div>
     
     <!-- <div class="container w-75 mt-5 mb-5 shadow p-3 mb-5 bg-body" style="border-radius: 20px"> -->
-    <div class="container sizing  shadow mt-5 mb-5 bg-body mb-5" style="border-radius: 20px">
+    <div class="container sizing  shadow mt-5 mb-5 bg-body" style="border-radius: 20px">
 
             <div class="row text-dark ">
     <!-- <h4 class="text-center fw-bolder">Create Your Account!!!</h4> -->

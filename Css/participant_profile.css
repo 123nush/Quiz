@@ -52,3 +52,7 @@ table.table-hover{
     border-collapse: separate;
     border-spacing: 0 15px; /* Adjust the vertical spacing here */
 }
+.table{
+    border-collapse: separate;
+    border-spacing: 0 15px; /* Adjust the vertical spacing here */
+}

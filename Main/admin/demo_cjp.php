@@ -17,34 +17,10 @@
     <style>
     /* Additional CSS */
     .rounded:hover {
-        transform: translateY(-10px); 
-        box-shadow: 0 5px 15px rgba(0, 0, 0.3, 0.3); 
+        transform: translateY(-10px); /* Example of a pop-up effect */
+        box-shadow: 0 5px 15px rgba(0, 0, 0.3, 0.3); /* Example of a shadow effect */
+        background-color: #073763; /* Example of a color change on hover */
     }
-    .arrow-box {
-    position: relative;
-    padding: 20px;
-    margin: 20px 0;
-    border: 1px solid #ccc;
-    background-color: transparent;
-    text-align: center;
-    font-weight: bold;
-}
-
-.left-arrow {
-    clip-path: polygon(0 50%, 10% 0, 100% 0, 100% 100%, 10% 100%);
-}
-
-.right-arrow {
-    clip-path: polygon(100% 50%, 90% 0, 0 0, 0 100%, 90% 100%);
-}
-.circle-image {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background-image: url('../../Images/tasks.png');
-    background-size: cover;
-    margin-left: 10px; 
-}
 </style>
 </head>
 <body>
@@ -70,11 +46,10 @@
                     while($row_of_query = mysqli_fetch_assoc($result_of_job_profile_info))
                     {
                         ?>
-                        <div class="col-lg-8  col-md-6 mb-5" id="infoColumn">
-                            <div class="rounded p-3  text-dark" style="cursor: pointer; transition: all 0.3s;background-color:white">
-                                <div style="color:black;background-color:yellow" >
-                                    <h4 class="card-title" style="text-align: center;" ><?php echo $row_of_query['job_profile_name']; ?></h4>
-                                </div>
+                        <div class="col-lg-6  col-md-6 mb-5" id="infoColumn">
+                            <div class="rounded p-3  text-white" style="cursor: pointer; transition: all 0.3s;background-color: #100a4d;">
+                                <!-- Your card content -->
+                                <h4 class="card-title" style="text-align: center;color:black;background-color:yellow" ><?php echo $row_of_query['job_profile_name']; ?></h4>
                                 <p class="card-text">
                                     <span  style="font-size:large;" class="fw-bolder">Description:</span>
                                     <?php echo $row_of_query['role']; ?>
@@ -84,32 +59,23 @@
                                     <?php echo date("d M Y", strtotime($row_of_query['update_date'])); ?>
                                 </p>
                                 <p class="card-text">
-                                <div class="d-flex align-items-center justify-content-center">
-                                    <span style="font-size: large;" class="fw-bolder text-center">Tasks</span>
-                                    <div class="circle-image"></div>
-                                </div>
-                                <br>
+                                <span  style="font-size:large;" class="fw-bolder"> Tasks:</span><br>
+                                <ul>
                                 <?php
-                                if(mysqli_num_rows($result_of_job_tasks_info) > 0) {
-                                    $index = 0;
-                                    $backgrounds = [
-                                        'linear-gradient(to bottom right, #FFA500, #FF4500)',
-                                        'linear-gradient(to bottom right, #ff69b4, #ff0000)',
-                                        'linear-gradient(to bottom right, #ba55d3, #da70d6 ,#9932cc,#8a2be2, #9400d3)',
-                                        'linear-gradient(to bottom right, #87CEEB, #0000FF)',
-                                        'linear-gradient(to bottom right, #ccff66, #54d911)'
-                                    ];
-                                    while($row_of_tasks = mysqli_fetch_assoc($result_of_job_tasks_info)) {
-                                        $background_style = isset($backgrounds[$index]) ? $backgrounds[$index] : $backgrounds[0];
-                                        ?>
-                                        <div class="arrow-box <?php echo ($index % 2 == 0) ? 'left-arrow' : 'right-arrow'; ?>" style="background: <?php echo $background_style; ?>">
-                                            <?php echo $row_of_tasks['task']; ?>
-                                        </div>
-                                        <?php
-                                        $index = ($index + 1) % count($backgrounds);
-                                    }
-                                }
+                            if(mysqli_num_rows($result_of_job_tasks_info)>0 )
+                            {
+                            while($row_of_tasks = mysqli_fetch_assoc($result_of_job_tasks_info))
+                            {    
                                 ?>
+                                        <li><?php echo $row_of_tasks['task']; ?></li>
+                            <?php
+                                }
+                            ?>
+                             </ul>
+                            </p> 
+                            <?php
+                            }
+                            ?>
                             <p class="card-text">
                             <span  style="font-size:large;" class="fw-bolder">Skills Required:</span><br>
                             <ul>
@@ -137,8 +103,8 @@
                 <?php
                 }
                 ?>
-            <!-- <div class="col-lg-5  col-md-6 mb-5" id="imageColumn">
-            </div> -->
+            <div class="col-lg-5  col-md-6 mb-5" id="imageColumn">
+            </div>
         </div>
 </div>
 <script>
