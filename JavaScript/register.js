@@ -9,7 +9,7 @@ $(document).ready(function(){
      }
      $('#full_name').bind('keypress', testInput);
 
-     
+     //code to check if user already exists
      $('#username').on('input',function(){
         var username = $('#username').val();
         //console.log(username);
@@ -19,15 +19,13 @@ $(document).ready(function(){
             data: {username : username},
             success: function(data) {
                 console.log(data);
-                if(data==1)
+                if(data=='User Name already Exists')
                 {
                     $('#usernameVerify').text("Username Already exists!").css("color", "red");
             $('#username').css("border-color","red");
                 }
                 else
                 {
-                    // $('#usernameVerify').text(data).css("color", "green");
-                    // $('#username').css("border-color","green"); 
                    $('#usernameVerify').text("Valid username!").css("color", "green");
             $('#username').css("border-color","green");
                 }
@@ -37,6 +35,7 @@ $(document).ready(function(){
             },
         })
     })
+    //code to check whether new email is getting registered or old
     $('#email').on('input',function(){
         var email = $('#email').val();
         var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regex for email validation
@@ -48,7 +47,7 @@ $(document).ready(function(){
             data: {sign_up_email : email},
             success: function(data) {
                 console.log(data);
-                if(data==1)
+                if(data=='Email is already registered')
                 {
                     $('#emailVerify').text("Email Already registered!").css("color", "red");
             $('#email').css("border-color","red");
@@ -139,17 +138,17 @@ $(document).ready(function(){
                     {
                         if($confirm_password_verify=="Password matched !")
                         {
-                                $username=$('#username').val();
+                                $username_register=$('#username').val();
                                 $full_name = $('#full_name').val();
                                 $email = $('#email').val();
                                 $password = $('#password').val();
                                 $.ajax({
                                     type: 'POST',
                                     url: 'ajax_work.php',
-                                    data: {full_name : $full_name, email: $email, password : $password,username:$username},
+                                    data: {full_name : $full_name, email: $email, password : $password,username_register:$username_register},
                                     success: function(data) {
-                                        //console.log(data);
-                                        if(data==1)
+                                        console.log(data);
+                                        if(data=='Register')
                                         {
                                             $('#success').modal('show');
                                         }                                 

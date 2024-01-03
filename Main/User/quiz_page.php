@@ -49,12 +49,10 @@
 .option-container:hover {
     border-color: black; 
 }
-
 .option-container.active {
     background-color: black !important; /* Ensure the selected background color overrides */
     color: white;
 }
-
 .preview-question {
     margin-bottom: 20px;
     border: 1px solid #ccc;
@@ -74,6 +72,22 @@
     margin-top: 20px;
     margin-bottom: 20px;
 }
+.circle-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-image: url('../../Images/winner.png');
+    background-size: cover;
+    margin-left: 10px; 
+    align-items: center;
+    justify-content: center;
+}
+#score_result_image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
 </style>
 </head>
 <body>
@@ -139,7 +153,10 @@
             </div>
         <!--   preview div -->
                 <div id="quizPreview" class="col-lg-7 col-md-8 m-auto bg-light" style="display: none;border-radius:10px">
-                    <div id="userScore" class="text-center"></div>
+                    <!-- <div id="score_result_image"> -->
+                        <!-- <div id="result_image" class="circle-image"> </div> -->
+                        <div id="userScore" class="text-center"></div>
+                    <!-- </div> -->
                     <div id="previewQuestions"></div>
                 </div>
     </div>

@@ -1,109 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Include necessary libraries -->
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Index Page</title>
+    <!-- talwind link -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+
+    <link type="image/png" sizes="16x16" rel="icon" href="https://tse3.mm.bing.net/th?id=OIP.8W1AqXk8aZfMEIyeyOwvAwAAAA&pid=Api&P=0&h=180" />
+    <!-- <link rel="stylesheet" href="../../Css/landing.css"> -->
+    <!-- link for animation  with text-->
+  <link href="https://cdn.jsdelivr.net/gh/yesiamrocks/cssanimation.io@1.0.3/cssanimation.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yesiamrocks/cssanimation.io@1.0.3/cssanimation.min.css">
+  <script src="../../JavaScript/animation.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/yesiamrocks/cssanimation.io@1.0.3/letteranimation.min.js"></script>
+<!-- link for various effects with shape -->
+<link rel="stylesheet" href="../../Css/shape.css">
+  <!-- <link rel="stylesheet" href="../../Css/style.css"> -->
     <style>
-        .animated-div {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background-color: blue;
-            border-radius: 50%;
-            opacity: 1;
-        }
+       body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(to right, #073763, #0e5a8a, #0984e3, #00a8e8, #00c6ff);
+  position: relative;
+  /* overflow: hidden; */
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* Cover the entire width */
+  height: 100vh; /* Cover the entire height */
+  background: url('https://tse1.mm.bing.net/th?id=OIP.d7G07Ll9HOV5jav9wJ1FDAHaFj&pid=Api&P=0&h=180') no-repeat left top;
+  background-size: cover;
+  mix-blend-mode: overlay;
+  opacity: 0.3; /* Adjust the opacity to blend with the background */
+  z-index: -1;
+}
+@keyframes slideLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-slide-left {
+    animation: slideLeft 0.5s ease-out;
+  }
+
+  .delay-100 {
+    animation-delay: 0.3s;
+  }
+
+  .delay-200 {
+    animation-delay: 0.5s;
+  }
+
+  .delay-300 {
+    animation-delay: 0.8s;
+  }
+
+  .delay-400 {
+    animation-delay: 1.1s;
+  }
+h3 {
+  color: white;
+  font-weight: bolder;
+  text-align: center;
+}
+/* Animation */
+@keyframes text_reveal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.video-wrapper {
+  width: 100%; /* Set width as desired */
+  height: 300px; /* Set visible height as desired */
+  overflow: hidden; /* Clip overflow */
+}
+.video-wrapper video {
+  width: 100%; /* Ensure video takes full width */
+  margin-top: -30px; /* Adjust to cut off bottom part */
+}
+@media (min-width: 768px) {
+  .col-md-5 {
+    margin-top: 1.5cm; /* Adjust as needed */
+  }
+}
+/* Adjust margin for smaller screens (mobile) */
+@media (max-width: 767px) {
+  .col-md-5 {
+    margin-top: 0 !important; /* Adjust as needed */
+  }
+}
     </style>
+    <!-- Include Tailwind CSS -->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<!-- Include animate.css for animations -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
 </head>
 <body>
-    <div id="showcase-left" class="animated-div" style="left: 0;">
-    <h2>Anushka</h2></div>
-    <div id="showcase-right" class="animated-div" style="left: 200px;">
-    <h1>Dalvi</h1></div>
+    <div class="row " >
+        <div class="col-md-5 col-lg-6 mx-auto py-3" style="margin-top: 3.5cm" >
+          <h3 style=" font-weight: bolder;color:#100a4d;text-shadow: #0984e3;font-size: xx-large;margin-top: 20px;" 
+          class="  cssanimation sequence leFadeIn infinite ">
+            SKILL ANALYSIS QUIZ</h3>
+            <div class="slide-in-left py-3" >
+              <h1  class="fw-bolder " style="text-align: center;color: white;">Engage, Assess, Learn: Your Pace, Your Progress, Your Mastery.</h1>
+            </div>
+            <div class="slide-in-bottom flex justify-center items-center">
+              <div class="flex gap-4">
+                <button onclick="location.href='register.php'" type="button" class="btn btn-lg text-light bg-indigo-800 hover:bg-indigo-500 font-bold h-12 w-32">Sign Up</button>
+                <button onclick="location.href='login.php'" type="button" class="btn btn-lg text-light bg-indigo-800 hover:bg-indigo-500 font-bold h-12 w-32">Sign In</button>
+              </div>
+            </div>
+        </div>
+    
+      <div class="col-md-5 col-lg-6 mx-auto py-3">
+      <div id="video-container" class="row video-wrapper" >
+          <div style="position: relative; overflow: hidden;">
+            <video autoplay loop muted style="width: 100%; height: 80%; position: relative;">
+              <source src="../../Images/InShot_20231203_164352768.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+           <div style="height:20px;width: 20px;">
+           </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="m-4 py-3 row" >
+      <div class="col-lg-3 col-md-4 mx-auto animate-slide-left mb-2 delay-100" style="background-color: #100a4d;color: white;border-radius: 20px;">
+        Interactive quizzes keep learners engaged and motivated throughout the learning process.
+      </div>
+      <div class="col-lg-3 col-md-4 mx-auto animate-slide-left mb-2 delay-200" style="background-color: #100a4d;color: white;border-radius: 20px">
+        Users can assess their knowledge and identify areas that require further improvement.
+      </div>
+      <div class="col-lg-3 col-md-4 mx-auto animate-slide-left mb-2 delay-300" style="background-color: #100a4d;color: white;border-radius: 20px">
+        Users can learn at their own pace and revisit challenging topics as needed.
+      </div>
+      <div class="col-lg-3 col-md-4 mx-auto animate-slide-left mb-2 delay-400" style="background-color: #100a4d;color: white;border-radius: 20px">
+        Technical quiz websites provide users with the ability to monitor their progress over time.
+      </div>
+    </div>
 
-    <script>
-        $(document).ready(function () {
-            // Flag to check if animations have been triggered
-            var animationsTriggered = false;
-
-            function animateImage() {
-                if (!animationsTriggered) {
-                    $('#showcase-left').animate({
-                        left: '+=50px',
-                        top: '+=50px',
-                        opacity: 0
-                    }, {
-                        step: function (now, fx) {
-                            if (fx.prop === 'left' || fx.prop === 'top') {
-                                $(this).css('transform', 'rotate(' + (now / 5) + 'deg)');
-                            }
-                        },
-                        duration: 1000,
-                        complete: function () {
-                            $('#showcase-left').animate({
-                                left: '-=50px',
-                                top: '-=50px',
-                                opacity: 1
-                            }, {
-                                step: function (now, fx) {
-                                    if (fx.prop === 'left' || fx.prop === 'top') {
-                                        $(this).css('transform', 'rotate(' + (now / 5) + 'deg)');
-                                    }
-                                },
-                                duration: 1000,
-                                complete: function () {
-                                    // Call the function recursively to create a continuous loop
-                                    animateImage();
-                                }
-                            });
-                        }
-                    });
-                    animationsTriggered = true;
-                }
-            }
-
-            function animateDiv() {
-                if (!animationsTriggered) {
-                    $('#showcase-right').animate({
-                        left: '-=50px',
-                        top: '+=50px',
-                        opacity: 0
-                    }, {
-                        step: function (now, fx) {
-                            if (fx.prop === 'left' || fx.prop === 'top') {
-                                $(this).css('transform', 'rotate(' + (now / 5) + 'deg)');
-                            }
-                        },
-                        duration: 1000,
-                        complete: function () {
-                            $('#showcase-right').animate({
-                                left: '+=50px',
-                                top: '-=50px',
-                                opacity: 1
-                            }, {
-                                step: function (now, fx) {
-                                    if (fx.prop === 'left' || fx.prop === 'top') {
-                                        $(this).css('transform', 'rotate(' + (now / 5) + 'deg)');
-                                    }
-                                },
-                                duration: 1000,
-                                complete: function () {
-                                    // Call the function recursively to create a continuous loop
-                                    animateDiv();
-                                }
-                            });
-                        }
-                    });
-                    animationsTriggered = true;
-                }
-            }
-
-            // Trigger animations on scroll
-            $(window).on('scroll', function () {
-                animateImage();
-                animateDiv();
-            });
-        });
-    </script>
 </body>
+<!-- Code for video at background -->
+ <!-- <img src="https://media.tenor.com/vCMW7BYD4WkAAAAC/m.gif" alt=""> -->
+    <!-- <div id="video-container">
+      <video autoplay loop muted>
+        <source src="https://marketplace.canva.com/EAFIGPIs_0g/1/0/450w/canva-blue-abstract-electronic-circuits-instagram-reel-nNFrRp9nxrE.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div> -->
+    <!-- about us -->   
+ <!-- last div -->
+  <!-- <div class="row  align-items-center justify-content-center content ">
+    <div class="col-md-4 col-lg-5 p-3 col-md-auto mx-auto " id="showcase-left">
+      
+      <img class="img-fluid"  src="https://media.tenor.com/vCMW7BYD4WkAAAAC/m.gif" alt="" >
+      
+    </div>
+    <div class="col-md-4 col-lg-5 p-3 col-md-auto mx-auto " id="showcase-right">
+      
+        <p style="font-weight: bolder;">
+        In Information technology(IT) there are many trending jobs for which people prepares themselves. 
+        But sometimes they find difficult that what is to study and from where to start , sometimes they can’t
+        recognize in which skill they are good. So this quiz platform help such people to solve all above problems.
+        With the help of this website  people can easily choose correct path ,
+        more specifically from the interview point of view they can prepare themselves in organize way.
+      </p>
+      
+    </div>
+  </div> -->
+
 </html>

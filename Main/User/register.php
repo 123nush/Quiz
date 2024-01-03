@@ -94,7 +94,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="full_name" class="form-label">Name:</label>
-                        <input type="text" class="form-control" id="full_name" placeholder="eg. Anushka Dalvi" autocomplete="off">  
+                        <input type="text" class="form-control" id="full_name" placeholder="eg. Anushka Dalvi" autocomplete="off" required>  
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email:</label>

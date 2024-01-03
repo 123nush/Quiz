@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,172 +24,141 @@
 <!-- link for various effects with shape -->
 <link rel="stylesheet" href="../../Css/shape.css">
   <!-- <link rel="stylesheet" href="../../Css/style.css"> -->
+    <link rel="stylesheet" href="../../Css/tailstyle.css">
     <style>
-       body {
-  margin: 0;
-  height: 100vh;
-  background: linear-gradient(to right, #073763, #0e5a8a, #0984e3, #00a8e8, #00c6ff);
-  position: relative;
-  /* overflow: hidden; */
-}
-
-body::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%; /* Cover the entire width */
-  height: 100vh; /* Cover the entire height */
-  background: url('https://tse1.mm.bing.net/th?id=OIP.d7G07Ll9HOV5jav9wJ1FDAHaFj&pid=Api&P=0&h=180') no-repeat left top;
-  background-size: cover;
-  mix-blend-mode: overlay;
-  opacity: 0.3; /* Adjust the opacity to blend with the background */
-  z-index: -1;
-}
-@keyframes slideLeft {
-    0% {
-      opacity: 0;
-      transform: translateX(-50px);
+    .btn {
+       background-color:lightskyblue ;
     }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
+
+    .btn:hover {
+        background-color: #0099ff; /* Change to the color you want on hover */
     }
-  }
-
-  .animate-slide-left {
-    animation: slideLeft 0.5s ease-out;
-  }
-
-  .delay-100 {
-    animation-delay: 0.3s;
-  }
-
-  .delay-200 {
-    animation-delay: 0.5s;
-  }
-
-  .delay-300 {
-    animation-delay: 0.8s;
-  }
-
-  .delay-400 {
-    animation-delay: 1.1s;
-  }
-h3 {
-  color: white;
-  font-weight: bolder;
-  text-align: center;
-}
-/* Animation */
-@keyframes text_reveal {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-.video-wrapper {
-  width: 100%; /* Set width as desired */
-  height: 300px; /* Set visible height as desired */
-  overflow: hidden; /* Clip overflow */
-}
-.video-wrapper video {
-  width: 100%; /* Ensure video takes full width */
-  margin-top: -30px; /* Adjust to cut off bottom part */
-}
-@media (min-width: 768px) {
-  .col-md-5 {
-    margin-top: 1.5cm; /* Adjust as needed */
-  }
-}
-/* Adjust margin for smaller screens (mobile) */
-@media (max-width: 767px) {
-  .col-md-5 {
-    margin-top: 0 !important; /* Adjust as needed */
-  }
-}
-    </style>
-    <!-- Include Tailwind CSS -->
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-<!-- Include animate.css for animations -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+</style>
 </head>
-<body>
-    <div class="row " >
-        <div class="col-md-5 col-lg-6 mx-auto py-3" style="margin-top: 3.5cm" >
-          <h3 style=" font-weight: bolder;color:#100a4d;text-shadow: #0984e3;font-size: xx-large;margin-top: 20px;" 
-          class="  cssanimation sequence leFadeIn infinite ">
-            SKILL ANALYSIS QUIZ</h3>
-            <div class="slide-in-left py-3" >
-              <h1  class="fw-bolder " style="text-align: center;color: white;">Engage, Assess, Learn: Your Pace, Your Progress, Your Mastery.</h1>
-            </div>
-            <div class="slide-in-bottom flex justify-center items-center">
-              <div class="flex gap-4">
-                <button onclick="location.href='register.php'" type="button" class="btn btn-lg text-light bg-indigo-800 hover:bg-indigo-500 font-bold h-12 w-32">Sign Up</button>
-                <button onclick="location.href='login.php'" type="button" class="btn btn-lg text-light bg-indigo-800 hover:bg-indigo-500 font-bold h-12 w-32">Sign In</button>
-              </div>
+<!-- https://tse1.mm.bing.net/th?id=OIP.8Jt5hsxs9acvfhfnfkZnIwHaFj&pid=Api&P=0&h=180
+https://tse3.mm.bing.net/th?id=OIP.TOcvDZ9dH0V1fPGoTCw6wAHaDe&pid=Api&P=0&h=180 
+https://img.freepik.com/free-photo/stylish-blue-abstract-background-with-text-space_1017-46766.jpg?size=626&ext=jpg&ga=GA1.1.1270697051.1699685084&semt=ais
+https://img.freepik.com/free-vector/blue-wavy-shape-background_1055-2929.jpg?size=626&ext=jpg&ga=GA1.1.1270697051.1699685084&semt=ais
+https://img.freepik.com/free-vector/abstract-background-with-waves-glow_1182-1873.jpg?size=626&ext=jpg&ga=GA1.1.1270697051.1699685084&semt=ais
+https://img.freepik.com/premium-vector/abstract-blue-background_114588-259.jpg?w=740
+https://img.freepik.com/free-vector/light-blue-wavy-background_1035-8917.jpg?size=626&ext=jpg&ga=GA1.1.1270697051.1699685084&semt=ais
+https://img.freepik.com/free-photo/abstract-curves-background-with-bokhe-lights_1048-13405.jpg?size=626&ext=jpg&ga=GA1.1.1270697051.1699685084&semt=ais
+https://img.freepik.com/free-vector/gradient-particle-wave-background_23-2150511951.jpg?size=626&ext=jpg&ga=GA1.1.1270697051.1699685084&semt=ais-->
+<body  style="background-image: url('https://img.freepik.com/free-photo/abstract-curves-background-with-bokhe-lights_1048-13405.jpg?size=626&ext=jpg&ga=GA1.1.1270697051.1699685084&semt=ais');background-repeat: no-repeat;
+  background-size: cover;">
+  <div class="row">
+  
+
+  <div class="col-lg-6 col-md-12 m-auto p-0" style="height: 100vh; overflow: hidden;">
+    <div class="d-flex flex-column align-items-center justify-content-center h-100">
+        <h1 style="text-align: center; color: black; font-size: xx-large; font-weight: bolder;">Skill Analysis Quiz</h1>
+        <div class="slide-in-left py-3">
+            <h1 class="fw-bolder" style="text-align: center; color: black;">Engage, Assess, Learn: Your Pace, Your Progress, Your Mastery.</h1>
+        </div>
+        <div class="slide-in-bottom mt-4">
+            <div class="d-flex justify-content-center">
+                <button onclick="location.href='register.php'" type="button" class="btn btn-lg text-dark btn-info  font-bold h-12 w-32 me-2">Sign Up</button>
+                <button onclick="location.href='login.php'" type="button" class="btn btn-lg text-dark btn-info font-bold h-12 w-32">Sign In</button>
             </div>
         </div>
-    
-      <div class="col-md-5 col-lg-6 mx-auto py-3">
-      <div id="video-container" class="row video-wrapper" >
-          <div style="position: relative; overflow: hidden;">
-            <video autoplay loop muted style="width: 100%; height: 80%; position: relative;">
-              <source src="../../Images/InShot_20231203_164352768.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-           <div style="height:20px;width: 20px;">
-           </div>
+    </div>
+</div> 
+    <div class="col-lg-6 col-md-12 d-flex flex-column align-items-center justify-content-center">
+      <div id="content-container" class="col-lg-8 col-md-5 d-flex flex-column align-items-center justify-content-center" style="border-radius: 10px; height: 300px; background: linear-gradient(to bottom right, #FFA500, #FF4500);">
+        <h1 id="content-heading" class="fs-5 text-center" style="font-weight: bold;">Accessible</h1>
+        <div id="heading-image" class="d-flex justify-content-center">
+          <img src="https://cdn-icons-png.flaticon.com/128/4662/4662943.png" class="illusion" alt="" style="height: 50px; width: 50px; border-radius: 10px;">
+        </div>
+        <div id="quiz-content" class="fs-5 text-center">
+          <p>Using our quizzes is easy! Just sign up or log in if you're already a user. Pick a quiz category you like, and begin testing what you know. Keep an eye on your progress and score points along the way.</p>
+          <div id="login-register-buttons" style="display: none;">
+            <button id="loginButton" class="btn btn-primary" onclick="login.php">Login</button>
+            <button id="registerButton">Register</button>
           </div>
         </div>
       </div>
-    </div>
-  
-    <div class="m-4 py-3 row" >
-      <div class="col-lg-3 col-md-4 mx-auto animate-slide-left mb-2 delay-100" style="background-color: #100a4d;color: white;border-radius: 20px;">
-        Interactive quizzes keep learners engaged and motivated throughout the learning process.
-      </div>
-      <div class="col-lg-3 col-md-4 mx-auto animate-slide-left mb-2 delay-200" style="background-color: #100a4d;color: white;border-radius: 20px">
-        Users can assess their knowledge and identify areas that require further improvement.
-      </div>
-      <div class="col-lg-3 col-md-4 mx-auto animate-slide-left mb-2 delay-300" style="background-color: #100a4d;color: white;border-radius: 20px">
-        Users can learn at their own pace and revisit challenging topics as needed.
-      </div>
-      <div class="col-lg-3 col-md-4 mx-auto animate-slide-left mb-2 delay-400" style="background-color: #100a4d;color: white;border-radius: 20px">
-        Technical quiz websites provide users with the ability to monitor their progress over time.
+      <div class="mt-3">
+        <input type="radio" id="content1" name="content" value="Content 1" checked>
+        <label for="content1"></label>
+        <input type="radio" id="content2" name="content" value="Content 2">
+        <label for="content2"></label>
+        <input type="radio" id="content3" name="content" value="Content 3">
+        <label for="content3"></label>
+        <input type="radio" id="content4" name="content" value="Content 4">
+        <label for="content4"></label>
+        <input type="radio" id="content5" name="content" value="Content 5">
+        <label for="content5"></label>
       </div>
     </div>
+  </div>
 
+  <script>
+    const contents = [
+      "Using our quizzes is easy! Just sign up or log in if you're already a user. Pick a quiz category you like, and begin testing what you know. Keep an eye on your progress and score points along the way.",
+      "Our quiz website is here for anyone keen on IT jobs. It's interactive, informative, and aimed at boosting your knowledge in this rapidly evolving field.",
+      'Discover the most popular IT jobs and learn about the important skills and tasks. Understand why keeping up with new tech is so important for success in the fast-moving IT field.',
+      'Explore diverse quiz categories that span IT fields. Test your knowledge in programming languages, cybersecurity, cloud computing, AI, and more! Take on engaging quizzes designed to boost your expertise in these areas.',
+      'After each quiz, you\'ll get a full summary of how you did, like your score and how you did overall. Also, we\'d love to hear what you think so we can make our quizzes even better for you.'
+    ];
+    const headings = ['Accessible', 'Enriching', 'Innovative', 'Diverse', 'Evaluative'];
+    const illusions = [
+      'https://cdn-icons-png.flaticon.com/128/4662/4662943.png',
+      'https://cdn-icons-png.flaticon.com/128/4370/4370748.png',
+      'https://t4.ftcdn.net/jpg/06/76/30/81/240_F_676308105_fhU0d5nqdegqNSWJgxsjIpQA8EBlMZn3.jpg',
+      'https://cdn-icons-png.flaticon.com/128/5691/5691422.png',
+      'https://cdn-icons-png.flaticon.com/128/2782/2782163.png'
+    ];
+    const backgrounds = [
+      'linear-gradient(to bottom right, #FFA500, #FF4500)',
+      'linear-gradient(to bottom right, #ff69b4, #ff0000)',
+      'linear-gradient(to bottom right, #ba55d3, #da70d6 ,#9932cc,#8a2be2, #9400d3)',
+      'linear-gradient(to bottom right, #87CEEB, #0000FF)',
+      'linear-gradient(to bottom right, #ccff66, #54d911)'
+    ];
+    const loginRegisterButtons = document.getElementById('login-register-buttons');
+    const contentHeading = document.getElementById('content-heading');
+    const headingImage = document.getElementById('heading-image');
+    const illusionImage = document.querySelector('.illusion');
+    const radios = document.querySelectorAll('input[name="content"]');
+    let currentIndex = 0;
+    let intervalId;
+
+    function changeContent(index) {
+      contentHeading.textContent = headings[index];
+      document.getElementById('quiz-content').textContent = contents[index];
+      document.getElementById('content-container').style.background = backgrounds[index];
+      illusionImage.src = illusions[index];
+      if (contents[index] === "Using our quizzes is easy! Just sign up or log in if you're already a user. Pick a quiz category you like, and begin testing what you know. Keep an eye on your progress and score points along the way.") {
+        loginRegisterButtons.style.display = 'block';
+      } else {
+        loginRegisterButtons.style.display = 'none';
+      }
+    }
+
+    radios.forEach((radio, i) => {
+      radio.addEventListener('change', () => {
+        clearInterval(intervalId);
+        currentIndex = i;
+        changeContent(i);
+        intervalId = setInterval(() => {
+          currentIndex = (currentIndex + 1) % contents.length;
+          radios[currentIndex].checked = true;
+          changeContent(currentIndex);
+        }, 5000);
+      });
+    });
+    intervalId = setInterval(() => {
+      currentIndex = (currentIndex + 1) % contents.length;
+      radios[currentIndex].checked = true;
+      changeContent(currentIndex);
+    }, 5000);
+  </script>
 </body>
-<!-- Code for video at background -->
- <!-- <img src="https://media.tenor.com/vCMW7BYD4WkAAAAC/m.gif" alt=""> -->
-    <!-- <div id="video-container">
-      <video autoplay loop muted>
-        <source src="https://marketplace.canva.com/EAFIGPIs_0g/1/0/450w/canva-blue-abstract-electronic-circuits-instagram-reel-nNFrRp9nxrE.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    </div> -->
-    <!-- about us -->   
- <!-- last div -->
-  <!-- <div class="row  align-items-center justify-content-center content ">
-    <div class="col-md-4 col-lg-5 p-3 col-md-auto mx-auto " id="showcase-left">
-      
-      <img class="img-fluid"  src="https://media.tenor.com/vCMW7BYD4WkAAAAC/m.gif" alt="" >
-      
-    </div>
-    <div class="col-md-4 col-lg-5 p-3 col-md-auto mx-auto " id="showcase-right">
-      
-        <p style="font-weight: bolder;">
-        In Information technology(IT) there are many trending jobs for which people prepares themselves. 
-        But sometimes they find difficult that what is to study and from where to start , sometimes they can’t
-        recognize in which skill they are good. So this quiz platform help such people to solve all above problems.
-        With the help of this website  people can easily choose correct path ,
-        more specifically from the interview point of view they can prepare themselves in organize way.
-      </p>
-      
-    </div>
-  </div> -->
 
 </html>
+
+<!-- https://cdn-icons-png.flaticon.com/128/4662/4662943.png(login) 
+https://cdn-icons-png.flaticon.com/128/4370/4370748.png(popular)
+https://t4.ftcdn.net/jpg/06/76/30/81/240_F_676308105_fhU0d5nqdegqNSWJgxsjIpQA8EBlMZn3.jpg(trending IT jobs)
+https://cdn-icons-png.flaticon.com/128/5691/5691422.png(quiz)
+https://cdn-icons-png.flaticon.com/128/2782/2782163.png(result and analysis)-->

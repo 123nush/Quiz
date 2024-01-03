@@ -104,14 +104,20 @@ session_start();
                             $query_to_find_total_given_quiz="SELECT COUNT(quiz_id) FROM `quiz` WHERE user_name='$user_name'";
                             $result_of_given_quiz=mysqli_query($con,$query_to_find_total_given_quiz);
                             $query_to_find_max_quiz_on_job_profile="SELECT job_profile_name, COUNT(*) AS quiz_count
-                             FROM quiz GROUP BY job_profile_name ORDER BY quiz_count DESC LIMIT 1";
+                            FROM quiz where quiz.user_name='$user_name' GROUP BY job_profile_name ORDER BY quiz_count DESC LIMIT 1";
                             $result_for_max_quiz=mysqli_query($con,$query_to_find_max_quiz_on_job_profile);
                             if(mysqli_num_rows($result_of_user_info)>0){
                                 $row=mysqli_fetch_assoc($result_of_user_info);
                                 $total=mysqli_fetch_assoc($result_of_given_quiz);
                                 $t=$total['COUNT(quiz_id)'];
-                                $row_of_job_profile=mysqli_fetch_assoc($result_for_max_quiz);
-                                $job_profile=$row_of_job_profile['job_profile_name'];
+                                if(mysqli_num_rows($result_for_max_quiz)){
+                                    $row_of_job_profile=mysqli_fetch_assoc($result_for_max_quiz);
+                                    $job_profile=$row_of_job_profile['job_profile_name'];
+                                }
+                                else{
+                                    $job_profile="No Quiz Perform";
+                                }
+                               
                               ?>
                                 <div class='text-center my-4'>
                                    <h2 class="fw-20 fs-3" style="font-weight: bolder;"> Hello <?php echo $row['user_name'] ?></h2>

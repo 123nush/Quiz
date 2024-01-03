@@ -23,6 +23,7 @@
               require_once('../User/user_navbar.html');
               ?>
             <div class="col-md-10 col-lg-10 mx-auto">
+                <div class="col-lg-8 col-md-6 m-auto" style="background-color: white;">
                 <?php
                 if(isset($_GET['job_profile'])&& isset($_GET['date'])&& isset($_GET['username'])){
                     $job_profile=$_GET['job_profile'];
@@ -46,12 +47,13 @@
                                 $query_for_questions="SELECT * from question_answer where question_id='$question_id'";
                                 $result_of_questions=mysqli_query($con,$query_for_questions);
                                 $query_for_score="SELECT * from result where result_id='$result_id' ";
+                                
                                 if(mysqli_num_rows($result_of_questions)>0){
                                     while($questions=mysqli_fetch_assoc($result_of_questions)){
                                         $question=$questions['question'];
                                         ?>
                                         <div class="col-lg-8 col-md-6 m-auto my-2">
-                                            <p>attained qustions</p>
+                                            <!-- <p>attained qustions</p> -->
                                             <h3><?php echo $questions['question']; ?></h3>
                                         </div>
                                         <?php
@@ -68,6 +70,7 @@
 
                 }
                 ?>
+                </div>
             </div>
     </div>
 </div>

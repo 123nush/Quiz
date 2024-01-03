@@ -148,6 +148,7 @@ $('document').ready(function(){
                         }
                         function showQuizPreview() {
                             $('#quiz_job_profile').text("Preview of Quiz on " + job_profile_name_for_quiz + " ");
+                            // document.getElementById('quiz_job_profile').style.background="white";
                             var quizContainer = document.getElementById('quizContainer');
                             quizContainer.style.display = 'none';
                             var quizPreviewSection = document.getElementById('quizPreview');
@@ -156,6 +157,10 @@ $('document').ready(function(){
                             previewQuestionsDiv.innerHTML = '';
                             var userScoreDiv = document.getElementById('userScore');
                             userScoreDiv.textContent = `Total Score: ${totalCorrect}`;
+                            // var resultimage=document.getElementById('result_image');
+                            // resultimage.style.display='block';
+                            // var score_result_image=document.getElementById('score_result_image');
+                            // score_result_image.style.display='block';
                             for (let i = 0; i < totalQuestions; i++) {
                                 var currentQuizData = parsedData.questions[i];
                                 var questionDiv = document.createElement('div');
@@ -262,7 +267,7 @@ $('document').ready(function(){
                             showQuizPreview();
                             var username=$('#username').text();
                             console.log(username);
-                            //code to set data in rult as well as quiz, quiz_question table
+                            //code to set data in result as well as quiz, quiz_question table
                             $.ajax({
                                 type:'POST',
                                 url:'ajax_work.php',
