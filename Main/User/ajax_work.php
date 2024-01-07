@@ -10,8 +10,9 @@ if (!empty($_POST['full_name']) &&
     $full_name = mysqli_real_escape_string($con, $_POST['full_name']);
     $email = mysqli_real_escape_string($con, $_POST['email']);
     $username = mysqli_real_escape_string($con, $_POST['username_register']);
-    $password = mysqli_real_escape_string($con, $_POST['password']);
-    $insert_user_info = "INSERT INTO `user` (user_name,name,email,pwd,user_type) VALUES ('$username','$full_name','$email','$password','o') ";
+    $password = mysqli_real_escape_string($con,$_POST['password']);
+    $secure_pass=password_hash($password,PASSWORD_DEFAULT);
+    $insert_user_info = "INSERT INTO `user` (user_name,name,email,pwd,user_type) VALUES ('$username','$full_name','$email','$secure_pass','o') ";
     if (mysqli_query($con, $insert_user_info)) {
         echo("Register");
     }
@@ -42,46 +43,53 @@ if(!empty($_POST['username']))
     if(mysqli_num_rows(mysqli_query($con,$query_to_search_username))>0)
     {
         echo("User Name already Exists");
-        //echo("You are there");
-        // echo("  u:".$username);
-        // echo'<script>';
-        // echo 'console.log("1")';
-        // echo '</script>';
-        // console.log('1');
+        
     }else{
         echo("New Unique User Name");
     }
 }
 //code for login
-if (!empty($_POST['username_login']) &&
-    !empty($_POST['password_login'])
-) {
-
+if (!empty($_POST['username_login']) && !empty($_POST['password_login'])) {
     $username = mysqli_real_escape_string($con, $_POST["username_login"]);
-    $password = mysqli_real_escape_string($con, $_POST["password_login"]);
-    $user_info_query = "SELECT * FROM `user` WHERE user_name = '$username' AND  pwd = '$password' ";
+    $password = mysqli_real_escape_string($con,$_POST["password_login"]);
+    $user_info_query = "SELECT * FROM `user` WHERE user_name = '$username'";
     $result_of_user_info = mysqli_query($con, $user_info_query);
     if (mysqli_num_rows($result_of_user_info) == 1) {
-        while ($row = mysqli_fetch_assoc($result_of_user_info)) {
+        $row = mysqli_fetch_assoc($result_of_user_info);
+        // $hashed_password = $row['pwd'];
+        // // Debugging: Confirm stored hashed password and user-entered password
+        // echo "Stored Hash: " . $hashed_password . "<br>";
+        // echo "User Input: " . $password . "<br>";
+        // // Check the length and correctness of the hashed password for debugging
+        // // var_dump($hashed_password); 
+        // // var_dump(password_hash($password, PASSWORD_DEFAULT)); 
+        // if (password_verify($password, $hashed_password)) {
+            // Passwords match
             $user_name = $row["user_name"];
             $full_name = $row["name"];
             $user_type = $row["user_type"];
-            $user_email=$row['email'];
+            $user_email = $row['email'];
+
             if ($user_type == "o") {
                 echo ("1");
-            } elseif($user_type == "a") {
+            } elseif ($user_type == "a") {
                 echo ("2");
             }
-            
+
             $_SESSION["user_name"] = $user_name;
             $_SESSION["user_full_name"] = $full_name;
             $_SESSION["user_type"] = $user_type;
-            $_SESSION['user_email']=$user_email;
-        }
+            $_SESSION['user_email'] = $user_email;
+        // } else {
+        //     // Password doesn't match
+        //     echo ("Password not match");
+        // }
     } else {
         echo ("no");
     }
 }
+
+
 //code to see whether username and email both matches with each other when user clicks forgot passsword
 if(!empty($_POST['forgot_password_email']) && !empty($_POST['forgot_password_username']))
 {
@@ -92,7 +100,7 @@ if(!empty($_POST['forgot_password_email']) && !empty($_POST['forgot_password_use
     {
         $result=mysqli_query($con,$verify_user);
         if(mysqli_num_rows($result)>0){
-            echo("1");
+            echo("User and Email Matched");
         }
         else{
             echo("2");

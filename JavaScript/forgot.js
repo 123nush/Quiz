@@ -5,8 +5,8 @@ $(document).ready(function(){
     var send_email;
     var send_username;
     otp = Math.floor(1000 + Math.random() * 9000);
-$('#section2').hide();
-$('#section3').hide();
+$('#section2').hide();//for otp verification
+$('#section3').hide();//to reset password
 $('#sendotp').hide();
 $('#CrossCheckUser').on('click',function(e){
     e.preventDefault();
@@ -23,9 +23,9 @@ $('#CrossCheckUser').on('click',function(e){
         success: function(data) {
            // console.log(otp);
            // console.log(data);
-            if(data==1)
+            if(data=='User and Email Matched')
             {
-                $('#verify').text("Valid details!Check your mail").css("color", "green");
+                $('#verify').text("Valid details!click on get otp button").css("color", "green");
                 $('#CrossCheckUser').hide();
                 $('#sendotp').show();
             }
@@ -50,15 +50,66 @@ $('#sendotp').on('click',function(e){
     $('#section2').show();
     e.preventDefault();
 })
-//code to verify oto
+
+function moveClass()
+        {
+            $('#emailTemp').html(" ");
+        }
+
+      function sendEmail(send_email,otp,send_username)
+      {
+        console.log("calling sendEmail()");
+        $.ajax({
+            type: 'POST',
+            url:'email.php',
+            data:{send_email:send_email,send_username:send_username,otp:otp},
+            success: function(data){
+                console.log(data);
+                $('#emailTemp').html(data);
+                setInterval(moveClass, 10000); 
+            },
+            error: function() {
+                console.log(response.status);
+            },
+        })
+      }
+//code to verify otp
 $('#verifyOtp').on('click', function(e) {
     e.preventDefault();
     verifyOTP(); // Call the verifyOYP function when the button is clicked
     e.preventDefault();
 });
-
-//code to sendemail
-   
+//code to dynamically move focus
+function otp_field_focus() {
+    const inputs = document.querySelectorAll('#otp > *[id]');
+    for (let i = 0; i < inputs.length; i++) 
+    { 
+        inputs[i].addEventListener('keydown', function(event) 
+        { 
+            if (event.key==="Backspace" ) 
+            { 
+                inputs[i].value='' ; 
+                if (i !==0) inputs[i - 1].focus(); 
+            } 
+            else 
+            { 
+                if (i===inputs.length - 1 && inputs[i].value !=='' ) 
+                { 
+                    return true; 
+                } 
+                else if (event.keyCode> 47 && event.keyCode < 58) 
+                { 
+                    inputs[i].value=event.key; 
+                    $value = inputs[i].value;
+                    if (i !==inputs.length - 1) inputs[i + 1].focus(); 
+                    event.preventDefault(); 
+                } 
+                
+            } 
+        });
+     } 
+    } 
+    otp_field_focus();
 //code to verify otp
 function verifyOTP() {
     var enteredOTP = $('#first').val() + $('#second').val() + $('#third').val() + $('#fourth').val();
@@ -178,26 +229,7 @@ $('#resetpassword').on('click',function(e){
     e.preventDefault();
 
 })
-function moveClass()
-    {
-        $('#emailTemp').html(" ");
-    }
-      function sendEmail(send_email,otp,send_username)
-      {
-        $.ajax({
-            type: 'POST',
-            url:'email.php',
-            data:{send_email:send_email,send_username:send_username,otp:otp},
-            success: function(data){
-                console.log(data);
-                $('#emailTemp').html(data);
-                setInterval(moveClass, 2000); 
-            },
-            error: function() {
-                console.log(response.status);
-            },
-        })
-      }
+    
 
 })
 

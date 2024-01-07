@@ -54,7 +54,7 @@
             <div class="modal-dialog modal-dialog modal-dialog-centered w-75 mx-auto">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <img src="https://img.freepik.com/free-vector/confirmed-concept-illustration_114360-545.jpg?w=1060&t=st=1683867581~exp=1683868181~hmac=1e7364b0ade26d1472f5c388369363e9158af74c9e3784a415576453158c7a65" class="img-fluid" alt="">
+                        <img src="../../Images/register.PNG" class="img-fluid" alt="">
                         <p class="fs-6 text-center"><strong>Congratulations.</strong> <br/> Your account has been successfully created.</p>
                     </div>
                     <div class="modal-footer">
@@ -64,12 +64,12 @@
                 </div>
             </div>
         </div>
-        <!-- FAILED -->
+        <!--REG FAILED -->
         <div class="modal fade" id="failed" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog modal-dialog-centered w-75 mx-auto">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <img src="https://img.freepik.com/free-vector/removing-goods-from-basket-refusing-purchase-changing-decision-item-deletion-emptying-trash-online-shopping-app-laptop-user-cartoon-character-vector-isolated-concept-metaphor-illustration_335657-2843.jpg?w=1060&t=st=1683869448~exp=1683870048~hmac=351919e98226dbde35a446a66fcd783e63766b69193d06232b36da08b0ca3b2c" class="img-fluid" alt="">
+                        <img src="https://img.freepik.com/premium-vector/website-blocking-icon_1284-66307.jpg?size=626&ext=jpg&ga=GA1.1.1270697051.1699685084&semt=ais" class="img-fluid" alt="">
                         <p class="fs-6 text-center"><strong>Failed to register.</strong> <br/> Try again. </p>
                     </div>
                     <div class="modal-footer">

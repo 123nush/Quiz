@@ -155,8 +155,11 @@
             $job_profile_name = $_GET['job_profile'];
             $difficulty_level=$_GET['difficulty'];
             ?>
-            <div class="col-md-6 col-lg-8 m-auto">
-            <h3 class="text-center">Questions on <?php echo $job_profile_name ;?>  With Difficulty Level <?php echo $difficulty_level?></h3>
+            <div class="d-flex justify-content-center">
+                    <div><a href="javascript:history.back()"><img src="https://tse3.mm.bing.net/th?id=OIP.3WDg3dO3K_fFvzpULWYoIgHaHa&pid=Api&P=0&h=180" alt="" style="height:50px;width:50px"></a></div>
+                    <div class="col-md-6 col-lg-8 m-auto">
+                    <h3 class="text-center">Questions on <?php echo $job_profile_name ;?>  With Difficulty Level <?php echo $difficulty_level?></h3>
+                    </div>
             </div>
         <?php
             $question_answer_table = "SELECT * FROM `question_answer` where job_profile_name='$job_profile_name' and difficulty_level='$difficulty_level' ";
@@ -164,7 +167,6 @@
             if (mysqli_num_rows($result_of_question_answer_table_query) > 0) {
                 while ($row = mysqli_fetch_assoc($result_of_question_answer_table_query)) {
         ?>
-    
                     <div class="col-md-6 col-lg-6 mb-5 p-3">
                         <div class="rounded p-3 text card" style="cursor: pointer; transition: all 0.3s;height: 300px;">
                                     <p class="card-title">

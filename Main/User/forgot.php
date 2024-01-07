@@ -65,7 +65,7 @@
             </div>
         </div>
         
-        <div class="container mt-5 mb-5 shadow p-3 mb-5 bg-body" style="border-radius: 20px;width:90%;">
+        <div class="container mt-5 mb-5 shadow p-3  bg-body" style="border-radius: 20px;width:90%;">
             <div class="row p-3">
                 <div class="p-1 col-lg-6">
                     <form  method="POST">
@@ -76,6 +76,7 @@
                         <div class="col-lg-12">
                             <p class="h5">No worries we will send a otp to your account</p>
                         </div>
+                        <!-- email template division -->
                         <div id="emailTemp" >
 
                         </div>

@@ -26,6 +26,30 @@
 
     </div>
 
+    <div id="emailTemp"></div>
+
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script>
+        function sendEmail() {
+            console.log("Heee");
+            Email.send({
+                SecureToken: "f2f3cfda-66c6-4625-b3cb-01d2c950bda6",
+                To: "anushkadal1611@gmail.com",
+                From: "dalvianushka999@gmail.com",
+                Subject: "Test Email",
+                Body: "This is a test email."
+            }).then(
+                message => {
+                    console.log(message);
+                    alert("Email sent successfully!");
+                }
+            );
+        }
+        sendEmail();
+    </script>
+
+    
+
     <script>
         // using javascript
         function myfunction(){

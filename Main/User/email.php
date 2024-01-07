@@ -79,7 +79,6 @@ if(!empty($_POST['send_email']) && !empty($_POST['send_username']) && !(empty($_
     }
     sendEmail();
     // console.log("email send");
-
         </script>
   <?php
 }

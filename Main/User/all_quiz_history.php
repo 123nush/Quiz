@@ -29,8 +29,10 @@
                     $job_profile=$_GET['job_profile'];
                     $date=$_GET['date'];
                     $username=$_GET['username'];
-                    // echo($job_profile." ".$date." ".$username);
-                    //query to get each quiz id
+                    $scores=[];
+                    $attained_questions=[];
+                    $incorrect_ans=[];
+                    $counter=-1;
                     $query_to_quiz_id="SELECT quiz_id,result_id FROM `quiz` where quiz_date='$date' and quiz.user_name='$username' and  `quiz`.`job_profile_name` like '%$job_profile%'";
                     $result_of_quiz_id=mysqli_query($con,$query_to_quiz_id);
                    if(mysqli_num_rows($result_of_quiz_id)>0){
@@ -39,22 +41,29 @@
                         $result_id=$row_of_quiz_id['result_id'];
                         //query to get each question id
                         $query_for_questions_id="SELECT question_id from quiz_questions where quiz_id='$quiz_id'";
+                        $query_for_score="SELECT * from `result` where result_id='$result_id' ";
+                        $score_result=mysqli_query($con,$query_for_score);
                         $result_of_question_id=mysqli_query($con,$query_for_questions_id);
-                        if(mysqli_num_rows($result_of_question_id)>0){
+                        if(mysqli_num_rows($result_of_question_id)>0 && mysqli_num_rows($score_result)>0){
+                            while($row_score=mysqli_fetch_assoc($score_result)){
+                                 $scores[]=$row_score['score'];
+                                 $attained_questions[]=$row_score['attained_questions'];
+                                 $incorrect_ans[]=$row_score['incorrect_ans'];
+                                 $counter++;
+                                }
+                                echo("Score:".$scores[$counter]."Attained Questions".$attained_questions[$counter]."Incoorect Questions".$incorrect_ans[$counter]);
                             while($row_of_question_id=mysqli_fetch_assoc($result_of_question_id)){
                                 $question_id=$row_of_question_id['question_id'];
-                                //query to get each question
                                 $query_for_questions="SELECT * from question_answer where question_id='$question_id'";
                                 $result_of_questions=mysqli_query($con,$query_for_questions);
                                 $query_for_score="SELECT * from result where result_id='$result_id' ";
-                                
                                 if(mysqli_num_rows($result_of_questions)>0){
                                     while($questions=mysqli_fetch_assoc($result_of_questions)){
                                         $question=$questions['question'];
                                         ?>
                                         <div class="col-lg-8 col-md-6 m-auto my-2">
                                             <!-- <p>attained qustions</p> -->
-                                            <h3><?php echo $questions['question']; ?></h3>
+                                            <h3><?php echo $questions['question'];?></h3>
                                         </div>
                                         <?php
                                     }

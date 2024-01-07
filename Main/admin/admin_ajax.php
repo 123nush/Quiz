@@ -13,39 +13,64 @@ if(!empty($_POST['job_profile_name_to_check'])){
 if (
     !empty($_POST['job_profile_name']) &&
     !empty($_POST['job_profile_information']) &&
-    !empty($_POST['technologies'])&&
-    !empty($_POST['tasks'])
+    !empty($_POST['technologies']) &&
+    !empty($_POST['tasks'])&&
+    isset($_FILES['job_profile_pic'])
 ) {
+    $max_length = 255;
+    $JobPic = $_FILES['job_profile_pic'];
+    $pic_name=$JobPic['name'];
+    $pic_path=$JobPic['tmp_name'];
+    $pic_error=$JobPic['error'];
+    $destination='../../Images/'.$pic_name; 
+    move_uploaded_file($pic_path,$destination);
     $job_profile_name = mysqli_real_escape_string($con, $_POST['job_profile_name']);
     $job_profile_information = mysqli_real_escape_string($con, $_POST['job_profile_information']);
-    $technologiesArray = $_POST['technologies'];
-    $tasksArray = $_POST['tasks'];
+    $technologiesArray =json_decode($_POST['technologies'],true);
+    $tasksArray =json_decode($_POST['tasks'],true);
     $currentdate = date('Y-m-d');
-    // Insert job profile information
-    $qurey_to_insert_job_profile_info = "INSERT INTO `job_profile` (job_profile_name, role, update_date) VALUES ('$job_profile_name', '$job_profile_information', '$currentdate')";
-    
-    if (mysqli_query($con, $qurey_to_insert_job_profile_info)) {
-        $job_profile_id = mysqli_insert_id($con); // Get the inserted job_profile_id
-        
-        // Loop through and insert each technology
+    if (strlen($job_profile_name) <= 255) {
+        //checking each value of technology whether exceds or not
         foreach ($technologiesArray as $technology) {
-            $sanitizedTechnology = mysqli_real_escape_string($con, $technology);
-            
-            $insert_technology_query = "INSERT INTO `job_technologies` (job_profile_name, technology) VALUES ('$job_profile_name', '$sanitizedTechnology')";
-            mysqli_query($con, $insert_technology_query);
+            if (mb_strlen($technology) > $max_length) {
+                echo "Error: Technology name '$technology' exceeds maximum length of $max_length characters. Data not inserted.";
+                exit;
+            }
         }
+        //checking each value of task whether exceeds or not
         foreach ($tasksArray as $task) {
-            $sanitizedTask = mysqli_real_escape_string($con, $task);
-            
-            $insert_task_query = "INSERT INTO `job_tasks` (job_profile_name, task) VALUES ('$job_profile_name', '$sanitizedTask')";
-            mysqli_query($con, $insert_task_query);
+            if (mb_strlen($task) > $max_length) {
+                echo "Error: Task name '$task' exceeds maximum length of $max_length characters. Data not inserted.";
+                exit;
+            }
         }
+        $qurey_to_insert_job_profile_info = "INSERT INTO `job_profile` (job_profile_name, role,job_pic, update_date) VALUES ('$job_profile_name', '$job_profile_information','$destination', '$currentdate')";
         
-        echo "Job Profile Data Inserted";
+        if (mysqli_query($con, $qurey_to_insert_job_profile_info)) {
+            $job_profile_id = mysqli_insert_id($con); // Get the inserted job_profile_id
+            
+            // Loop through and insert each technology
+            foreach ($technologiesArray as $technology) {
+                $sanitizedTechnology = mysqli_real_escape_string($con, $technology);
+                $insert_technology_query = "INSERT INTO `job_technologies` (job_profile_name, technology) VALUES ('$job_profile_name', '$sanitizedTechnology')";
+                mysqli_query($con, $insert_technology_query);
+            }
+            foreach ($tasksArray as $task) {
+                $sanitizedTask = mysqli_real_escape_string($con, $task);
+                $insert_task_query = "INSERT INTO `job_tasks` (job_profile_name, task) VALUES ('$job_profile_name', '$sanitizedTask')";
+                mysqli_query($con, $insert_task_query);
+            }
+            
+            echo "Job Profile Data Inserted";
+        } else {
+            echo("Error:".mysqli_error($con));
+            echo "Data Not Inserted";
+        }
     } else {
-        echo("Error:".mysqli_error($con));
-        echo "Data Not Inserted";
+        // Value exceeds the character limit
+        echo "The input exceeds the character limit of job profile name";
     }
+   
 }
 //code to delete job profile information from database
 if (!empty($_POST['profileName'])){
@@ -74,7 +99,7 @@ if (!empty($_POST['profileName'])){
         echo 'Error Is: ' . mysqli_error($con);
     }
 }
-//code to display data during update
+//code to display data during update of job profile
 if (!empty($_POST['profileNameUpdate'])){
     $selectedProfileName=mysqli_real_escape_string($con,$_POST['profileNameUpdate']);
     $get_job_profile_info="SELECT * from `job_profile` where job_profile_name='$selectedProfileName'";
@@ -88,10 +113,10 @@ if (!empty($_POST['profileNameUpdate'])){
         $job_profile = [
             'job_profile_name' => $profile_name['job_profile_name'],
             'role' => $profile_name['role'],
+            'photo'=>$profile_name['job_pic'],
             'tasks' => [],
             'technologies' => []
         ];
-    
         if(mysqli_num_rows($result_of_job_tasks)){
             while($task = mysqli_fetch_assoc($result_of_job_tasks)){
                 $job_profile['tasks'][] = $task;
@@ -112,12 +137,19 @@ if (
     !empty($_POST['update_job_profile_name']) &&
     !empty($_POST['update_job_profile_information']) &&
     !empty($_POST['updatetechnologies'])&&
-    !empty($_POST['updatetasks'])
+    !empty($_POST['updatetasks'])&&
+    isset($_FILES['update_job_profile_pic'])
 ) {
+    $UpdateJobPic = $_FILES['job_profile_pic'];
+    $pic_name=$UpdateJobPic['name'];
+    $pic_path=$UpdateJobPic['tmp_name'];
+    $pic_error=$UpdateJobPic['error'];
+    $destination='../../Images/'.$pic_name; 
+    move_uploaded_file($pic_path,$destination);
     $update_job_profile_name = mysqli_real_escape_string($con, $_POST['update_job_profile_name']);
     $update_job_profile_information = mysqli_real_escape_string($con, $_POST['update_job_profile_information']);
-    $updatetechnologiesArray = $_POST['updatetechnologies'];
-    $updatetasksArray = $_POST['updatetasks'];
+    $updatetechnologiesArray =json_decode($_POST['updatetechnologies'],true);
+    $updatetasksArray =json_decode($_POST['updatetasks'],true);
     $currentdate = date('Y-m-d');
     //getting data for updation
     $get_job_tasks="SELECT * from `job_tasks` where job_profile_name='$update_job_profile_name' and task<>' ' ";
@@ -137,7 +169,7 @@ if (
         }
     }
     // update job profile information
-    $qurey_to_update_job_profile_info = "UPDATE `job_profile` set  role='$update_job_profile_information',update_date='$currentdate' where job_profile_name='$update_job_profile_name' ";
+    $qurey_to_update_job_profile_info = "UPDATE `job_profile` set  role='$update_job_profile_information',update_date='$currentdate',job_pic='$destination' where job_profile_name='$update_job_profile_name' ";
     
     if (mysqli_query($con, $qurey_to_update_job_profile_info)) {
         $job_profile_id = mysqli_insert_id($con); // Get the updated job_profile_id
@@ -184,6 +216,9 @@ if (
         echo "Data Not updated";
     }
 }
+// else{
+//     echo("Data not found");
+// }
 //code to check if question like this already there in database
 if(!empty($_POST['question_to_check'])){
     $question_to_check=mysqli_real_escape_string($con,$_POST['question_to_check']);
@@ -193,6 +228,7 @@ if(!empty($_POST['question_to_check'])){
         echo('Question already exists');
     }
 }
+
 //code to add question in data base
 if(!empty($_POST['job_profile_question'])&&
         !empty($_POST['difficulty_level_for_question']) &&

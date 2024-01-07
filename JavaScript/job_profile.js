@@ -3,6 +3,7 @@ $(document).ready(function(){
     var technologiesArray;
     var technologyValue;
     var taskValue ;
+    var job_profile_pic={};
     //code for dynamic height of textarea
     $('.auto-resize').on('input', function() {
         this.style.height = 'auto';
@@ -43,7 +44,8 @@ $(document).ready(function(){
             url: 'admin_ajax.php',
             data: {job_profile_name_to_check : job_profile_name_to_check},
             success: function(data) {
-                console.log(data);
+                console.log("Received data from AJAX call 1:", data);
+                // console.log(data);
                 if(data=='Job Profile Name already exists')
                 {
                     $('#job_profile_nameVerify').text("Job Profile Name Alredy Exists!").css("color", "red");
@@ -61,61 +63,80 @@ $(document).ready(function(){
     })
     
     //code to insert new job profile information in database
+    //trying different approach for insertion
     $('#submit_info').on('click', function(e) {
         e.preventDefault();
-        $job_profile_name=$('#job_profile_name').val();
-        $job_profile_information=$('#job_profile_role').val();
-        technologiesArray = [];
-            $('.technologies').each(function() {
-                 technologyValue = $(this).val().trim();
-                if (technologyValue !== '') {
-                    technologiesArray.push(technologyValue);
-                }
-            });
-        tasksArray = [];
-            $('.tasks').each(function() {
-                taskValue = $(this).val().trim();
-                if (taskValue !== '') {
-                    tasksArray.push(taskValue);
-                }
-            });
+        var job_profile_name = $('#job_profile_name').val();
+        var job_profile_information = $('#job_profile_role').val();
+         job_profile_pic = [document.getElementById('job_profile_pic').files[0]];
+        console.log(typeof(job_profile_pic[0]));
+        //slight diffrent approach because it is an image and input type is file
+        var technologiesArray = [];
+        $('.technologies').each(function() {
+            technologyValue = $(this).val().trim();
+            if (technologyValue !== '') {
+                technologiesArray.push(technologyValue);
+            }
+        });
+        var tasksArray = [];
+        $('.tasks').each(function() {
+            taskValue = $(this).val().trim();
+            if (taskValue !== '') {
+                tasksArray.push(taskValue);
+            }
+        });
     
-        console.log(technologiesArray);
-        var job_profile_name_to_check=$('#job_profile_nameVerify').text();
-        if(job_profile_name_to_check!=='Job Profile Name Alredy Exists!'){
-            if($job_profile_information!==''){
-            console.log($job_profile_information);
-            $.ajax({
-                type: 'POST',
-                url: 'admin_ajax.php',
-                data: {job_profile_name : $job_profile_name,job_profile_information:$job_profile_information,technologies:technologiesArray,tasks:tasksArray},
-                success: function(data) {
-                    console.log(data);
-                    if(data=='Job Profile Data Inserted')
-                    {
-                        alert("Data Inserted Successfully");
-                        window.location.href = '../admin/admin_home.php';
-                    }                                 
-                    else 
-                    {
-                        alert("Try again later"+data);
-                        window.location.href = '../admin/admin_home.php';
-
-                    }
-                },
-                error: function() {
-                    console.log(response.status);
-                },
-            })
+        var job_profile_name_to_check = $('#job_profile_nameVerify').text();
+        if(job_profile_name!=='' || job_profile_name.length<255){
+        if (job_profile_name_to_check !== 'Job Profile Name Alredy Exists!') {
+            if (job_profile_information !== '') {
+                if (tasksArray.length !== 0 && technologiesArray.length !== 0) {
+                    if (typeof job_profile_pic[0] !== 'undefined') {
+                    var formData = new FormData();
+                    formData.append('job_profile_name', job_profile_name);
+                    formData.append('job_profile_information', job_profile_information);
+                    formData.append('technologies', JSON.stringify(technologiesArray));
+                    formData.append('tasks', JSON.stringify(tasksArray));
+                    formData.append('job_profile_pic', job_profile_pic[0]);
+                    $.ajax({
+                        type: 'POST',
+                        url: 'admin_ajax.php',
+                        data: formData,
+                        contentType: false,//this is important to handle form with files
+                        processData: false,//this is important to handle form with files
+                        cache: false,
+                        success: function(data) {
+                            console.log('Response', data);
+                            if (data === 'Job Profile Data Inserted') {
+                                alert("Data Inserted Successfully");
+                                window.location.href = '../admin/admin_home.php';
+                            } else {
+                                alert("Try again later  " + data);
+                                window.location.href = '../admin/admin_home.php';
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                            alert("Error occurred. Please check the console for details.");
+                        },
+                    });
+                }
+                else{
+                    alert("Upload a Job profile picture");
+                }
+                } else {
+                    alert("Add at least one skill or one task");
+                }
+            } else {
+                alert("Enter Job Profile Role");
             }
-            else{
-                alert("Enter  Job Profile Information");
-            }
-        }
-        else{
+        } else {
             alert("Enter a new Job Profile Name");
         }
-        e.preventDefault();
+        }
+        else{
+            alert("Job profile name field is empty or exceeds the limit");
+        }
     });
     
 //code to delete  job profile data from database
@@ -182,21 +203,20 @@ $(document).ready(function(){
                     data: { profileNameUpdate: profileNameUpdate },
                     // dataType: 'json', 
                     success: function(data) {
-                        // console.log(data);
+                        console.log(data);
                         var parsedData = JSON.parse(data);
                         // console.log(parsedData);
                         $('#show_job_update').text(parsedData.job_profile_name);
                         $('#update_job_profile_name').val(parsedData.job_profile_name);
                         $('#update_job_profile_role').val(parsedData.role);
+                        $('#update_job_profile_pic_name').val(parsedData.photo);
                         // Populate tasks container
                         var tasksContainer = $('#updatetasksContainer');
                         tasksContainer.empty(); // Clear previous tasks
-
                         parsedData.tasks.forEach(function(task) {
                             tasksContainer.append(`<input type="text" class="form-control updatetasks" name="updatetasks[]" value="${task.task}">`);
-                            // Use task.task instead of task.task_name
+                           
                         });
-
                         // Populate technologies container
                         var technologiesContainer = $('#updatetechnologiesContainer');
                         technologiesContainer.empty(); // Clear previous technologies
@@ -206,7 +226,6 @@ $(document).ready(function(){
                             // Use tech.technology instead of tech.technology_name
                         });
                         $('#update_job_profile_modal').modal('show');
-                        
                     },
                     error: function(xhr, status, error) {
                         // Handle errors, if any
@@ -217,8 +236,8 @@ $(document).ready(function(){
     });
     //code to update job_profile_data
     $('#update_job_profile').on('click',function(e){
-        $update_job_profile_name=$('#update_job_profile_name').val();
-        $update_job_profile_information=$('#update_job_profile_role').val();
+        var update_job_profile_name=$('#update_job_profile_name').val();
+        var update_job_profile_information=$('#update_job_profile_role').val();
         var updatetechnologiesArray = [];
             $('.updatetechnologies').each(function() {
                 var updatetechnologyValue = $(this).val().trim();
@@ -233,18 +252,28 @@ $(document).ready(function(){
                     updatetasksArray.push(updatetaskValue);
                 // }
             });
-            console.log(updatetechnologiesArray);
-            console.log(updatetasksArray);
-            
+        var profile_pic = [document.getElementById('update_job_profile_pic').files[0]];
+        console.log(job_profile_pic[0])
+        if(profile_pic[0]!=='undefined'){
+            update_job_profile_pic=profile_pic;
+        }
+        else{
+            update_job_profile_pic=job_profile_pic;
+        }
+        console.log(update_job_profile_pic[0]);
+        var updateformData = new FormData();
+                    updateformData.append('update_job_profile_name',update_job_profile_name);
+                    updateformData.append('update_job_profile_information',update_job_profile_information);
+                    updateformData.append('update_technologies', JSON.stringify(updatetechnologiesArray));
+                    updateformData.append('update_tasks', JSON.stringify(updatetasksArray));
+                    updateformData.append('update_job_profile_pic',update_job_profile_pic);
        $.ajax({
         type:'POST',
         url:'admin_ajax.php',
-        data:{update_job_profile_name:$update_job_profile_name,
-            update_job_profile_information:$update_job_profile_information,
-            updatetechnologies:updatetechnologiesArray,
-            updatetasks:updatetasksArray
-            },
-           
+        data:updateformData,
+        contentType: false,//this is important to handle form with files
+        processData: false,//this is important to handle form with files
+        cache: false,
         success:function(data){
             console.log(data);
             if(data=='Job profile data updated'){
@@ -331,7 +360,7 @@ $(document).ready(function(){
                                         option4:option4,
                                         answer_description:answer_description},
                                         success:function(data){
-                                            //console.log(data);
+                                            console.log(data);
                                         if(data=="question inserted successsfully"){
                                             alert("Question Added");
                                             window.location.href = '../admin/admin_home.php';
