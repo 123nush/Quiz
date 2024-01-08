@@ -61,15 +61,14 @@ $(document).ready(function(){
             },
         })
     })
-    
     //code to insert new job profile information in database
     //trying different approach for insertion
     $('#submit_info').on('click', function(e) {
         e.preventDefault();
         var job_profile_name = $('#job_profile_name').val();
         var job_profile_information = $('#job_profile_role').val();
-         job_profile_pic = [document.getElementById('job_profile_pic').files[0]];
-        console.log(typeof(job_profile_pic[0]));
+        job_profile_pic = [document.getElementById('job_profile_pic').files[0]];
+        console.log((job_profile_pic[0]));
         //slight diffrent approach because it is an image and input type is file
         var technologiesArray = [];
         $('.technologies').each(function() {
@@ -235,9 +234,10 @@ $(document).ready(function(){
                 e.preventDefault();
     });
     //code to update job_profile_data
+    // another diff approach
     $('#update_job_profile').on('click',function(e){
-        var update_job_profile_name=$('#update_job_profile_name').val();
-        var update_job_profile_information=$('#update_job_profile_role').val();
+        $update_job_profile_name=$('#update_job_profile_name').val();
+        $update_job_profile_information=$('#update_job_profile_role').val();
         var updatetechnologiesArray = [];
             $('.updatetechnologies').each(function() {
                 var updatetechnologyValue = $(this).val().trim();
@@ -252,28 +252,46 @@ $(document).ready(function(){
                     updatetasksArray.push(updatetaskValue);
                 // }
             });
-        var profile_pic = [document.getElementById('update_job_profile_pic').files[0]];
-        console.log(job_profile_pic[0])
-        if(profile_pic[0]!=='undefined'){
-            update_job_profile_pic=profile_pic;
-        }
-        else{
-            update_job_profile_pic=job_profile_pic;
-        }
-        console.log(update_job_profile_pic[0]);
-        var updateformData = new FormData();
-                    updateformData.append('update_job_profile_name',update_job_profile_name);
-                    updateformData.append('update_job_profile_information',update_job_profile_information);
-                    updateformData.append('update_technologies', JSON.stringify(updatetechnologiesArray));
-                    updateformData.append('update_tasks', JSON.stringify(updatetasksArray));
-                    updateformData.append('update_job_profile_pic',update_job_profile_pic);
+            var profile_pic = [document.getElementById('update_job_profile_pic').files[0]];
+            if (typeof profile_pic[0] !== 'undefined') {
+                console.log(profile_pic[0]);
+            
+                var formData = new FormData();
+                formData.append('update_job_profile_pic', profile_pic[0]);
+                formData.append('photo_update_job_profile_name', $update_job_profile_name);
+            
+                $.ajax({
+                    type: 'POST',
+                    url: 'admin_ajax.php',
+                    data: formData,
+                    cache: false,
+                    contentType: false, // Set to false to prevent jQuery from messing with the content type
+                    processData: false, // Set to false because FormData already encodes the data
+                    success: function (data) {
+                        console.log(data);
+                        if (data === 'Image replace') {
+                            // alert('Data Updated successfully');
+                            // window.location.href = '../admin/admin_home.php';
+                        } else {
+                            // alert('Try again Later');
+                            // window.location.href = '../admin/admin_home.php';
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error);
+                    },
+                });
+            }        
+       //calling ajax for rest of the data
        $.ajax({
         type:'POST',
         url:'admin_ajax.php',
-        data:updateformData,
-        contentType: false,//this is important to handle form with files
-        processData: false,//this is important to handle form with files
-        cache: false,
+        data:{update_job_profile_name:$update_job_profile_name,
+            update_job_profile_information:$update_job_profile_information,
+            updatetechnologies:updatetechnologiesArray,
+            updatetasks:updatetasksArray
+            },
+           
         success:function(data){
             console.log(data);
             if(data=='Job profile data updated'){
@@ -293,6 +311,69 @@ $(document).ready(function(){
         }
        })
     })
+
+
+    //trying another approach for input type=file
+    // $('#update_job_profile').on('click',function(e){
+    //     var update_job_profile_name=$('#update_job_profile_name').val();
+    //     var update_job_profile_information=$('#update_job_profile_role').val();
+    //     var updatetechnologiesArray = [];
+    //         $('.updatetechnologies').each(function() {
+    //             var updatetechnologyValue = $(this).val().trim();
+    //             // if (updatetechnologyValue !== '') {
+    //                 updatetechnologiesArray.push(updatetechnologyValue);
+    //             // }
+    //         });
+    //     var updatetasksArray = [];
+    //         $('.updatetasks').each(function() {
+    //             var updatetaskValue = $(this).val().trim();
+    //             // if (updatetaskValue !== '') {
+    //                 updatetasksArray.push(updatetaskValue);
+    //             // }
+    //         });
+    //     var profile_pic = [document.getElementById('update_job_profile_pic').files[0]];
+    //     console.log(job_profile_pic[0])
+    //     if(typeof profile_pic[0]!=='undefined'){
+    //         update_job_profile_pic=profile_pic;
+    //     }
+    //     else{
+    //         update_job_profile_pic=job_profile_pic;
+    //     }
+    //     console.log(update_job_profile_pic[0]);
+    //     var updateformData = new FormData();
+    //                 updateformData.append('update_job_profile_name',update_job_profile_name);
+    //                 updateformData.append('update_job_profile_information',update_job_profile_information);
+    //                 updateformData.append('update_technologies', JSON.stringify(updatetechnologiesArray));
+    //                 updateformData.append('update_tasks', JSON.stringify(updatetasksArray));
+    //                 updateformData.append('update_job_profile_pic',update_job_profile_pic[0]);
+    //    $.ajax({
+    //     type:'POST',
+    //     url:'admin_ajax.php',
+    //     data:updateformData,
+    //     contentType: false,//this is important to handle form with files
+    //     processData: false,//this is important to handle form with files
+    //     cache: false,
+    //     success:function(data){
+    //         console.log(data);
+    //         if(data=='Job profile data updated'){
+    //             alert("Job Profile Data Updated successfully");
+    //             window.location.href = '../admin/admin_home.php';
+    //         }
+    //         else{
+                
+    //             alert("Try again Later");
+    //             window.location.href = '../admin/admin_home.php';
+
+    //         }
+
+    //     },
+    //     error:function(xhr,status,error){
+    //         console.log(error);
+    //     }
+    //    })
+    // })
+
+
     //code to show modal of adding new question
     $('#add_question_button').on('click',function(e){
         e.preventDefault();

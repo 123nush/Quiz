@@ -132,90 +132,204 @@ if (!empty($_POST['profileNameUpdate'])){
         echo json_encode($job_profile);
     }
 }
-//code to update data of job profile
-if (
-    !empty($_POST['update_job_profile_name']) &&
-    !empty($_POST['update_job_profile_information']) &&
-    !empty($_POST['updatetechnologies'])&&
-    !empty($_POST['updatetasks'])&&
-    isset($_FILES['update_job_profile_pic'])
-) {
-    $UpdateJobPic = $_FILES['job_profile_pic'];
+//code to update job profile photo
+if(isset($_FILES['update_job_profile_pic'])
+&& !empty($_POST['photo_update_job_profile_name'])){
+    $UpdateJobPic = $_FILES['update_job_profile_pic'];
     $pic_name=$UpdateJobPic['name'];
     $pic_path=$UpdateJobPic['tmp_name'];
     $pic_error=$UpdateJobPic['error'];
     $destination='../../Images/'.$pic_name; 
     move_uploaded_file($pic_path,$destination);
-    $update_job_profile_name = mysqli_real_escape_string($con, $_POST['update_job_profile_name']);
-    $update_job_profile_information = mysqli_real_escape_string($con, $_POST['update_job_profile_information']);
-    $updatetechnologiesArray =json_decode($_POST['updatetechnologies'],true);
-    $updatetasksArray =json_decode($_POST['updatetasks'],true);
-    $currentdate = date('Y-m-d');
-    //getting data for updation
-    $get_job_tasks="SELECT * from `job_tasks` where job_profile_name='$update_job_profile_name' and task<>' ' ";
-    $result_of_job_tasks=mysqli_query($con,$get_job_tasks);
-    $get_job_techs="SELECT * from `job_technologies` where job_profile_name='$update_job_profile_name' and technology<>' ' ";
-    $result_of_job_tech=mysqli_query($con,$get_job_techs);
-    $tasks=[];
-    $technologies=[];
-    if(mysqli_num_rows($result_of_job_tasks)){
-        while($task = mysqli_fetch_assoc($result_of_job_tasks)){
-            $tasks[] = $task;
-        }
+    $photo_update_job_profile_name = mysqli_real_escape_string($con, $_POST['photo_update_job_profile_name']);
+    $qurey_to_update_job_profile_photo = "UPDATE `job_profile` set  job_pic='$destination' where job_profile_name='$photo_update_job_profile_name' ";
+    if(mysqli_query($con,$qurey_to_update_job_profile_photo)){
+        echo("Image replace");
     }
-    if(mysqli_num_rows($result_of_job_tech)){
-        while($tech = mysqli_fetch_assoc($result_of_job_tech)){
-            $technologies[] = $tech;
-        }
-    }
-    // update job profile information
-    $qurey_to_update_job_profile_info = "UPDATE `job_profile` set  role='$update_job_profile_information',update_date='$currentdate',job_pic='$destination' where job_profile_name='$update_job_profile_name' ";
-    
-    if (mysqli_query($con, $qurey_to_update_job_profile_info)) {
-        $job_profile_id = mysqli_insert_id($con); // Get the updated job_profile_id
-        $count=count($technologies);
-
-        // Loop through and update each technology
-        for($i=0;$i<$count;$i++) {
-        if(isset($updatetechnologiesArray[$i]) && isset($technologies[$i]['technology'])){
-            $updatesanitizedTechnology = mysqli_real_escape_string($con, $updatetechnologiesArray[$i]);
-            $sanitizedTechnology=mysqli_real_escape_string($con,$technologies[$i]['technology']);
-            $update_technology_query = "UPDATE `job_technologies` SET technology='$updatesanitizedTechnology' WHERE job_profile_name='$update_job_profile_name' and technology='$sanitizedTechnology' ";
-            mysqli_query($con, $update_technology_query);
-        }
-        }
-        //code to add data during update
-        if(count($updatetechnologiesArray)>count($technologies)){
-            $data_to_update=count($updatetechnologiesArray)-count($technologies);
-            for($i=count($technologies);$i<count($updatetechnologiesArray);$i++){
-                $sanitizedTechnology = mysqli_real_escape_string($con, $updatetechnologiesArray[$i]);
-                $insert_technology_query = "INSERT INTO `job_technologies` (job_profile_name, technology) VALUES ('$update_job_profile_name', '$sanitizedTechnology')";
-                mysqli_query($con, $insert_technology_query);
-            }
-        }
-        // Loop through and update each task
-        $count1=count($tasks);
-        for($i=0;$i<$count1;$i++) {
-            $updatesanitizedtask = mysqli_real_escape_string($con, $updatetasksArray[$i]);
-            $sanitizedtask=mysqli_real_escape_string($con,$tasks[$i]['task']);
-            $update_task_query = "UPDATE `job_tasks` SET task='$updatesanitizedtask' WHERE job_profile_name='$update_job_profile_name' and task='$sanitizedtask' ";
-            mysqli_query($con, $update_task_query);
-        }
-        if(count($updatetasksArray)>count($tasks)){
-            for($i=count($tasks);$i<count($updatetasksArray);$i++){
-                $sanitizedTask = mysqli_real_escape_string($con, $updatetasksArray[$i]);
-                $insert_task_query = "INSERT INTO `job_tasks` (job_profile_name, task) VALUES ('$update_job_profile_name', '$sanitizedTask')";
-                mysqli_query($con, $insert_task_query);
-            }
-             
-        }
-        echo "Job profile data updated";
-        
-    } else { 
-        echo(mysqli_error($con));
-        echo "Data Not updated";
+    else{
+       echo("Not replace:".mysqli_error($con));
     }
 }
+//code to update data of job profile
+
+if (
+    !empty($_POST['update_job_profile_name']) &&
+    !empty($_POST['update_job_profile_information']) &&
+    !empty($_POST['updatetechnologies'])&&
+    !empty($_POST['updatetasks'])
+) {
+    $update_job_profile_name = mysqli_real_escape_string($con, $_POST['update_job_profile_name']);
+    $update_job_profile_information = mysqli_real_escape_string($con, $_POST['update_job_profile_information']);
+    $updatetechnologiesArray = $_POST['updatetechnologies'];
+    $updatetasksArray = $_POST['updatetasks'];
+    $currentdate = date('Y-m-d');
+    if (strlen($update_job_profile_name) <= 255) {
+        $max_length=255;
+        foreach ($updatetechnologiesArray as $technology) {
+            if (mb_strlen($technology) > $max_length) {
+                echo "Error: Technology name '$technology' exceeds maximum length of $max_length characters. Data not inserted.";
+                exit;
+            }
+        }
+        //checking each value of task whether exceeds or not
+        foreach ($updatetasksArray as $task) {
+            if (mb_strlen($task) > $max_length) {
+                echo "Error: Task name '$task' exceeds maximum length of $max_length characters. Data not inserted.";
+                exit;
+            }
+        }
+        //getting data for updation
+        $get_job_tasks="SELECT * from `job_tasks` where job_profile_name='$update_job_profile_name' and task<>' ' ";
+        $result_of_job_tasks=mysqli_query($con,$get_job_tasks);
+        $get_job_techs="SELECT * from `job_technologies` where job_profile_name='$update_job_profile_name' and technology<>' ' ";
+        $result_of_job_tech=mysqli_query($con,$get_job_techs);
+        $tasks=[];
+        $technologies=[];
+        if(mysqli_num_rows($result_of_job_tasks)){
+            while($task = mysqli_fetch_assoc($result_of_job_tasks)){
+                $tasks[] = $task;
+            }
+        }
+        if(mysqli_num_rows($result_of_job_tech)){
+            while($tech = mysqli_fetch_assoc($result_of_job_tech)){
+                $technologies[] = $tech;
+            }
+        }
+        // update job profile information
+        $qurey_to_update_job_profile_info = "UPDATE `job_profile` set  role='$update_job_profile_information',update_date='$currentdate' where job_profile_name='$update_job_profile_name' ";
+    
+        if (mysqli_query($con, $qurey_to_update_job_profile_info)) {
+            $job_profile_id = mysqli_insert_id($con); // Get the updated job_profile_id
+            $count=count($technologies);
+            for($i=0;$i<$count;$i++) {
+            if(isset($updatetechnologiesArray[$i]) && isset($technologies[$i]['technology'])){
+                $updatesanitizedTechnology = mysqli_real_escape_string($con, $updatetechnologiesArray[$i]);
+                $sanitizedTechnology=mysqli_real_escape_string($con,$technologies[$i]['technology']);
+                $update_technology_query = "UPDATE `job_technologies` SET technology='$updatesanitizedTechnology' WHERE job_profile_name='$update_job_profile_name' and technology='$sanitizedTechnology' ";
+                mysqli_query($con, $update_technology_query);
+            }
+            }
+            //code to add data during update
+            if(count($updatetechnologiesArray)>count($technologies)){
+                $data_to_update=count($updatetechnologiesArray)-count($technologies);
+                for($i=count($technologies);$i<count($updatetechnologiesArray);$i++){
+                    $sanitizedTechnology = mysqli_real_escape_string($con, $updatetechnologiesArray[$i]);
+                    $insert_technology_query = "INSERT INTO `job_technologies` (job_profile_name, technology) VALUES ('$update_job_profile_name', '$sanitizedTechnology')";
+                    mysqli_query($con, $insert_technology_query);
+                }
+            }
+            // Loop through and update each task
+            $count1=count($tasks);
+            for($i=0;$i<$count1;$i++) {
+                $updatesanitizedtask = mysqli_real_escape_string($con, $updatetasksArray[$i]);
+                $sanitizedtask=mysqli_real_escape_string($con,$tasks[$i]['task']);
+                $update_task_query = "UPDATE `job_tasks` SET task='$updatesanitizedtask' WHERE job_profile_name='$update_job_profile_name' and task='$sanitizedtask' ";
+                mysqli_query($con, $update_task_query);
+            }
+            if(count($updatetasksArray)>count($tasks)){
+                for($i=count($tasks);$i<count($updatetasksArray);$i++){
+                    $sanitizedTask = mysqli_real_escape_string($con, $updatetasksArray[$i]);
+                    $insert_task_query = "INSERT INTO `job_tasks` (job_profile_name, task) VALUES ('$update_job_profile_name', '$sanitizedTask')";
+                    mysqli_query($con, $insert_task_query);
+                }
+                
+            }
+            echo "Job profile data updated";
+        
+            }
+             else { 
+            echo(mysqli_error($con));
+            echo "Data Not updated";
+        }
+    }
+    else {
+        echo "The input exceeds the character limit of job profile name";
+    }
+}
+//handling file also
+// if (
+//     !empty($_POST['update_job_profile_name']) &&
+//     !empty($_POST['update_job_profile_information']) &&
+//     !empty($_POST['updatetechnologies'])&&
+//     !empty($_POST['updatetasks'])
+//     && isset($_FILES['update_job_profile_pic'])
+// ) {
+//     $UpdateJobPic = $_FILES['job_profile_pic'];
+//     $pic_name=$UpdateJobPic['name'];
+//     $pic_path=$UpdateJobPic['tmp_name'];
+//     $pic_error=$UpdateJobPic['error'];
+//     $destination='../../Images/'.$pic_name; 
+//     move_uploaded_file($pic_path,$destination);
+//     $update_job_profile_name = mysqli_real_escape_string($con, $_POST['update_job_profile_name']);
+//     $update_job_profile_information = mysqli_real_escape_string($con, $_POST['update_job_profile_information']);
+//     $updatetechnologiesArray =json_decode($_POST['updatetechnologies'],true);
+//     $updatetasksArray =json_decode($_POST['updatetasks'],true);
+//     $currentdate = date('Y-m-d');
+//     //getting data for updation
+//     $get_job_tasks="SELECT * from `job_tasks` where job_profile_name='$update_job_profile_name' and task<>' ' ";
+//     $result_of_job_tasks=mysqli_query($con,$get_job_tasks);
+//     $get_job_techs="SELECT * from `job_technologies` where job_profile_name='$update_job_profile_name' and technology<>' ' ";
+//     $result_of_job_tech=mysqli_query($con,$get_job_techs);
+//     $tasks=[];
+//     $technologies=[];
+//     if(mysqli_num_rows($result_of_job_tasks)){
+//         while($task = mysqli_fetch_assoc($result_of_job_tasks)){
+//             $tasks[] = $task;
+//         }
+//     }
+//     if(mysqli_num_rows($result_of_job_tech)){
+//         while($tech = mysqli_fetch_assoc($result_of_job_tech)){
+//             $technologies[] = $tech;
+//         }
+//     }
+//     // update job profile information
+//     $qurey_to_update_job_profile_info = "UPDATE `job_profile` set  role='$update_job_profile_information',update_date='$currentdate',job_pic='$destination' where job_profile_name='$update_job_profile_name' ";
+    
+//     if (mysqli_query($con, $qurey_to_update_job_profile_info)) {
+//         $job_profile_id = mysqli_insert_id($con); // Get the updated job_profile_id
+//         $count=count($technologies);
+
+//         // Loop through and update each technology
+//         for($i=0;$i<$count;$i++) {
+//         if(isset($updatetechnologiesArray[$i]) && isset($technologies[$i]['technology'])){
+//             $updatesanitizedTechnology = mysqli_real_escape_string($con, $updatetechnologiesArray[$i]);
+//             $sanitizedTechnology=mysqli_real_escape_string($con,$technologies[$i]['technology']);
+//             $update_technology_query = "UPDATE `job_technologies` SET technology='$updatesanitizedTechnology' WHERE job_profile_name='$update_job_profile_name' and technology='$sanitizedTechnology' ";
+//             mysqli_query($con, $update_technology_query);
+//         }
+//         }
+//         //code to add data during update
+//         if(count($updatetechnologiesArray)>count($technologies)){
+//             $data_to_update=count($updatetechnologiesArray)-count($technologies);
+//             for($i=count($technologies);$i<count($updatetechnologiesArray);$i++){
+//                 $sanitizedTechnology = mysqli_real_escape_string($con, $updatetechnologiesArray[$i]);
+//                 $insert_technology_query = "INSERT INTO `job_technologies` (job_profile_name, technology) VALUES ('$update_job_profile_name', '$sanitizedTechnology')";
+//                 mysqli_query($con, $insert_technology_query);
+//             }
+//         }
+//         // Loop through and update each task
+//         $count1=count($tasks);
+//         for($i=0;$i<$count1;$i++) {
+//             $updatesanitizedtask = mysqli_real_escape_string($con, $updatetasksArray[$i]);
+//             $sanitizedtask=mysqli_real_escape_string($con,$tasks[$i]['task']);
+//             $update_task_query = "UPDATE `job_tasks` SET task='$updatesanitizedtask' WHERE job_profile_name='$update_job_profile_name' and task='$sanitizedtask' ";
+//             mysqli_query($con, $update_task_query);
+//         }
+//         if(count($updatetasksArray)>count($tasks)){
+//             for($i=count($tasks);$i<count($updatetasksArray);$i++){
+//                 $sanitizedTask = mysqli_real_escape_string($con, $updatetasksArray[$i]);
+//                 $insert_task_query = "INSERT INTO `job_tasks` (job_profile_name, task) VALUES ('$update_job_profile_name', '$sanitizedTask')";
+//                 mysqli_query($con, $insert_task_query);
+//             }
+             
+//         }
+//         echo "Job profile data updated";
+        
+//     } else { 
+//         echo(mysqli_error($con));
+//         echo "Data Not updated";
+//     }
+// }
 // else{
 //     echo("Data not found");
 // }

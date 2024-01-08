@@ -56,14 +56,13 @@ if (!empty($_POST['username_login']) && !empty($_POST['password_login'])) {
     $result_of_user_info = mysqli_query($con, $user_info_query);
     if (mysqli_num_rows($result_of_user_info) == 1) {
         $row = mysqli_fetch_assoc($result_of_user_info);
-        // $hashed_password = $row['pwd'];
-        // // Debugging: Confirm stored hashed password and user-entered password
+        $hashed_password = $row['pwd'];
+        $new_hash=password_hash($password,PASSWORD_DEFAULT);
         // echo "Stored Hash: " . $hashed_password . "<br>";
-        // echo "User Input: " . $password . "<br>";
-        // // Check the length and correctness of the hashed password for debugging
+        // echo "User Input: " . $new_hash . "<br>";
         // // var_dump($hashed_password); 
         // // var_dump(password_hash($password, PASSWORD_DEFAULT)); 
-        // if (password_verify($password, $hashed_password)) {
+        // if (password_verify($new_hash, $hashed_password)) {
             // Passwords match
             $user_name = $row["user_name"];
             $full_name = $row["name"];

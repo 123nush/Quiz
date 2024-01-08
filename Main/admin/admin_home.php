@@ -220,14 +220,15 @@
                             </select>
                         </div>
                         <div class="mb-3">
+                            <label for="category" class="form-label">Category/Skill</label>
+                            <input type="text" class="form-control" id="category" required >
+                        </div>
+                        <div class="mb-3">
                             <label for="question" class="form-label">Question</label>
                             <input type="text" class="form-control" id="question" required >
                             <div id="questionVerify" class="form-text"></div>  
                         </div>
-                        <div class="mb-3">
-                            <label for="category" class="form-label">Category</label>
-                            <input type="text" class="form-control" id="category" required >
-                        </div>
+                        
                         <div class="mb-3">
                             <label for="option1" class="form-label">Option 1</label>
                             <input type="text" class="form-control" id="option1" required >
