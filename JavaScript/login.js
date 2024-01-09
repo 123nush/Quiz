@@ -24,6 +24,8 @@ $(document).ready(function(){
             data: {username_login: $username, password_login : $password},
             success: function(data) {
                 console.log(data);
+                console.log(`Data trim in login js:${data.trim()==='1'}`);
+                
                 if(data.trim()==='1')
                 {
                     // alert(data);
