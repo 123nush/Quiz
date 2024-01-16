@@ -9,7 +9,7 @@ if(!empty($_POST['send_email']) && !empty($_POST['send_username']) && !(empty($_
         // echo '<script>';
         // echo($otp);
         // echo '</script>';
-        $get_user_name = "SELECT * FROM `USER` WHERE `email` = '$email' ";
+        $get_user_name = "SELECT * FROM `user` WHERE `email` = '$email' ";
         $execute_query = mysqli_query($con,$get_user_name);
         if(mysqli_num_rows($execute_query)>0)
         {
@@ -67,13 +67,13 @@ if(!empty($_POST['send_email']) && !empty($_POST['send_username']) && !(empty($_
     function sendEmail(){
             Email.send({
             SecureToken:"f2f3cfda-66c6-4625-b3cb-01d2c950bda6",
-            To : <?php echo($email); ?>,
+            To : "<?php echo($email); ?>",
             From : "dalvianushka999@gmail.com",
             Subject : "Reset password for skill analysis quiz",
             Body : document.getElementById('emailContent').innerHTML
         }).then(
         message => {
-            alert("OTP sent successfully on "+<?php echo($email); ?>);
+            alert("OTP sent successfully on "+"<?php echo($email); ?>");
         }
         );
     }

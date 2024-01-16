@@ -333,6 +333,7 @@ if (
 // else{
 //     echo("Data not found");
 // }
+
 //code to check if question like this already there in database
 if(!empty($_POST['question_to_check'])){
     $question_to_check=mysqli_real_escape_string($con,$_POST['question_to_check']);
@@ -352,6 +353,7 @@ if(!empty($_POST['job_profile_question'])&&
         !empty($_POST['option2'])&&
         !empty($_POST['option3'])&&
         !empty($_POST['option4'])&&
+        !empty($_POST['answer_option'])&&
         !empty($_POST['answer_description'])){
             function generateUniqueID() {
                 $id = mt_rand(10000, 69999);
@@ -372,16 +374,41 @@ if(!empty($_POST['job_profile_question'])&&
         $option2=mysqli_real_escape_string($con,$_POST['option2']);
         $option3=mysqli_real_escape_string($con,$_POST['option3']);
         $option4=mysqli_real_escape_string($con,$_POST['option4']);
+        $answer_option=mysqli_real_escape_string($con,$_POST['answer_option']);
         $answer_description=mysqli_real_escape_string($con,$_POST['answer_description']);
-        $query_to_inset_question="INSERT into `question_answer` (question_id,difficulty_level,question,category,option_1,option_2,option_3,option_4,correct_answer_description,job_profile_name) 
-        values ('$question_id','$difficulty_level_for_question','$question','$category','$option1','$option2','$option3','$option4','$answer_description','$job_profile_question')";
-        $result_of_question_insert=mysqli_query($con,$query_to_inset_question);
-        if(mysqli_affected_rows($con)>0){
-            echo('question inserted successsfully');
+        if(strlen($answer_option) <= 255){
+            if(strlen($option1) <= 255){
+                if(strlen($option2) <= 255){
+                    if(strlen($option3) <= 255){
+                        if(strlen($option4) <= 255){
+                            $query_to_inset_question="INSERT into `question_answer` (question_id,difficulty_level,question,category,option_1,option_2,option_3,option_4,answer_option,correct_answer_description,job_profile_name) 
+                            values ('$question_id','$difficulty_level_for_question','$question','$category','$option1','$option2','$option3','$option4','$answer_option','$answer_description','$job_profile_question')";
+                            $result_of_question_insert=mysqli_query($con,$query_to_inset_question);
+                            if(mysqli_affected_rows($con)>0){
+                                echo('question inserted successsfully');
+                            }
+                            else{
+                                echo("Error:".mysqli_error($con));
+                            }
+                        }
+                        else{
+                            echo "The input exceeds the character limit of option 4"; 
+                        }
+                    }
+                    else{
+                        echo "The input exceeds the character limit of option 3";   
+                    }
+                }
+                else{
+                    echo "The input exceeds the character limit of option 2"; 
+                }
+            }
+            else{
+                echo "The input exceeds the character limit of option 1"; 
+            }
         }
         else{
-            // echo("Hello");
-            echo("Error:".mysqli_error($con));
+            echo "The input exceeds the character limit of Answer option"; 
         }
 }
 //code to delete question from database
@@ -397,9 +424,13 @@ if (!empty($_POST['question_id_to_delete'])){
     }
 }
 //code to get all data related to questions in order to show in update question modal
-if (!empty($_POST['question_id_to_update'])){
+if (!empty($_POST['question_id_to_update'])&&
+    !empty($_POST['dynamic_job_profile'])){
     $selected_question_id=mysqli_real_escape_string($con,$_POST['question_id_to_update']);
+    $job_select=mysqli_real_escape_string($con,$_POST['dynamic_job_profile']);
+    
     $get_question_info="SELECT * from `question_answer` where question_id='$selected_question_id'";
+    // $query_for_skills="SELECT  distinct technology from `job_technologies` where technology<>'' and job_profile_name='$job_profile_for_which_category_to_derived'  ";
     $result_of_question=mysqli_query($con,$get_question_info);
     if(mysqli_num_rows($result_of_question) > 0){
         $Question_Answer = mysqli_fetch_assoc($result_of_question);
@@ -412,14 +443,24 @@ if (!empty($_POST['question_id_to_update'])){
             'option_2' =>$Question_Answer['option_2'],
             'option_3' =>$Question_Answer['option_3'],
             'option_4' =>$Question_Answer['option_4'],
+            'answer_option'=>$Question_Answer['answer_option'],
             'answer_description'=>$Question_Answer['correct_answer_description'],
             'job_profiles' => [],
+            'skills'=>[],
         ];
         $get_all_jobs="SELECT job_profile_name from `job_profile`";
         $result_of_job_profile=mysqli_query($con,$get_all_jobs);
         if(mysqli_num_rows($result_of_job_profile)){
             while($job = mysqli_fetch_assoc($result_of_job_profile)){
                 $Questions['job_profiles'][] = $job;
+            }
+        }
+        echo($job);
+        $get_all_skills="SELECT  distinct technology from `job_technologies` where technology<>'' and job_profile_name='$job_select' ";
+        $result_of_skills=mysqli_query($con,$get_all_skills);
+        if(mysqli_num_rows($result_of_skills)){
+            while($skill = mysqli_fetch_assoc($result_of_skills)){
+                $Questions['skills'][] = $skill;
             }
         }
         echo json_encode($Questions);
@@ -435,6 +476,7 @@ if(!empty($_POST['question_id']) &&
         !empty($_POST['update_option2'])&&
         !empty($_POST['update_option3'])&&
         !empty($_POST['update_option4'])&&
+        !empty($_POST['update_answer_option'])&&
         !empty($_POST['update_answer_description'])){
         $question_id =mysqli_real_escape_string($con,$_POST['question_id']);
         $update_job_profile_question=mysqli_real_escape_string($con,$_POST['update_job_profile_question']);
@@ -445,10 +487,11 @@ if(!empty($_POST['question_id']) &&
         $update_option2=mysqli_real_escape_string($con,$_POST['update_option2']);
         $update_option3=mysqli_real_escape_string($con,$_POST['update_option3']);
         $update_option4=mysqli_real_escape_string($con,$_POST['update_option4']);
+        $update_answer_option=mysqli_real_escape_string($con,$_POST['update_answer_option']);
         $update_answer_description=mysqli_real_escape_string($con,$_POST['update_answer_description']);
         $query_to_update_question="UPDATE `question_answer` set difficulty_level='$update_difficulty_level_for_question',
         question='$update_question',category='$update_category',option_1='$update_option1',option_2='$update_option2',
-        option_3='$update_option3',option_4='$update_option4',correct_answer_description='$update_answer_description',
+        option_3='$update_option3',option_4='$update_option4',answer_option='$update_answer_option',correct_answer_description='$update_answer_description',
         job_profile_name='$update_job_profile_question' where question_id='$question_id'";
         if(mysqli_query($con,$query_to_update_question)){
             echo('question updated successsfully');
@@ -457,5 +500,21 @@ if(!empty($_POST['question_id']) &&
             // echo("Hello");
             echo("Error:".mysqli_error($con));
         }
+}
+if(!empty($_POST['job_profile_for_which_category_to_derived'])){
+    $job_profile_for_which_category_to_derived=mysqli_real_escape_string($con,$_POST['job_profile_for_which_category_to_derived']);
+    $query_to_find_skills="SELECT  distinct technology from `job_technologies` where technology<>'' and job_profile_name='$job_profile_for_which_category_to_derived' ";
+    $result_of_skills=mysqli_query($con,$query_to_find_skills);
+    $skills = [];
+    if (mysqli_num_rows($result_of_skills) > 0) {
+        while ($row = mysqli_fetch_assoc($result_of_skills)) {
+            $skills[] = [
+                'technology' => $row['technology'] 
+            ];
+        }
+        echo json_encode($skills);
+    } else {
+        echo("No Skills");
+    }
 }
 ?>

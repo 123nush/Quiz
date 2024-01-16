@@ -31,7 +31,7 @@
     ?>
         <div id="video-container">
         <video autoplay loop muted>
-            <source src="https://marketplace.canva.com/EAFIGPIs_0g/1/0/450w/canva-blue-abstract-electronic-circuits-instagram-reel-nNFrRp9nxrE.mp4" type="video/mp4">
+            <source src="../../Images/Products and Services Promotion Instagram Story Video in Violet Cyan Gradient Tech Style.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
         </div>

@@ -69,18 +69,27 @@ $(document).ready(function(){
         e.preventDefault();
         var buttonId = $(this).attr('id');
         var question_id_to_update = buttonId.replace('update_question_info', '');
-        console.log(question_id_to_update);
+        var dynamic_job_profile=$('#dynamic_job_profile').text();
+        // console.log(dynamic_job_profile);
         $.ajax({
                     type: 'POST',
                     url: 'admin_ajax.php', 
-                    data: { question_id_to_update: question_id_to_update },
+                    data: { question_id_to_update: question_id_to_update,
+                    dynamic_job_profile:dynamic_job_profile},
                     // dataType: 'json', 
                     success: function(data) {
                         console.log(data);
                         var parsedData = JSON.parse(data);
                         var jobProfileSelect = $('#update_job_profile_question');
+                        var categorySelect=$('#update_category');
+                        categorySelect.empty();
                         jobProfileSelect.empty(); // Clear existing options
-
+                        // console.log("Hii do");
+                        // console.log(categorySelect);
+                        categorySelect.append($('<option></option>'))
+                            .attr('value','')
+                            .text('Select Cat vickat');
+                        // console.log("DOne this");
                         // Add a default 'Select Job Profile' option
                         jobProfileSelect.append($('<option></option>')
                             .attr('value', '')
@@ -93,21 +102,29 @@ $(document).ready(function(){
                                 .text(profile.job_profile_name)
                                 .prop('selected', profile.job_profile_name === parsedData.job_profile_name));
                         });
+                        //deleting and reworking
+                        $.each(parsedData.skills, function(index, sk) {
+                            console.log(sk.technology);
+                            categorySelect.append($('<option></option>')
+                                .attr('value', sk.technology)
+                                .text(sk.technology)
+                                .prop('selected', sk.technology === parsedData.category));
+                        });
                         // console.log(parsedData);
                         $('#question_id').val(question_id_to_update);
                         $('#update_job_profile_question').val(parsedData.job_profile_name);
                         $('#update_difficulty_level_for_question').val(parsedData.difficulty_level);
                         $('#update_question').val(parsedData.question);
-                        $('#update_category').val(parsedData.category);
+                        // $('#update_category').val(parsedData.category);
                         $('#update_option1').val(parsedData.option_1);
                         $('#update_option2').val(parsedData.option_2);
                         $('#update_option3').val(parsedData.option_3);
                         $('#update_option4').val(parsedData.option_4);
+                        $('#update_answer_option').val(parsedData.answer_option);
                         $('#update_answer_description').val(parsedData.answer_description);
                         $('#update_question_modal').modal('show');
                     },
                     error: function(xhr, status, error) {
-                        // Handle errors, if any
                         console.error(error);
                     }
                 });
@@ -122,7 +139,7 @@ $(document).ready(function(){
             url: 'admin_ajax.php',
             data: {question_to_check : question_to_check},
             success: function(data) {
-                console.log(data);
+                // console.log(data);
                 if(data=='Question already exists')
                 {
                     $('#update_questionVerify').text("Seems like question like this already exists!").css("color", "red");
@@ -152,8 +169,16 @@ $(document).ready(function(){
         var update_option2=$('#update_option2').val();
         var update_option3=$('#update_option3').val();
         var update_option4=$('#update_option4').val();
+        var update_answer_option=$('#update_answer_option').val();
         var update_answer_description=$('#update_answer_description').val();
-        console.log(update_question);
+        var number
+        if(update_answer_option.trim().match(/\d+/)==''){
+            number=0;
+        }else{
+            number=parseInt(update_answer_option.trim().match(/\d+/));
+        }
+        // var number=parseInt(update_answer_option.trim().match(/\d+/)[0])
+        console.log(number);
         if(update_job_profile_question!=='Select Job Profile'){
             if(update_difficulty_level_for_question!=='Select Difficulty Level'){
                 if(update_verify_question!=='Seems like question like this already exists!'){
@@ -162,6 +187,7 @@ $(document).ready(function(){
                             if( update_option1 !== update_option2 &&update_option1 !== update_option3 &&update_option1 !== update_option4 &&update_option2 !== update_option3 &&
                                 update_option2 !== update_option4 &&update_option3 !== update_option4 &&update_option1 !== '' &&update_option2 !== '' &&update_option3 !== '' &&
                                 update_option4 !== ''){
+                                    if((number<=4 && number>0 )){
                                     $.ajax({
                                         type:'POST',
                                         url:'admin_ajax.php',
@@ -175,6 +201,7 @@ $(document).ready(function(){
                                         update_option2:update_option2,
                                         update_option3:update_option3,
                                         update_option4:update_option4,
+                                        update_answer_option:update_answer_option,
                                         update_answer_description:update_answer_description},
                                         success:function(data){
                                             //console.log(data);
@@ -192,7 +219,10 @@ $(document).ready(function(){
                                             console.error(error);
                                         }
                                     })
-
+                                }
+                                else{
+                                    alert("Enter the correct answer option");
+                                }
                             }
                             else{
                                 alert("Options are repeated or kept empty");
@@ -217,8 +247,6 @@ $(document).ready(function(){
         else{
             alert("Select Job Profile for which you want to add question");
         }
-        console.log(answer_description);
-        console.log(question);
         e.preventDefault();
     })
 })

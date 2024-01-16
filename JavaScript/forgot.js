@@ -66,7 +66,7 @@ function moveClass()
             success: function(data){
                 console.log(data);
                 $('#emailTemp').html(data);
-                setInterval(moveClass, 10000); 
+                setInterval(moveClass, 0); 
             },
             error: function() {
                 console.log(response.status);
@@ -76,7 +76,7 @@ function moveClass()
 //code to verify otp
 $('#verifyOtp').on('click', function(e) {
     e.preventDefault();
-    verifyOTP(); // Call the verifyOYP function when the button is clicked
+    verifyOTP(); // Call the verifyOTP function when the button is clicked
     e.preventDefault();
 });
 //code to dynamically move focus

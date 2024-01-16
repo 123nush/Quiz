@@ -92,22 +92,7 @@
                                                 <div id="pass_verify" class="form-text"></div>
                                             </td>
                                         </tr >
-                                        <tr >
-                                            <th scope="col">Confirm Password:</th>
-                                            <td scope="col" class="split-column">
-                                                <div class="d-flex justify-content-center">
-                                                    <input type="password" name="update_confirm_password" class="form-control w-75 text-center"
-                                                    id="update_confirm_password" aria-describedby="pass_verify" 
-                                                    value="<?php echo $row['pwd']?>" placeholder="Confirm Password" 
-                                                    autocomplete="off" required>
-                                                    <span class="input-group-text confirm_pass_icon" id="basic-addon1">
-                                                        <i class="bi bi-eye-fill cpass_open_eye"></i>
-                                                        <i class="bi bi-eye-slash-fill cpass_close_eye"></i>
-                                                    </span>
-                                                </div>
-                                                <div id="confirm_password_verify" class="form-text"></div>
-                                            </td>
-                                        </tr >
+                                        
                                     </tbody>
                                     </table>
                                     <button class="btn btn-primary d-flex justify-content-center m-auto" id="submit">Update</button>

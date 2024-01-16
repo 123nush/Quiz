@@ -102,13 +102,16 @@
                             </select>
                         </div>
                         <div class="mb-3">
+                            <label  class="form-label">Category/Skill</label>
+                            <select type="text" class="form-select" name="update_category" id="update_category" >
+                                <option selected>Select Category</option>
+                               
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <label for="update_question" class="form-label">Question</label>
                             <input type="text" class="form-control" id="update_question" required >
                             <div id="update_questionVerify" class="form-text"></div>  
-                        </div>
-                        <div class="mb-3">
-                            <label for="update_category" class="form-label">Category</label>
-                            <input type="text" class="form-control" id="update_category" required >
                         </div>
                         <div class="mb-3">
                             <label for="update_option1" class="form-label">Option 1</label>
@@ -126,7 +129,11 @@
                             <label for="update_option4" class="form-label">Option 4</label>
                             <input type="text" class="form-control" id="update_option4" required >
                         </div>
-                        
+                        <div class="mb-3">
+                            <label for="option4" class="form-label">Correct Answer Option</label>
+                            <input type="text" class="form-control" id="update_answer_option" required >
+                            <small class="text-light">Enter the correct option number eg.option 1 or option 4</small><br>
+                        </div>
                         <div class="mb-3">
                             <label for="update_answer_description" class="form-label">Correct Answer Description</label>
                             <textarea class="form-control auto-resize" id="update_answer_description" required></textarea>
@@ -158,7 +165,7 @@
             <div class="d-flex justify-content-center">
                     <div><a href="javascript:history.back()"><img src="https://tse3.mm.bing.net/th?id=OIP.3WDg3dO3K_fFvzpULWYoIgHaHa&pid=Api&P=0&h=180" alt="" style="height:50px;width:50px"></a></div>
                     <div class="col-md-6 col-lg-8 m-auto">
-                    <h3 class="text-center">Questions on <?php echo $job_profile_name ;?>  With Difficulty Level <?php echo $difficulty_level?></h3>
+                    <h3 class="text-center" style="display: inline;margin:0;">Questions on <h3 id="dynamic_job_profile" style="display: inline;margin:0;"><?php echo $job_profile_name ;?></h3> <h3 style="display: inline;margin:0;">With Difficulty Level <?php echo $difficulty_level?></h3>
                     </div>
             </div>
         <?php
@@ -173,14 +180,12 @@
                                         <span class="fw-bolder">Category of question :</span>
                                         <?php echo $row['category']; ?>
                                     </p>
+                                    <div class="ans_description" style="height: 150px; overflow-y: auto;">
                                     <p class="card-title">
                                         <span class="fw-bolder">Question :</span>
                                         <?php echo $row['question']; ?>
                                     </p>
-                                    <p class="card-title">
-                                        <span class="fw-bolder">Difficulty Level:</span>
-                                        <?php echo $row['difficulty_level']; ?>
-                                    </p>
+                                    </div>
                                     <div class="row justify-content-center" class="options" style="height: 150px; overflow-y: auto;">
                                         <div class="col-md-6 col-lg-6  d-flex justify-content-between">
                                             <p class="card-title">
@@ -203,7 +208,10 @@
                                             </p>
                                         </div>
                                     </div>
-                                    
+                                    <p class="card-title">
+                                        <span class="fw-bolder">Answer Option:</span>
+                                        <?php echo $row['answer_option']; ?>
+                                    </p>
                                     <div class="ans_description" style="height: 150px; overflow-y: auto;">
                                     <p class="card-title">
                                         <span class="fw-bolder">Answer Description : </span>

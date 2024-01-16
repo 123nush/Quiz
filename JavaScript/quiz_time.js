@@ -44,7 +44,8 @@ $('document').ready(function(){
         $.ajax({
             type:'POST',
             url:'ajax_work.php',
-            data:{job_profile_name_for_quiz:job_profile_name_for_quiz,difficulty_level_for_quiz:difficulty_level_for_quiz},
+            data:{job_profile_name_for_quiz:job_profile_name_for_quiz,
+                difficulty_level_for_quiz:difficulty_level_for_quiz},
             success:function(data){
                 // console.log(data);
                 var parsedData = JSON.parse(data);
@@ -166,9 +167,9 @@ $('document').ready(function(){
                                 var questionDiv = document.createElement('div');
                                 questionDiv.classList.add('preview-question');
                                 var questionTitle = document.createElement('h2');
-                                questionTitle.textContent = `Question ${i + 1}: ${currentQuizData.question}`;
+                                questionTitle.textContent = `Question ${i + 1}: ${currentQuizData.question.trim('')}`;
                                 questionDiv.appendChild(questionTitle);
-                                var correctAnswerIndex = parseInt(currentQuizData.correct_answer_description.split('\n')[0].trim().match(/\d+/)[0]);
+                                var correctAnswerIndex = parseInt(currentQuizData.answer_option.trim().match(/\d+/));
                                 var userSelectedOption = userAnswers[i];
                                 if (!userSelectedOption) {
                                     var noSelectionText = document.createElement('p');
@@ -206,7 +207,7 @@ $('document').ready(function(){
                                         // console.log("Attained"+attainedQuestions+"  "+"In"+IncorrectQuestions);
                                     }
                                 }
-                                var correctAnswerDescription = currentQuizData.correct_answer_description.split('\n')[1];
+                                var correctAnswerDescription = currentQuizData.correct_answer_description.trim('');
                                 var answerDescription = document.createElement('p');
                                 answerDescription.innerHTML = `<b>Answer Description</b>: ${correctAnswerDescription}`;
                                 questionDiv.appendChild(answerDescription);
@@ -253,7 +254,7 @@ $('document').ready(function(){
                             for (var i = 0; i < totalQuestions; i++) {
                                 var currentQuizData = parsedData.questions[i];
                                 var correctAnswerDescription = currentQuizData.correct_answer_description.split('\n');
-                                var correctAnswerIndex = parseInt(correctAnswerDescription[0].trim().match(/\d+/)[0]);
+                                var correctAnswerIndex = parseInt(currentQuizData.answer_option.trim().match(/\d+/));
                                 var userAnswerIndex = parseInt(userAnswers[i]);
                                 if (!isNaN(userAnswerIndex) && userAnswerIndex === correctAnswerIndex) {
                                     totalCorrect++;

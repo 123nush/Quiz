@@ -12,15 +12,25 @@ if (!empty($_POST['full_name']) &&
     $username = mysqli_real_escape_string($con, $_POST['username_register']);
     $password = mysqli_real_escape_string($con,$_POST['password']);
     $secure_pass=password_hash($password,PASSWORD_DEFAULT);
-    $insert_user_info = "INSERT INTO `user` (user_name,name,email,pwd,user_type) VALUES ('$username','$full_name','$email','$secure_pass','o') ";
-    if (mysqli_query($con, $insert_user_info)) {
-        echo("Register");
+    if(strlen($username)<255){
+        if(strlen($full_name)<255){
+            $insert_user_info = "INSERT INTO `user` (user_name,name,email,pwd,user_type) VALUES ('$username','$full_name','$email','$secure_pass','o') ";
+            if (mysqli_query($con, $insert_user_info)) {
+                echo("Register");
+            }
+            else
+            // if(mysqli_error($con))
+            {
+                echo ("2");
+            echo ("Error description: " . mysqli_error($con));
+            }
+        }
+        else{
+            echo "The input exceeds the character limit of option Name ";
+        }
     }
-    else
-    // if(mysqli_error($con))
-    {
-        echo ("2");
-       echo ("Error description: " . mysqli_error($con));
+    else{
+        echo "The input exceeds the character limit of option Username field";
     }
 }
 //code to see whether email is already refisterde or not
@@ -54,35 +64,28 @@ if (!empty($_POST['username_login']) && !empty($_POST['password_login'])) {
     $password = mysqli_real_escape_string($con,$_POST["password_login"]);
     $user_info_query = "SELECT * FROM `user` WHERE user_name = '$username'";
     $result_of_user_info = mysqli_query($con, $user_info_query);
-    if (mysqli_num_rows($result_of_user_info) == 1) {
+    if (mysqli_num_rows($result_of_user_info) > 0) {
         $row = mysqli_fetch_assoc($result_of_user_info);
         $hashed_password = $row['pwd'];
         $new_hash=password_hash($password,PASSWORD_DEFAULT);
-        // echo "Stored Hash: " . $hashed_password . "<br>";
-        // echo "User Input: " . $new_hash . "<br>";
-        // // var_dump($hashed_password); 
-        // // var_dump(password_hash($password, PASSWORD_DEFAULT)); 
-        // if (password_verify($new_hash, $hashed_password)) {
-            // Passwords match
+        if (password_verify($password, $hashed_password)) {
             $user_name = $row["user_name"];
             $full_name = $row["name"];
             $user_type = $row["user_type"];
             $user_email = $row['email'];
-
             if ($user_type == "o") {
                 echo ("1");
             } elseif ($user_type == "a") {
                 echo ("2");
             }
-
             $_SESSION["user_name"] = $user_name;
             $_SESSION["user_full_name"] = $full_name;
             $_SESSION["user_type"] = $user_type;
             $_SESSION['user_email'] = $user_email;
-        // } else {
-        //     // Password doesn't match
-        //     echo ("Password not match");
-        // }
+        } else {
+            // Password doesn't match
+            echo ("Password not match");
+        }
     } else {
         echo ("no");
     }
@@ -108,21 +111,15 @@ if(!empty($_POST['forgot_password_email']) && !empty($_POST['forgot_password_use
         //echo(mysqli_query($con,$verify_user));
     }
 }
-// else{
-//     echo("Invalid data");
-// }
 //code to reset password
 if(!empty($_POST['reset_password'])&& !empty($_POST['user_name']) ){
     $username = mysqli_real_escape_string($con, $_POST['user_name']);
     $password = mysqli_real_escape_string($con, $_POST['reset_password']);
-    $change_user_password = "UPDATE `USER` SET `pwd` = '$password' WHERE `USER`.`user_name` = '$username' ";
+    $secure_pass=password_hash($password,PASSWORD_DEFAULT);
+    $change_user_password = "UPDATE `USER` SET `pwd` = '$secure_pass' WHERE `USER`.`user_name` = '$username' ";
     if(mysqli_query($con,$change_user_password))
     {
         echo('Password Reset');
-       // echo("Hello");
-        // if(mysqli_num_rows($result)==1){
-            //echo("1");
-        // }
     }
     else{
         echo("2");
@@ -144,6 +141,7 @@ if(!empty($_POST['job_profile_name_for_quiz']) && !empty($_POST['difficulty_leve
                 'option_3' => $question_answer_row['option_3'],
                 'option_4' => $question_answer_row['option_4'],
                 'question_id'=>$question_answer_row['question_id'],
+                'answer_option'=>$question_answer_row['answer_option'],
                 'correct_answer_description' => $question_answer_row['correct_answer_description']
             );
         }
@@ -260,11 +258,12 @@ if(!empty($_POST['update_full_name'])
     $username=mysqli_real_escape_string($con,$_POST['update_username']);
     $update_full_name=mysqli_real_escape_string($con,$_POST['update_full_name']);
     $update_password=mysqli_real_escape_string($con,$_POST['update_password']);
+    $secure_pass=password_hash($update_password,PASSWORD_DEFAULT);
     $update_email=mysqli_real_escape_string($con,$_POST['update_email']);
     $query_to_update_user_data = "UPDATE `user` 
                              SET `name` = '$update_full_name', 
                                  `email` = '$update_email', 
-                                 `pwd` = '$update_password' 
+                                 `pwd` = '$secure_pass' 
                              WHERE `user_name` = '$username'";
             if (mysqli_query($con, $query_to_update_user_data)) {
                 // $affectedRows = mysqli_affected_rows($con);

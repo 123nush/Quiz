@@ -221,7 +221,9 @@
                         </div>
                         <div class="mb-3">
                             <label for="category" class="form-label">Category/Skill</label>
-                            <input type="text" class="form-control" id="category" required >
+                            <select type="text" class="form-select" name="category" id="category" >
+                                <option selected>Select Category</option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="question" class="form-label">Question</label>
@@ -245,7 +247,12 @@
                             <label for="option4" class="form-label">Option 4</label>
                             <input type="text" class="form-control" id="option4" required >
                         </div>
-                        
+                        <div class="mb-3">
+                            <label for="option4" class="form-label">Correct Answer Option</label>
+                            <input type="text" class="form-control" id="answer_option" required >
+                            <small class="text-light">Enter the correct option number eg.option 1 or option 4</small><br>
+
+                        </div>
                         <div class="mb-3">
                             <label for="answer_description" class="form-label">Correct Answer Description</label>
                             <textarea class="form-control auto-resize" id="answer_description" required></textarea>

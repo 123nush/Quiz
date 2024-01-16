@@ -156,7 +156,7 @@ $(document).ready(function(){
             url: 'admin_ajax.php',
             data: {profileName : profileName},
             success: function(data) {
-                console.log(data);
+                // console.log(data);
                 if(data=='Job Profile Data Deleted')
                 {
                     alert("Data Deleted Successfully");
@@ -241,16 +241,12 @@ $(document).ready(function(){
         var updatetechnologiesArray = [];
             $('.updatetechnologies').each(function() {
                 var updatetechnologyValue = $(this).val().trim();
-                // if (updatetechnologyValue !== '') {
                     updatetechnologiesArray.push(updatetechnologyValue);
-                // }
             });
         var updatetasksArray = [];
             $('.updatetasks').each(function() {
                 var updatetaskValue = $(this).val().trim();
-                // if (updatetaskValue !== '') {
                     updatetasksArray.push(updatetaskValue);
-                // }
             });
             var profile_pic = [document.getElementById('update_job_profile_pic').files[0]];
             if (typeof profile_pic[0] !== 'undefined') {
@@ -311,69 +307,6 @@ $(document).ready(function(){
         }
        })
     })
-
-
-    //trying another approach for input type=file
-    // $('#update_job_profile').on('click',function(e){
-    //     var update_job_profile_name=$('#update_job_profile_name').val();
-    //     var update_job_profile_information=$('#update_job_profile_role').val();
-    //     var updatetechnologiesArray = [];
-    //         $('.updatetechnologies').each(function() {
-    //             var updatetechnologyValue = $(this).val().trim();
-    //             // if (updatetechnologyValue !== '') {
-    //                 updatetechnologiesArray.push(updatetechnologyValue);
-    //             // }
-    //         });
-    //     var updatetasksArray = [];
-    //         $('.updatetasks').each(function() {
-    //             var updatetaskValue = $(this).val().trim();
-    //             // if (updatetaskValue !== '') {
-    //                 updatetasksArray.push(updatetaskValue);
-    //             // }
-    //         });
-    //     var profile_pic = [document.getElementById('update_job_profile_pic').files[0]];
-    //     console.log(job_profile_pic[0])
-    //     if(typeof profile_pic[0]!=='undefined'){
-    //         update_job_profile_pic=profile_pic;
-    //     }
-    //     else{
-    //         update_job_profile_pic=job_profile_pic;
-    //     }
-    //     console.log(update_job_profile_pic[0]);
-    //     var updateformData = new FormData();
-    //                 updateformData.append('update_job_profile_name',update_job_profile_name);
-    //                 updateformData.append('update_job_profile_information',update_job_profile_information);
-    //                 updateformData.append('update_technologies', JSON.stringify(updatetechnologiesArray));
-    //                 updateformData.append('update_tasks', JSON.stringify(updatetasksArray));
-    //                 updateformData.append('update_job_profile_pic',update_job_profile_pic[0]);
-    //    $.ajax({
-    //     type:'POST',
-    //     url:'admin_ajax.php',
-    //     data:updateformData,
-    //     contentType: false,//this is important to handle form with files
-    //     processData: false,//this is important to handle form with files
-    //     cache: false,
-    //     success:function(data){
-    //         console.log(data);
-    //         if(data=='Job profile data updated'){
-    //             alert("Job Profile Data Updated successfully");
-    //             window.location.href = '../admin/admin_home.php';
-    //         }
-    //         else{
-                
-    //             alert("Try again Later");
-    //             window.location.href = '../admin/admin_home.php';
-
-    //         }
-
-    //     },
-    //     error:function(xhr,status,error){
-    //         console.log(error);
-    //     }
-    //    })
-    // })
-
-
     //code to show modal of adding new question
     $('#add_question_button').on('click',function(e){
         e.preventDefault();
@@ -407,6 +340,40 @@ $(document).ready(function(){
     })
 
     //code to add new question
+    $('#job_profile_question').on('change',function(e){
+        e.preventDefault();
+        job_profile_for_which_category_to_derived=$('#job_profile_question').val();
+        console.log(job_profile_for_which_category_to_derived);
+        $.ajax({
+            type:'POST',
+            url:'admin_ajax.php',
+            data:{job_profile_for_which_category_to_derived:job_profile_for_which_category_to_derived},
+            success:function(data){
+                console.log(data);
+                if(data=='No Skills'){
+                    $('#category').append('<option selected>No Category listed</option>');   
+                }
+                else{
+                dataArray=JSON.parse(data);
+                console.log(typeof(dataArray));
+                console.log(typeof(data));
+                $('#category').empty(); // To Clear previous options
+                $('#category').append('<option selected>Select Category</option>'); 
+                dataArray.forEach(function (item) {
+                    $('#category').append($('<option>', {
+                        value: item.technology,
+                        text: item.technology 
+                    }));
+                });
+                }
+            },
+            error:function(xhr,status,error){
+            }
+        })
+        e.preventDefault();
+    })
+
+
     $('#submit_question').on('click',function(e){
         e.preventDefault();
         var verify_question=$('#quetionVerify').text();
@@ -418,8 +385,15 @@ $(document).ready(function(){
         var option2=$('#option2').val();
         var option3=$('#option3').val();
         var option4=$('#option4').val();
+        var answer_option=$('#answer_option').val();
         var answer_description=$('#answer_description').val();
-        console.log(question);
+        var number
+        if(answer_option.trim().match(/\d+/)==''){
+            number=0;
+        }else{
+            number=parseInt(answer_option.trim().match(/\d+/));
+        } 
+        console.log(number);
         if(job_profile_question!=='Select Job Profile'){
             if(difficulty_level_for_question!=='Select Difficulty Level'){
                 if(verify_question!=='Seems like question like this already exists!'){
@@ -428,6 +402,7 @@ $(document).ready(function(){
                             if( option1 !== option2 &&option1 !== option3 &&option1 !== option4 &&option2 !== option3 &&
                                 option2 !== option4 &&option3 !== option4 &&option1 !== '' &&option2 !== '' &&option3 !== '' &&
                                 option4 !== ''){
+                                    if((number<=4 && number>0)){
                                     $.ajax({
                                         type:'POST',
                                         url:'admin_ajax.php',
@@ -439,6 +414,7 @@ $(document).ready(function(){
                                         option2:option2,
                                         option3:option3,
                                         option4:option4,
+                                        answer_option:answer_option,
                                         answer_description:answer_description},
                                         success:function(data){
                                             console.log(data);
@@ -456,7 +432,10 @@ $(document).ready(function(){
                                             console.error(error);
                                         }
                                     })
-
+                                }
+                                else{
+                                    alert("Enter Option Number");
+                                }
                             }
                             else{
                                 alert("Options are repeated or kept empty");
@@ -481,8 +460,6 @@ $(document).ready(function(){
         else{
             alert("Select Job Profile for which you want to add question");
         }
-        console.log(answer_description);
-        console.log(question);
         e.preventDefault();
     })
 })

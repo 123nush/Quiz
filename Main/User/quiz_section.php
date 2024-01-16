@@ -98,11 +98,13 @@
             $result_of_job_profile_info = mysqli_query($con,$get_job_profile_info);
             if(mysqli_num_rows($result_of_job_profile_info)>0)
             $jobs=[];
+            $job_pics=[];
             {
                 while($row_of_query = mysqli_fetch_assoc($result_of_job_profile_info))
                 {
                     $profile_job=$row_of_query['job_profile_name'];
                     $jobs[]=$row_of_query['job_profile_name'].trim(' ');
+                    $job_pics[]=$row_of_query['job_pic'].trim(' ');
                     ?>
                         <div class=" job-profile-container col-lg-4 col-md-6 mb-5 p-3" >
 
@@ -177,11 +179,12 @@
         // Add mappings for other job profiles here...
     };
     const jobProfiles = <?php echo json_encode($jobs); ?>;
+    const jobPics=<?php echo json_encode($job_pics);?>;
 document.querySelectorAll('.job-profile-container').forEach((container, index) => {
     const job = jobProfiles[index].trim(' ');
-    const imageFilename = jobProfileImages[job];
+   // const imageFilename = jobProfileImages[job];
     // container.querySelector('.card-title').textContent = job;
-    container.querySelector('.job-profile-image').src = `../../Images/${imageFilename}`;
+    container.querySelector('.job-profile-image').src = jobPics[index];
 });
  })
 </script>

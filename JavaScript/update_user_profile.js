@@ -62,18 +62,18 @@ $(document).ready(function(){
             $('.pass_close_eye').show();
        }
     })
-    $('.confirm_pass_icon').on('click',function(){
-        if('password' == $('#update_confirm_password').attr('type')){
-            $('#update_confirm_password').prop('type', 'text');
-            $('.cpass_open_eye').show();
-            $('.cpass_close_eye').hide();
+    // $('.confirm_pass_icon').on('click',function(){
+    //     if('password' == $('#update_confirm_password').attr('type')){
+    //         $('#update_confirm_password').prop('type', 'text');
+    //         $('.cpass_open_eye').show();
+    //         $('.cpass_close_eye').hide();
     
-       }else{
-            $('#update_confirm_password').prop('type', 'password');
-            $('.cpass_open_eye').hide();
-            $('.cpass_close_eye').show();
-       }
-    })
+    //    }else{
+    //         $('#update_confirm_password').prop('type', 'password');
+    //         $('.cpass_open_eye').hide();
+    //         $('.cpass_close_eye').show();
+    //    }
+    // })
     $('#update_password').on("input",function(){
         passwordChanged=true;
         $password = $('#update_password').val();
@@ -95,30 +95,30 @@ $(document).ready(function(){
         }
         
     })
-    $('#update_confirm_password').on("input",function(){
-        confirmpasswordchanged=true;
-        $password = $('#update_password').val();
-        $confirm_password = $('#update_confirm_password').val();
-        if($password==$confirm_password){
-                $('#confirm_password_verify').text("Password matched !").css("color", "green");
-                $('#update_confirm_password').css("border-color","green");
-        }
-        else{
-            $('#confirm_password_verify').text("Password not matched !").css("color", "red");
-                $('#update_confirm_password').css("border-color","red");
-        }
-    })
+    // $('#update_confirm_password').on("input",function(){
+    //     confirmpasswordchanged=true;
+    //     $password = $('#update_password').val();
+    //     $confirm_password = $('#update_confirm_password').val();
+    //     if($password==$confirm_password){
+    //             $('#confirm_password_verify').text("Password matched !").css("color", "green");
+    //             $('#update_confirm_password').css("border-color","green");
+    //     }
+    //     else{
+    //         $('#confirm_password_verify').text("Password not matched !").css("color", "red");
+    //             $('#update_confirm_password').css("border-color","red");
+    //     }
+    // })
     
     $('#submit').on('click',function(e){
         e.preventDefault();
         if ((emailChanged && $('#emailVerify').text() === 'Valid email!') || !emailChanged) {
             if ((passwordChanged && $('#pass_verify').text() === 'Valid Password !') || !passwordChanged) {
-                if((confirmpasswordchanged && $('#confirm_password_verify').text()==='Password matched !') || !confirmpasswordchanged){
+                // if((confirmpasswordchanged && $('#confirm_password_verify').text()==='Password matched !') || !confirmpasswordchanged){
                     var update_full_name = $('#update_full_name').val();
                     var update_email = $('#update_email').val();
                     var update_password = $('#update_password').val();
-                    var confirm_update_password=$('#update_confirm_password');
-                    console.log(confirm_update_password);
+                    // var confirm_update_password=$('#update_confirm_password');
+                    // console.log(confirm_update_password);
                     $.ajax({
                     type: 'POST',
                     url: 'ajax_work.php',
@@ -128,23 +128,24 @@ $(document).ready(function(){
                     update_username:update_username},
                     success: function(data) {
                     console.log(data);
-                    if(data=='User Data updated successfully')
-                    {
-                    window.location.href="../User/participant_profile.php";
-                    }                                 
-                    else
-                    {
-                    alert("Sorry Something went wrong");
-                    }
+                        if(data=='User Data updated successfully')
+                        {
+                        alert("Your Profile Updated Successfully");
+                        window.location.href="../User/participant_profile.php";
+                        }                                 
+                        else
+                        {
+                        alert("Sorry Something went wrong");
+                        }
                     },
                     error: function() {
                     console.log(response.status);
                     },
                     })
-                }
-                else{
-                    alert("Your Password has not matched with the Password")
-                }
+                // }
+                // else{
+                //     alert("Your Password has not matched with the Password")
+                // }
             } else {
                 alert("Password must be more than 8 characters and have an uppercase letter and number");
             }
