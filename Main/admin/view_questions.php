@@ -131,8 +131,16 @@
                         </div>
                         <div class="mb-3">
                             <label for="option4" class="form-label">Correct Answer Option</label>
-                            <input type="text" class="form-control" id="update_answer_option" required >
-                            <small class="text-light">Enter the correct option number eg.option 1 or option 4</small><br>
+                            <br>
+                            <!-- <input type="text" class="form-control" id="update_answer_option" required > -->
+                                <input class="form-check-input" type="radio"  name="update_answer_option" value="option_1" id="update_op_1">
+                                <label class="form-check-label text-light" for="option_1">option 1</label>
+                                <input class="form-check-input" type="radio"  name="update_answer_option" value="option_2" id="update_op_2">
+                                <label class="form-check-label text-light" for="option_2">Option 2</label>
+                                <input class="form-check-input" type="radio"  name="update_answer_option" value="option_3" id="update_op_3">
+                                <label class="form-check-label text-light" for="option_3">Option 3</label>
+                                <input class="form-check-input" type="radio"  name="update_answer_option" value="option_4" id="update_op_4">
+                                <label class="form-check-label text-light" for="option_4">Option 4</label>
                         </div>
                         <div class="mb-3">
                             <label for="update_answer_description" class="form-label">Correct Answer Description</label>

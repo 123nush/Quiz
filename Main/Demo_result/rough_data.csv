@@ -1,0 +1,81 @@
+Category name,total questions,correct questions,correctness,Performance,Job Profile Name,User name
+Analytical Skills: Ability to analyze complex data sets and derive meaningful conclusions.,5,2,40,Below Average,Data Analyst,john
+"Programming Skills (R,Python,R)",8,7,87.5,Very Good,Data Analyst,john
+Statistical Knowledge: Understanding statistical methods and tools for data analysis,4,1,25,Very Poor,Data Analyst,john
+"Data Visualization: Proficiency in using visualization tools like Tableau, Power BI, or matplotlib to present findings.",6,4,66.66,Above Average,Data Analyst,john
+Database Knowledge: Familiarity with database systems and data querying languages.,7,3,42.85,Below Average,Data Analyst,john
+Critical Thinking: Ability to interpret data objectively and draw valid conclusions.,2,2,100,Excellent,Data Analyst,john
+Attention to Detail: Ensuring data accuracy and thoroughness in data analysis.,0,0,0,Needs Improvement,Data Analyst,john
+"
+
+
+
+
+
+Domain Knowledge:Understanding the specific industry or business context to derive relevant insights.",3,2,66.66,Above  Average,Data Analyst,john
+"Front-end Technologies(Proficiency in HTML, CSS, JavaScript, and front-end frameworks/libraries like React, Angular, or Vue.js.)",4,3,75,Good,Full Stack Developer,andrew
+"Back-end Technologies(Knowledge of server-side languages (Node.js, Python, Ruby, etc.) and frameworks (Express.js, Django, Flask, etc.).)",3,1,33.33,Poor,Full Stack Developer,andrew
+"Database Management( Experience with database systems like MySQL, PostgreSQL, MongoDB, or others.)",5,3,60,Above Average,Full Stack Developer,andrew
+"APIs (RESTful, GraphQL)",1,0,0,Needs Improvement,Full Stack Developer,andrew
+"Web Development Tools:( Experience with development tools and workflows like IDEs, package managers, and build tools.)",6,5,83.33,Very Good,Full Stack Developer,andrew
+"
+
+
+
+
+Version Control/Git:( Familiarity with version control systems for code management and collaboration.)",2,1,50,Average,Full Stack Developer,andrew
+"Knowledge of Security Tools( SIEM (Security Information and Event Management), intrusion detection/prevention systems, antivirus software)",5,2,40,Below Average,Cybersecurity Analyst,jefforson
+"Networking Skills(Understanding of networking protocols, architecture, and security principles)",3,2,66.66,Above Average,Cybersecurity Analyst,jefforson
+Security Policies and Compliance( Understanding of security standards and compliance requirements ),7,5,71.42,Good,Cybersecurity Analyst,jefforson
+Cyber Threat Intelligence: Knowledge of current and emerging cyber threats and attack methodologies.,4,3,75,Good,Cybersecurity Analyst,jefforson
+Understanding of Security Tools,2,1,50,Average,Cybersecurity Analyst,jefforson
+Problem-Solving Abilities( Capability to troubleshoot security incidents and find solutions.),6,1,16.66,Extremly Poor,Cybersecurity Analyst,jefforson
+Risk Assessment and Management: Assessing and managing security risks within an organization.,4,1,25,Very Poor,Cybersecurity Analyst,jefforson
+Analytical Skills: Ability to analyze complex data sets and derive meaningful conclusions.,3,2,66.66,Above Average,Data Analyst,jefforson
+"Programming Skills (R,Python,R)",5,3,60,Above Average,Data Analyst,jefforson
+Statistical Knowledge: Understanding statistical methods and tools for data analysis,4,2,50,Average,Data Analyst,jefforson
+"Data Visualization: Proficiency in using visualization tools like Tableau, Power BI, or matplotlib to present findings.",6,6,100,Excellent,Data Analyst,jefforson
+Database Knowledge: Familiarity with database systems and data querying languages.,7,5,71.42,Good,Data Analyst,jefforson
+Critical Thinking: Ability to interpret data objectively and draw valid conclusions.,4,1,25,Very Poor,Data Analyst,jefforson
+Attention to Detail: Ensuring data accuracy and thoroughness in data analysis.,8,7,87.5,Very Good,Data Analyst,jefforson
+"
+
+
+
+
+
+Domain Knowledge:Understanding the specific industry or business context to derive relevant insights.",3,2,66.66,Above  Average,Data Analyst,jefforson
+"Front-end Technologies(Proficiency in HTML, CSS, JavaScript, and front-end frameworks/libraries like React, Angular, or Vue.js.)",6,1,16.66,Extremly Poor,Full Stack Developer,andrew
+"Back-end Technologies(Knowledge of server-side languages (Node.js, Python, Ruby, etc.) and frameworks (Express.js, Django, Flask, etc.).)",6,2,33.33,Poor,Full Stack Developer,andrew
+"Database Management( Experience with database systems like MySQL, PostgreSQL, MongoDB, or others.)",7,5,71.42,good,Full Stack Developer,andrew
+"APIs (RESTful, GraphQL)",6,5,83.33,Very Good,Full Stack Developer,andrew
+"Web Development Tools:( Experience with development tools and workflows like IDEs, package managers, and build tools.)",6,5,83.33,Very Good,Full Stack Developer,andrew
+"
+
+
+
+
+Version Control/Git:( Familiarity with version control systems for code management and collaboration.)",5,4,80,Very Good,Full Stack Developer,andrew
+Deep Learning,7,4,57.14,Average,Artificial Intelligence (AI) Engineer,lara
+"Programming Skills(Python, Java, or C++ for implementing AI algorithms and models).)",10,7,70,Good,Artificial Intelligence (AI) Engineer,lara
+Problem-Solving Abilities( Strong analytical and problem-solving skills to tackle complex AI challenges.),5,3,60,Above Average,Artificial Intelligence (AI) Engineer,lara
+Machine Learning,3,1,33.33,Poor,Artificial Intelligence (AI) Engineer,lara
+Algorithm Development,7,3,42.85,Below Average,Artificial Intelligence (AI) Engineer,lara
+Mathematics and Statistics.,9,5,55.55,Average,Artificial Intelligence (AI) Engineer,lara
+Natural Language Processing ,1,0,0,Needs Improvement,Artificial Intelligence (AI) Engineer,lara
+"Data Handling( Ability to work with large datasets, clean data, and preprocess it for AI model training.)",5,4,80,Very Good,Artificial Intelligence (AI) Engineer,lara
+"
+
+
+
+
+Domain Knowledge( Understanding the industry or specific domain where AI solutions will be implemented.)",6,6,100,Excellent,Artificial Intelligence (AI) Engineer,lara
+Data Modeling and Design,5,4,80,Very Good,Database Administrator,robin
+"Database Management Systems (Oracle, MySQL, SQL Server, PostgreSQL, etc.)",10,6,60,Above Average,Database Administrator,robin
+SQL and Query Optimization,3,1,33.33,Poor,Database Administrator,robin
+Database Security,5,2,40,Below Average,Database Administrator,robin
+Backup and Recovery,7,4,57.14,average,Database Administrator,robin
+Performance Tuning,7,3,42.85,Below Average,Database Administrator,robin
+Troubleshooting and Problem-Solving,1,0,0,Needs Improvement,Database Administrator,robin
+"
+Scripting and Automation( Familiarity with scripting languages to automate database tasks.)",3,2,66.66,Above Average,Database Administrator,robin

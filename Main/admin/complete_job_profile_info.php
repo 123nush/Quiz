@@ -144,6 +144,7 @@
                                     }
                                 }
                                 ?>
+                                <!-- Now styling skills -->
                             <p class="card-text">
                             <span  style="font-size:large;" class="fw-bolder">Skills Required:</span><br>
                             <ul>
@@ -220,3 +221,30 @@
 </script>
 </body>
 </html>
+<!-- 
+    <div class="row">
+    <div class="col-md-6">
+        <p class="card-text">
+            <span style="font-size:large;" class="fw-bolder">Skills Required:</span><br>
+            <ul>
+            <?php
+            $count = 0; // Initialize counter
+            if(mysqli_num_rows($result_of_job_tech_info) > 0)
+            {
+                while($row_of_tech = mysqli_fetch_assoc($result_of_job_tech_info))
+                {
+                    // Display skill
+                    echo '<li>' . $row_of_tech['technology'] . '</li>';
+                    $count++; // Increment counter
+                    // Display image after every 4 skills
+                    if ($count % 4 == 0) {
+                        echo '</ul></p></div><div class="col-md-2 img-fluid"><img src="../../Images/skill1.avif" alt="Image"></div><div class="col-md-6"><p class="card-text"><span style="font-size:large;" class="fw-bolder">Skills Required:</span><br><ul>';
+                    }
+                }
+            }
+            ?>
+            </ul>
+        </p>
+    </div>
+</div>
+ -->

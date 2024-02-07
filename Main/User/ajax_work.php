@@ -116,7 +116,7 @@ if(!empty($_POST['reset_password'])&& !empty($_POST['user_name']) ){
     $username = mysqli_real_escape_string($con, $_POST['user_name']);
     $password = mysqli_real_escape_string($con, $_POST['reset_password']);
     $secure_pass=password_hash($password,PASSWORD_DEFAULT);
-    $change_user_password = "UPDATE `USER` SET `pwd` = '$secure_pass' WHERE `USER`.`user_name` = '$username' ";
+    $change_user_password = "UPDATE `user` SET `pwd` = '$secure_pass' WHERE `user`.`user_name` = '$username' ";
     if(mysqli_query($con,$change_user_password))
     {
         echo('Password Reset');
@@ -129,7 +129,7 @@ if(!empty($_POST['reset_password'])&& !empty($_POST['user_name']) ){
 if(!empty($_POST['job_profile_name_for_quiz']) && !empty($_POST['difficulty_level_for_quiz'])){
     $job_profile_name_for_quiz=mysqli_real_escape_string($con,$_POST['job_profile_name_for_quiz']);
     $difficulty_level_for_quiz=mysqli_real_escape_string($con,$_POST['difficulty_level_for_quiz']);
-    $get_questions_for_quiz = "SELECT * FROM `question_answer` WHERE job_profile_name='$job_profile_name_for_quiz' AND difficulty_level='$difficulty_level_for_quiz' ORDER BY rand() LIMIT 0,3";
+    $get_questions_for_quiz = "SELECT * FROM `question_answer` WHERE job_profile_name='$job_profile_name_for_quiz' AND difficulty_level='$difficulty_level_for_quiz' ORDER BY rand() LIMIT 0,10";
     $result_for_getting_questions = mysqli_query($con, $get_questions_for_quiz);
     if(mysqli_num_rows($result_for_getting_questions)>0) {
         $question_answer = array(); 

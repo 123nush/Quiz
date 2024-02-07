@@ -29,7 +29,7 @@
                             <select class="form-select" id="job_profile_quiz_view">
                                                     <option selected>Select Job Profile</option>
                                                     <?php
-                                                    $get_job = "SELECT * FROM `job_profile` ";
+                                                    $get_job = "SELECT distinct job_profile_name FROM `quiz` where user_name='$user_name' ";
                                                     $result = mysqli_query($con,$get_job);
                                                    ?>
                                                    <?php

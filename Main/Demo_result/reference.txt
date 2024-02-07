@@ -1,0 +1,4 @@
+using machine learning  applied in jupyter for php website
+ machine learning  applied  jupyter notebook in vs code use it  for php website
+ how to deploy machine learning model on php  website using vscode
+ stremlit python library for ML  To run command:- python -m stremlit run app.py

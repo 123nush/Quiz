@@ -120,7 +120,16 @@ $(document).ready(function(){
                         $('#update_option2').val(parsedData.option_2);
                         $('#update_option3').val(parsedData.option_3);
                         $('#update_option4').val(parsedData.option_4);
-                        $('#update_answer_option').val(parsedData.answer_option);
+                        if (parsedData.answer_option == 'option_1') {
+                            $('#update_op_1').prop('checked', true);
+                        } else if (parsedData.answer_option == 'option_2') {
+                            $('#update_op_2').prop('checked', true);
+                        } else if (parsedData.answer_option == 'option_3') {
+                            $('#update_op_3').prop('checked', true);
+                        } else if (parsedData.answer_option == 'option_4') {
+                            $('#update_op_4').prop('checked', true);
+                        }
+                        // $('#update_answer_option').val(parsedData.answer_option);
                         $('#update_answer_description').val(parsedData.answer_description);
                         $('#update_question_modal').modal('show');
                     },
@@ -158,7 +167,7 @@ $(document).ready(function(){
     //code to update question
     $('#update_question_submit').on('click',function(e){
         e.preventDefault();
-        console.log("Hello");
+        var update_answer_option='';
         var question_id=$('#question_id').val();
         var update_verify_question=$('#update_quetionVerify').text();
         var update_job_profile_question=$('#update_job_profile_question').val();
@@ -169,16 +178,18 @@ $(document).ready(function(){
         var update_option2=$('#update_option2').val();
         var update_option3=$('#update_option3').val();
         var update_option4=$('#update_option4').val();
-        var update_answer_option=$('#update_answer_option').val();
         var update_answer_description=$('#update_answer_description').val();
-        var number
-        if(update_answer_option.trim().match(/\d+/)==''){
-            number=0;
-        }else{
-            number=parseInt(update_answer_option.trim().match(/\d+/));
-        }
-        // var number=parseInt(update_answer_option.trim().match(/\d+/)[0])
-        console.log(number);
+        let radios = document.querySelectorAll('input[name="update_answer_option"]');
+        let isChecked = Array.from(radios).some(radio => radio.checked);
+        if (!isChecked) {
+            console.log("Select a Correct  Answer's Option first");
+        } else {
+            radios.forEach(radio => {
+                if (radio.checked) {
+                    update_answer_option=radio.value;
+                }
+            })
+        };
         if(update_job_profile_question!=='Select Job Profile'){
             if(update_difficulty_level_for_question!=='Select Difficulty Level'){
                 if(update_verify_question!=='Seems like question like this already exists!'){
@@ -187,7 +198,7 @@ $(document).ready(function(){
                             if( update_option1 !== update_option2 &&update_option1 !== update_option3 &&update_option1 !== update_option4 &&update_option2 !== update_option3 &&
                                 update_option2 !== update_option4 &&update_option3 !== update_option4 &&update_option1 !== '' &&update_option2 !== '' &&update_option3 !== '' &&
                                 update_option4 !== ''){
-                                    if((number<=4 && number>0 )){
+                                    if((update_answer_option!=='')){
                                     $.ajax({
                                         type:'POST',
                                         url:'admin_ajax.php',
@@ -221,7 +232,7 @@ $(document).ready(function(){
                                     })
                                 }
                                 else{
-                                    alert("Enter the correct answer option");
+                                    alert("Select the correct answer's option");
                                 }
                             }
                             else{

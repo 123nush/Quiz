@@ -50,12 +50,10 @@
                     <input class="form-check-input" type="radio" id="easy" name="options" value="easy">
                     <label class="form-check-label text-light" for="easy">Easy</label>
                 </div>
-
                 <div class="form-check">
                     <input class="form-check-input" type="radio" id="medium" name="options" value="medium">
                     <label class="form-check-label text-light" for="medium">Medium</label>
                 </div>
-
                 <div class="form-check">
                     <input class="form-check-input" type="radio" id="hard" name="options" value="hard">
                     <label class="form-check-label text-light" for="hard">Hard</label>
@@ -249,9 +247,16 @@
                         </div>
                         <div class="mb-3">
                             <label for="option4" class="form-label">Correct Answer Option</label>
-                            <input type="text" class="form-control" id="answer_option" required >
-                            <small class="text-light">Enter the correct option number eg.option 1 or option 4</small><br>
-
+                            <br>
+                            <!-- <input type="text" class="form-control" id="answer_option" required > -->
+                                <input class="form-check-input" type="radio"  name="answer_option" value="option_1">
+                                <label class="form-check-label text-light" for="option_1">option 1</label>
+                                <input class="form-check-input" type="radio"  name="answer_option" value="option_2">
+                                <label class="form-check-label text-light" for="option_2">Option 2</label>
+                                <input class="form-check-input" type="radio"  name="answer_option" value="option_3">
+                                <label class="form-check-label text-light" for="option_3">Option 3</label>
+                                <input class="form-check-input" type="radio"  name="answer_option" value="option_4">
+                                <label class="form-check-label text-light" for="option_4">Option 4</label>
                         </div>
                         <div class="mb-3">
                             <label for="answer_description" class="form-label">Correct Answer Description</label>

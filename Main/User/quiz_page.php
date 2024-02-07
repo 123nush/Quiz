@@ -156,6 +156,8 @@
                     <!-- <div id="score_result_image"> -->
                         <!-- <div id="result_image" class="circle-image"> </div> -->
                         <div id="userScore" class="text-center"></div>
+                        <div id="attainedQ" class="text-center"></div>
+                        <div id="incorrectQ" class="text-center"></div>
                     <!-- </div> -->
                     <div id="previewQuestions"></div>
                 </div>

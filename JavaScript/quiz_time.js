@@ -48,6 +48,9 @@ $('document').ready(function(){
                 difficulty_level_for_quiz:difficulty_level_for_quiz},
             success:function(data){
                 // console.log(data);
+                if(data=="Try Again!!!"){
+                    $('#quiz_job_profile').text("Quiz On "+ job_profile_name_for_quiz+" Not Available ");
+                }
                 var parsedData = JSON.parse(data);
                         // console.log(parsedData);
                         var totalCorrect;
@@ -218,7 +221,7 @@ $('document').ready(function(){
                          //code to show countdown of time 
                          function startCountdown() {
                             document.getElementById('countdown').style.display = 'block';
-                            let duration = 600; // 10 minutes * 60 seconds = 600 seconds
+                            let duration = 300; // 10 minutes * 60 seconds = 600 seconds
                             const countdownElement = document.getElementById('countdown');
                             // Update the countdown timer every second
                             countdown = setInterval(function() {
@@ -268,6 +271,11 @@ $('document').ready(function(){
                             showQuizPreview();
                             var username=$('#username').text();
                             console.log(username);
+                            //code to dynamically set attainedQuestion and incorectQuestion information in html
+                            var attainedQ=document.getElementById("attainedQ");
+                            var incorectQ=document.getElementById("incorrectQ");
+                            attainedQ.textContent=`Attained Questions: ${attainedQuestions}`;
+                            incorectQ.textContent=`Incorrect Questions: ${IncorrectQuestions}`
                             //code to set data in result as well as quiz, quiz_question table
                             $.ajax({
                                 type:'POST',

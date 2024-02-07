@@ -376,6 +376,7 @@ $(document).ready(function(){
 
     $('#submit_question').on('click',function(e){
         e.preventDefault();
+        var answer_option='';
         var verify_question=$('#quetionVerify').text();
         var job_profile_question=$('#job_profile_question').val();
         var difficulty_level_for_question=$('#difficulty_level_for_question').val();
@@ -385,15 +386,27 @@ $(document).ready(function(){
         var option2=$('#option2').val();
         var option3=$('#option3').val();
         var option4=$('#option4').val();
-        var answer_option=$('#answer_option').val();
+        let radios = document.querySelectorAll('input[name="answer_option"]');
+        let isChecked = Array.from(radios).some(radio => radio.checked);
+        if (!isChecked) {
+            console.log("Select a Correct  Answer's Option first");
+        } else {
+            radios.forEach(radio => {
+                if (radio.checked) {
+                    answer_option=radio.value;
+                }
+            })
+        };
+        console.log(answer_option);
+        // var answer_option=$('#answer_option').val();
         var answer_description=$('#answer_description').val();
-        var number
-        if(answer_option.trim().match(/\d+/)==''){
-            number=0;
-        }else{
-            number=parseInt(answer_option.trim().match(/\d+/));
-        } 
-        console.log(number);
+        // var number
+        // if(answer_option.trim().match(/\d+/)==''){
+        //     number=0;
+        // }else{
+        //     number=parseInt(answer_option.trim().match(/\d+/));
+        // } 
+        // console.log(number);
         if(job_profile_question!=='Select Job Profile'){
             if(difficulty_level_for_question!=='Select Difficulty Level'){
                 if(verify_question!=='Seems like question like this already exists!'){
@@ -402,7 +415,7 @@ $(document).ready(function(){
                             if( option1 !== option2 &&option1 !== option3 &&option1 !== option4 &&option2 !== option3 &&
                                 option2 !== option4 &&option3 !== option4 &&option1 !== '' &&option2 !== '' &&option3 !== '' &&
                                 option4 !== ''){
-                                    if((number<=4 && number>0)){
+                                if(answer_option!==''){
                                     $.ajax({
                                         type:'POST',
                                         url:'admin_ajax.php',
@@ -434,7 +447,7 @@ $(document).ready(function(){
                                     })
                                 }
                                 else{
-                                    alert("Enter Option Number");
+                                    alert("Select a Correct  Answer's Option first");
                                 }
                             }
                             else{

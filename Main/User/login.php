@@ -81,7 +81,8 @@
             </div>
         </div>
     
-    <div class="container sizing mt-5 mb-5 shadowmb-5 bg-body" style="border-radius: 20px">
+    <div class="container sizing mt-5 mb-5 shadowmb-5 bg-body " style="border-radius: 20px">
+    <!-- content -->
             <div class="row text-dark ">
                 <div class=" col-md-5 col-lg-6 mx-auto" style="background-color:#1a75ff;">
                     <!-- <img src="https://1.bp.blogspot.com/-aGY128_uhLA/YOiVbVdX-DI/AAAAAAAAAFI/wqvpHrmEgK86934cxNkOS9jbDFwh9rkTQCLcBGAsYHQ/s720/bigstock-Man-Having-an-Online-Registrat-73738582-720x537.jpg"
