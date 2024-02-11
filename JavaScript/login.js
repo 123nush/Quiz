@@ -27,7 +27,7 @@ $(document).ready(function(){
                 if(data.trim()==='1')
                 {
                     // alert(data);
-                    window.location.href = '../User/home.php';
+                    window.location.href = '../User/quiz_section.php';
                 }
                 else if(data.trim()==='2')
                 {

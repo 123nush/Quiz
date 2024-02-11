@@ -9,3 +9,4 @@ using machine learning  applied in jupyter for php website
 50 to 59,"Average",60 to 69,"Above  Average",70 to 79,"Good",
 80 to 89,"Very Good",90 to 100,"Excellent"
 
+mobirise -> for generating templates
