@@ -103,8 +103,8 @@
                         <li>Accurate Responses: Users receive one point for each accurate answer.</li>
                         <li>Unanswered Questions: Incorrect answers are assigned to unanswered questions.</li>
                         <li>Incorrect Answers: Inaccurate answers do not receive any points.</li>
-                        <li> There is a predetermined 10-minute time limit for quizzes.</li>
-                        <li> Each quiz follows this standard count, with a total of 20 questions.</li>
+                        <li> There is a predetermined 5-minute time limit for quizzes.</li>
+                        <li> Each quiz follows this standard count, with a total of 10 questions.</li>
                         <li>Users will see a preview right away after submitting the quiz.</li>
                     </ul>
                 </label>

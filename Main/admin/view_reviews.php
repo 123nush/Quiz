@@ -47,7 +47,15 @@
         require_once('../connection/connect.php');
         $get_review_info="SELECT * FROM `review` ORDER BY `review_date` DESC LIMIT 10;";
         $result_of_reviews = mysqli_query($con,$get_review_info);
+        ?>
+        <div class="d-flex justify-content-center">
+                    <div><a href="javascript:history.back()"><img src="https://tse3.mm.bing.net/th?id=OIP.3WDg3dO3K_fFvzpULWYoIgHaHa&pid=Api&P=0&h=180" alt="" style="height:50px;width:50px"></a></div>
+                    <div class="col-md-6 col-lg-8 m-auto">
+                    <h3 class="text-center" style="display: inline;margin:0;">Reviews Given By Quiz Participant's</h3>
+                    </div>
+        </div>
         
+        <?php
         if(mysqli_num_rows($result_of_reviews)>0)
         {
             while($row_of_query = mysqli_fetch_assoc($result_of_reviews))

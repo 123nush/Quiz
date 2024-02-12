@@ -34,10 +34,16 @@ session_start();
             <?php
             require_once('../User/user_navbar.html');
             ?>
-            <div class="col-lg-8 col-md-5 m-auto "  >
-              <h2 class="text-center fs-4 fw-50 my-3" style="font-weight: bolder;">Your Opinion, Our Growth! Review & Elevate the Quizzing Experience
+            <div class=" m-auto px-5 col-lg-11 col-md-6" >
+              <h2 class="text-center fs-2 fw-50 " style="font-weight: bolder;margin-bottom:20px">Your Opinion, Our Growth! Review & Elevate the Quizzing Experience
               </h2>
-              <form class="bg-light p-3" style="border-radius: 10px;">
+              <div class="row justify-content-center align-items-centerd-flex bg-light"  style="border-radius: 20px;" >
+                <div class="col-md-6 col-lg-5">
+                  <img src="https://img.freepik.com/free-vector/feedback-loop-concept-illustration_114360-21826.jpg?size=626&ext=jpg&ga=GA1.1.1270697051.1699685084&semt=ais"
+                  class="img-fluid" alt="">
+                </div>
+                <div class="col-md-6 col-lg-7">
+                <form class="p-3" style="border-radius: 10px" >
                     <div class="mb-3">
                             <label for="suggested_job_profile" class="form-label">Suggest Job Profile</label>
                             <div id="suggested_job_profileContainer">
@@ -48,7 +54,7 @@ session_start();
                     <button type="button" class="btn btn-outline-primary" id="more_job_profile" name="more_job_profile">Add Job Profile</button>           
                     <div id="emailHelp" class="form-text">To suggest more job profiles click on Add Job Profile button.</div>
                     <div class="mb-3">
-                          <label for="reason_for_job_profile" class="form-label">Reason For Job Profile:</label>
+                          <label for="reason_for_job_profile" class="form-label">Reason For Suggesting Job Profile:</label>
                           <textarea class="form-control" aria-label="With textarea" id="reason_for_job_profile" 
                           name="reason_for_job_profile"></textarea>
                     </div>
@@ -61,6 +67,9 @@ session_start();
                           value="<?php echo $user_name;?>">
                     <button type="submit" class="btn btn-primary text-center" id="submit">Submit</button>
                 </form>
+                </div>
+              </div>
+              
             </div>
 
   </div>

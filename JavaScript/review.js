@@ -33,7 +33,7 @@ $('document').ready(function(){
                     // console.log("Success: " + data);
                     if(data=="Review inserted successfully"){
                         alert("Your Response stored successfully!!");
-                        window.location.href="home.php";
+                        window.location.href="quiz_section.php";
                     }
                 },
                 error: function (xhr, status, error) {
