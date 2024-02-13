@@ -349,7 +349,7 @@ if (!empty($_POST['job_profile_analysis']) && !empty($_POST['total_question']) &
     );
 
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'http://127.0.0.1:5000/predict');
+    curl_setopt($ch, CURLOPT_URL, 'https://ml-640d.onrender.com/predict');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data_to_send));
