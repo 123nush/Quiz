@@ -294,4 +294,77 @@ if(!empty($_POST['job_profile_from_which_date_retrived'])
         echo("No result");
     }
 }
+if(!empty($_POST['job_profile_view_analysis'])
+&& !empty($_POST['view_analysis_user'])){
+    $job_profile=mysqli_real_escape_string($con,$_POST['job_profile_view_analysis']);
+    $username=mysqli_real_escape_string($con,$_POST['view_analysis_user']);
+    //query for getting results id
+    $total_questions_array=[];
+    $total_score_array=[];
+    $query_to_get_result_id="SELECT result_id FROM `quiz` WHERE `job_profile_name` ='$job_profile' and user_name='$username'";
+    if(mysqli_query($con,$query_to_get_result_id)){
+        $result_id_result=mysqli_query($con,$query_to_get_result_id);
+        if(mysqli_num_rows($result_id_result)>0){
+            while($result_id=mysqli_fetch_assoc($result_id_result)){
+                $id=$result_id['result_id'];
+                //query for getting score and total questions
+                $query_score_questions="SELECT attained_questions,score from `result` where result_id='$id' ";
+                $result=mysqli_query($con,$query_score_questions);
+                if(mysqli_num_rows($result)>0) {
+                while ($row_for_data = mysqli_fetch_assoc($result)) {
+                    $total_questions_array[]=$row_for_data['attained_questions'];
+                    $total_score_array[]=$row_for_data['score'];
+                }
+            }
+            
+        }
+        
+        $score_question_data = array(
+            'attained_questions' => array_sum($total_questions_array),
+            'acheived_score' => array_sum($total_score_array)
+        );
+        echo json_encode($score_question_data);
+    }
+    }
+    else{
+        echo("Do not analyse!!");
+    }
+   
+}
+if(!empty($_POST['job_profile_analysis'])
+&& !empty($_POST['total_question'])
+&& !empty($_POST['total_score'])){
+    $job_profile=mysqli_real_escape_string($con,$_POST['job_profile_analysis']);
+    $total_questions=mysqli_real_escape_string($con,$_POST['total_question']);
+    $total_score=mysqli_real_escape_string($con,$_POST['total_score']);
+    if ($job_profile_view_analysis !== '') {
+        // Data to send to Python model
+        $data_to_send = array(
+            'job_profile' => $job_profile,
+            'total_questions' => $total_questions,
+            'total_score' => $total_score
+        );
+    
+        // cURL request to send data to Python model
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'https://ml-640d.onrender.com/predict'); // Replace with your Python model endpoint
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data_to_send));
+    
+        // Execute cURL request
+        $response = curl_exec($ch);
+        if ($response === false) {
+            echo json_encode(array('error' => 'Curl error: ' . curl_error($ch)));
+        } else {
+            echo $response; // Output response directly without JSON encoding
+        }
+    
+        // Close cURL session
+        curl_close($ch);
+    } else {
+        echo json_encode(array('message' => 'Do not analyse!!'));
+    }
+    
+}
 ?>

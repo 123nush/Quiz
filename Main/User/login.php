@@ -120,7 +120,7 @@
                                     <div id="pass_verify" class="form-text"></div>
                     </div>
                     <div class="mb-3">
-                       <a href="../User/forgot.php">Forgot password</a>
+                       <a href="../User/forgot.php">Forgot password ?</a>
 
                     </div>  
                     <button type="submit" class="btn btn-primary" id="submit">Submit</button>
