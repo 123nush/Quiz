@@ -276,6 +276,7 @@ if(!empty($_POST['update_full_name'])
                 echo "Error updating user data: " . mysqli_error($con);
             }
 }
+//code to fetch dates when user will select job profile
 if(!empty($_POST['job_profile_from_which_date_retrived'])
 && !empty($_POST['view_history_user'])){
     $job_profile=mysqli_real_escape_string($con,$_POST['job_profile_from_which_date_retrived']);
@@ -294,6 +295,7 @@ if(!empty($_POST['job_profile_from_which_date_retrived'])
         echo("No result");
     }
 }
+//code to return total score and attained questions when user selects job profile
 if(!empty($_POST['job_profile_view_analysis'])
 && !empty($_POST['view_analysis_user'])){
     $job_profile=mysqli_real_escape_string($con,$_POST['job_profile_view_analysis']);
@@ -331,40 +333,39 @@ if(!empty($_POST['job_profile_view_analysis'])
     }
    
 }
-if(!empty($_POST['job_profile_analysis'])
-&& !empty($_POST['total_question'])
-&& !empty($_POST['total_score'])){
-    $job_profile=mysqli_real_escape_string($con,$_POST['job_profile_analysis']);
-    $total_questions=mysqli_real_escape_string($con,$_POST['total_question']);
-    $total_score=mysqli_real_escape_string($con,$_POST['total_score']);
-    if ($job_profile_view_analysis !== '') {
-        // Data to send to Python model
-        $data_to_send = array(
-            'job_profile' => $job_profile,
-            'total_questions' => $total_questions,
-            'total_score' => $total_score
-        );
-    
-        // cURL request to send data to Python model
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://ml-640d.onrender.com/predict'); // Replace with your Python model endpoint
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data_to_send));
-    
-        // Execute cURL request
-        $response = curl_exec($ch);
-        if ($response === false) {
-            echo json_encode(array('error' => 'Curl error: ' . curl_error($ch)));
-        } else {
-            echo $response; // Output response directly without JSON encoding
-        }
-    
-        // Close cURL session
-        curl_close($ch);
+//code to request render.com
+if (!empty($_POST['job_profile_analysis']) && !empty($_POST['total_question']) && !empty($_POST['total_score'])) {
+    $job_profile = $_POST['job_profile_analysis'];
+    $total_questions = $_POST['total_question'];
+    $total_score = $_POST['total_score'];
+
+    // Debugging: Log received data
+    error_log("Received data: job_profile=$job_profile, total_question=$total_questions, total_score=$total_score");
+
+    $data_to_send = array(
+        'job_profile_name_analysis' => $job_profile,
+        'attained_questions_analysis' => $total_questions,
+        'score_analysis' => $total_score
+    );
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'http://127.0.0.1:5000/predict');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data_to_send));
+
+    $response = curl_exec($ch);
+    if ($response === false) {
+        // Debugging: Log cURL error
+        error_log('cURL Error: ' . curl_error($ch));
+        echo 'Error: Internal server error'; // Return generic error message
     } else {
-        echo json_encode(array('message' => 'Do not analyse!!'));
+        echo $response; // Return the response from the Flask app
     }
-    
-}
+
+    curl_close($ch);
+} 
+// else {
+//     echo 'Required form fields are missing';
+// }
 ?>

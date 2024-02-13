@@ -20,9 +20,7 @@ $('document').ready(function(){
                 } else {
                     $('#submit_to_see_performance').show(); // to show the button
                     var dataArray = JSON.parse(data);
-                    console.log(dataArray);
-                    // total_question=dataArray.attained_questions;
-                    // total_score=dataArray.acheived_score;
+                    // console.log(dataArray);
                     $('#attained_questions').val(dataArray.attained_questions);
                     $('#acheived_score').val(dataArray.acheived_score);
                 }
@@ -37,26 +35,17 @@ $('document').ready(function(){
         job_profile_analysis=$('#job_profile_view_analysis').val();
         total_question= $('#attained_questions').val();
         total_score= $('#acheived_score').val();
+        user=$('#username').val();
         e.preventDefault();
         $.ajax({
             type:'POST',
             url:'ajax_work.php',
-            data:{job_profile_analysis:job_profile_analysis,total_question:total_question,total_score:total_score},
+            data:{job_profile_analysis:job_profile_analysis,
+                total_question:total_question,
+                total_score:total_score},
             success:function(data){
-                // console.log(data);
-                if (data == 'Do not analyse!!') {
-                    $('#attained_questions').val('No Quiz Performed'); 
-                    $('#acheived_score').val('No Quiz Performed');
-                    $('#submit_to_see_performance').hide(); // to hide the button
-                } else {
-                    $('#submit_to_see_performance').show(); // to show the button
-                    var dataArray = JSON.parse(data);
-                    console.log(dataArray);
-                    // total_question=dataArray.attained_questions;
-                    // total_score=dataArray.acheived_score;
-                    $('#attained_questions').val(dataArray.attained_questions);
-                    $('#acheived_score').val(dataArray.acheived_score);
-                }
+                console.log(data);
+                $('#analyseModalLabel').text("Hello "+user+" your performance for "+job_profile_analysis+" is "+data);
             },
             error:function(xhr,status,error){
             }
