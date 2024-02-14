@@ -51,7 +51,7 @@
         <div class="d-flex justify-content-center">
                     <div><a href="javascript:history.back()"><img src="https://tse3.mm.bing.net/th?id=OIP.3WDg3dO3K_fFvzpULWYoIgHaHa&pid=Api&P=0&h=180" alt="" style="height:50px;width:50px"></a></div>
                     <div class="col-md-6 col-lg-8 m-auto">
-                    <h3 class="text-center" style="display: inline;margin:0;">Reviews Given By Quiz Participant's</h3>
+                    <h3 class="text-center" style="margin:0;">Reviews Given By Quiz Participant's</h3>
                     </div>
         </div>
         
