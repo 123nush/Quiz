@@ -32,6 +32,7 @@ $('document').ready(function(){
     })
     $('#submit_to_see_performance').on('click',function(e){
         e.preventDefault();
+        console.log('I"m clicked');
         job_profile_analysis=$('#job_profile_view_analysis').val();
         total_question= $('#attained_questions').val();
         total_score= $('#acheived_score').val();

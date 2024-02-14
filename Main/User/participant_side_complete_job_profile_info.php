@@ -15,6 +15,40 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link type="image/png" sizes="16x16" rel="icon" href="https://tse3.mm.bing.net/th?id=OIP.8W1AqXk8aZfMEIyeyOwvAwAAAA&pid=Api&P=0&h=180" />
     <style>
+     .card-text-container {
+    display: flex;
+    margin-bottom: 20px; /* Adjust as needed */
+}
+
+.left-content, .right-content {
+    flex: 1;
+}
+
+.left-image, .right-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-image {
+    order: 1; /* Change order to place image on right */
+}
+
+.right-content {
+    order: 1; /* Change order to place content on right */
+}
+
+ul {
+    padding-left: 20px; /* Adjust as needed */
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
     /* For hovering */
     .rounded:hover {
         transform: translateY(-10px); 
@@ -82,7 +116,7 @@
 <div class="main">
         <div class="row justify-content-center">
             <?php
-            require_once('../admin/reduced_navbar.html');
+            require_once('../User/user_navbar.html');
             ?>
             
                 <?php
@@ -141,24 +175,56 @@
                                     }
                                 }
                                 ?>
-                            <p class="card-text">
-                            <span  style="font-size:large;" class="fw-bolder">Skills Required:</span><br>
-                            <ul>
-                            <?php
-                            if(mysqli_num_rows($result_of_job_tech_info)>0 )
-                            {
-                            while($row_of_tech = mysqli_fetch_assoc($result_of_job_tech_info))
-                            {    
-                                ?>
-                                       <li><?php echo $row_of_tech['technology']; ?></li> 
-                            <?php
-                                }
-                            ?>
-                            </ul>
-                            </p>
-                            <?php
-                            }
-                    ?>    
+                            <!-- Now styling skills -->
+                            <div class="card-text-container">
+                                    <div class="left-content">
+                                        <span class="fw-bolder">Skills Required:</span><br>
+                                        <ul>
+                                            <?php
+                                            if(mysqli_num_rows($result_of_job_tech_info) > 0) {
+                                                $count = 0;
+                                                $total_rows = mysqli_num_rows($result_of_job_tech_info);
+                                                while($row_of_tech = mysqli_fetch_assoc($result_of_job_tech_info)) {
+                                                    $count++;
+                                                    if ($count <= ceil($total_rows / 2)) {
+                                                        echo '<li>' . $row_of_tech['technology'] . '</li>';
+                                                    }
+                                                }
+                                                // Reset the pointer to start from the beginning
+                                                mysqli_data_seek($result_of_job_tech_info, 0);
+                                            }
+                                            ?>
+                                        </ul>
+                                    </div>
+                                    <div class="right-image">
+                                        <!-- Add image here -->
+                                        <img src="../../Images/skill3.avif" alt="Image">
+                                    </div>
+                                </div>
+
+                                <div class="card-text-container">
+                                    <div class="left-image">
+                                        <!-- Add image here -->
+                                        <img src="../../Images/skill1.avif" alt="Image">
+                                    </div>
+                                    <div class="right-content">
+                                        <span class="fw-bolder">Skills Required:</span><br>
+                                        <ul>
+                                            <?php
+                                            if(mysqli_num_rows($result_of_job_tech_info) > 0) {
+                                                $count = 0;
+                                                $total_rows = mysqli_num_rows($result_of_job_tech_info);
+                                                // Skip the first half of the skills
+                                                mysqli_data_seek($result_of_job_tech_info, ceil($total_rows / 2));
+                                                while($row_of_tech = mysqli_fetch_assoc($result_of_job_tech_info)) {
+                                                    $count++;
+                                                    echo '<li>' . $row_of_tech['technology'] . '</li>';
+                                                }
+                                            }
+                                            ?>
+                                        </ul>
+                                    </div>
+                                </div>   
                 <?php
                     }
                 }

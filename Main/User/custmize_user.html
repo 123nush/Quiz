@@ -16,10 +16,21 @@
     <link type="image/png" sizes="16x16" rel="icon" href="https://tse3.mm.bing.net/th?id=OIP.8W1AqXk8aZfMEIyeyOwvAwAAAA&pid=Api&P=0&h=180" />
     <!-- <link rel="stylesheet" href="../../Css/landing.css"> -->
     <style>
-
+        .video-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1; /* Set z-index to 0 */
+        }
+        .content {
+        padding-top: 50vh; 
+        /* Adjust according to video height */
+        scroll-margin-top: 100vh; /* Adjust according to video height */
+        position: relative; /* Set position to relative */
+        z-index: 1; /* Set z-index to 1 to appear above the video */
+        }
         video {
             width: 100%;
-             /* Default width, fills the container */
         }
 
         @media only screen and (min-width: 768px) {
@@ -60,8 +71,16 @@
             background-size: contain; /* Ensure the entire background image is visible */
             background-position: center; /* Center the background image */
             background-repeat: no-repeat; /* Prevent background image from repeating */
-    
+            @media (max-width: 768px) {
+        /* Adjust styles for screens smaller than 768px (typical tablet and mobile sizes) */
+            width: 100%;
+            height: auto;
+        /* Adjust any other styles as needed */
+            }
         }
+
+        
+        
         .back-image1 {
             margin-top: 20px;
             position: absolute;
@@ -69,14 +88,13 @@
             left: 50%;
             width: 700px !important;
             height: 400px !important;
-            background-image: url('https://tse2.mm.bing.net/th?id=OIP.0-Zh9L-Y06tgHSNJTsbLLQHaEK&pid=Api&P=0&h=180');
+            background-image: url('https://rodrigueeyecare.com/wp-content/uploads/2020/10/Shape.png');
             /* background-size: cover; Cover the entire container */
             transform: translate(-50%, -50%); /* Center the back image */
             z-index: 1; /* Ensure the back image is behind the front image */
             background-size: contain; /* Ensure the entire background image is visible */
             background-position: center; /* Center the background image */
             background-repeat: no-repeat; /* Prevent background image from repeating */
-    
         }
         .back-image2 {
             margin-top: 20px;
@@ -143,13 +161,18 @@
 </head>
 <body>
     <div id='main'>
-        
+        <div class="video-container">
             <video autoplay loop muted>
                 <source src="../../Images/TrENDING JOB Profiles.mp4" type="video/mp4" >
                 Your browser does not support the video tag.
             </video>
+        </div>
         <div class="content">
-            <div class="row justify-content-center align-items-center bg-white d-flex ">
+            <div class="d-flex justify-content-center align-items-center">
+                <button onclick="location.href='register.php'" type="button" class="btn btn-lg text-dark btn-info  font-bold h-12 w-32 me-2">Sign Up</button>
+                <button onclick="location.href='login.php'" type="button" class="btn btn-lg text-dark btn-info font-bold h-12 w-32">Sign In</button>
+            </div>
+            <div class="row justify-content-center align-items-center d-flex bg-white " >
                 <h2 class="text-center">Accessible</h2>
                 <div class="com-md-6 col-lg-6 m-auto p-5 center_img">
                     <div class="container">
@@ -168,7 +191,7 @@
                     </p>
                 </div>
             </div>
-            <div class="row justify-content-center align-items-center  d-flex" style="background-color: #492E87;">
+            <div class="row justify-content-center align-items-center  d-flex" style="background: linear-gradient(to bottom right, #FFA500, #FF4500);">
                 <h2 class="text-center">Enriching</h2>
                 <div class="col-md-6 col-lg-6 m-auto p-5">
                     <p class="fw-bold" style="font-size: large;">
@@ -189,11 +212,11 @@
                     <!-- <img src="https://cdn-icons-png.flaticon.com/128/4370/4370748.png" alt="" class="img-fluid"> -->
                 </div>
             </div>
-            <div class="row justify-content-center align-items-center  d-flex" style="background-color: #37B5B6;">
+            <div class="row justify-content-center align-items-center  d-flex" style="background: linear-gradient(to bottom right,#ff69b4, #ff0000)">
                 <h2 class="text-center">Innovative</h2>
                 <div class="col-md-6 col-lg-6 m-auto p-5 center_img">
                     <div class="container">
-                        <div class="back-image1"></div>
+                        <div class="back-image2"></div>
                         <img src="../../Images/innovation.jpg" class="img-fluid front-image" alt="">
                     </div>
                     <!-- <img class="img-fluid" src="https://t4.ftcdn.net/jpg/06/76/30/81/240_F_676308105_fhU0d5nqdegqNSWJgxsjIpQA8EBlMZn3.jpg" alt=""> -->
@@ -211,7 +234,7 @@
                     </p>
                 </div>
             </div>
-            <div class="row justify-content-center align-items-center d-flex" style="background-color: #F2F597;">
+            <div class="row justify-content-center align-items-center d-flex" style="background: linear-gradient(to bottom right,#87CEEB, #0000FF)">
                 <h2 class="text-center">Diverse</h2>
                 <div class="col-md-6 col-lg-6 m-auto p-5">
                     <p class="fw-bold" style="font-size: large;">Dive into a wide array of quiz categories that encompass 
@@ -226,17 +249,17 @@
                 </div>
                 <div class="col-md-6 col-lg-6 m-auto p-5 center_img">
                     <div class="container">
-                        <div class="back-image1"></div>
+                        <div class="back-image3"></div>
                         <img src="../../Images/diverse.jpg" class="img-fluid front-image" alt="">
                     </div>
                     <!-- <img src="https://cdn-icons-png.flaticon.com/128/5691/5691422.png" class="img-fluid" alt=""> -->
                 </div>
             </div>
-            <div class="row justify-content-center align-items-centerd-flex" style="background-color: #6895D2;">
+            <div class="row justify-content-center align-items-centerd-flex" style="background: linear-gradient(to bottom right,#ccff66, #54d911)">
                 <h2 class="text-center">Evaluative</h2>
                 <div class="col-md-6 col-lg-6 m-auto p-5 center_img">
                     <div class="container">
-                        <div class="back-image1"></div>
+                        <div class="back-image4"></div>
                         <img src="../../Images/evaluate.jpg" class="img-fluid front-image" alt="">
                     </div>
                     <!-- <img src="https://cdn-icons-png.flaticon.com/128/2782/2782163.png" class="img-fluid" alt=""> -->
