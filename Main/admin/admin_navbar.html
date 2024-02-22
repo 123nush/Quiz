@@ -21,9 +21,10 @@
     body {
   margin: 0;
   height: 100vh;
+  width: 100%;
   background: linear-gradient(to right, #073763, #0e5a8a, #0984e3, #00a8e8, #00c6ff);
   position: relative;
-  /* overflow: hidden; */
+  overflow-x: hidden;
 }
 
 body::before {
@@ -32,8 +33,8 @@ body::before {
   top: 0;
   left: 0;
   width: 100%; /* Cover the entire width */
-  height: 100vh; /* Cover the entire height */
-  /* background: url('https://tse1.mm.bing.net/th?id=OIP.d7G07Ll9HOV5jav9wJ1FDAHaFj&pid=Api&P=0&h=180') no-repeat left top; */
+  height:100%; /* Cover the entire height */
+  background: url('https://tse1.mm.bing.net/th?id=OIP.d7G07Ll9HOV5jav9wJ1FDAHaFj&pid=Api&P=0&h=180') no-repeat left top;
   background-size: cover;
   mix-blend-mode: overlay;
   opacity: 0.3; /* Adjust the opacity to blend with the background */
@@ -43,7 +44,7 @@ body::before {
 
     </style>
 <body>
-   <div class="background-image" style="background: linear-gradient(to right, #073763, #0e5a8a, #0984e3, #00a8e8, #00c6ff);">
+   <div class="background-image" >
     <div class="p-3">
     <nav class="navbar navbar-expand-lg fs-5 ">
         <div class="container-fluid ">

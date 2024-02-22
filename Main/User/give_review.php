@@ -18,6 +18,18 @@ session_start();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link type="image/png" sizes="16x16" rel="icon" href="https://tse3.mm.bing.net/th?id=OIP.8W1AqXk8aZfMEIyeyOwvAwAAAA&pid=Api&P=0&h=180" />
     <script src='../../JavaScript/review.js'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+          @keyframes moveUpDown {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); } /* Adjust this value for the desired vertical movement */
+      100% { transform: translateY(0); }
+    }
+
+    .moving-image {
+      animation: moveUpDown 5s infinite; /* Adjust the duration as needed */
+    }
+    </style>
 </head>
 <body>
   <div class="main">
@@ -35,16 +47,13 @@ session_start();
             require_once('../User/user_navbar.html');
             ?>
             <div class=" m-auto px-5 col-lg-11 col-md-6" >
-              <h2 class="text-center fs-2 fw-50 " style="font-weight: bolder;margin-bottom:20px">Your Opinion, Our Growth! Review & Elevate the Quizzing Experience
+              <h2 class="text-center fs-2 fw-50 animate__animated animate__backInDown animate__delay-1s " style="font-weight: bolder;margin-bottom:20px">Your Opinion, Our Growth! Review & Elevate the Quizzing Experience
               </h2>
-              <div class="row justify-content-center align-items-centerd-flex bg-light"  style="border-radius: 20px;" >
-                <div class="col-md-6 col-lg-5">
-                  <img src="https://img.freepik.com/free-vector/feedback-loop-concept-illustration_114360-21826.jpg?size=626&ext=jpg&ga=GA1.1.1270697051.1699685084&semt=ais"
-                  class="img-fluid" alt="">
-                </div>
+              <div class="row justify-content-center align-items-center d-flex bg-light"  style="border-radius: 20px;" >
+                
                 <div class="col-md-6 col-lg-7">
                 <form class="p-3" style="border-radius: 10px" >
-                    <div class="mb-3">
+                    <div class="mb-3 ">
                             <label for="suggested_job_profile" class="form-label">Suggest Job Profile</label>
                             <div id="suggested_job_profileContainer">
                                 <input type="text" class="form-control suggested_job_profile" name="suggested_job_profile[]">
@@ -67,6 +76,9 @@ session_start();
                           value="<?php echo $user_name;?>">
                     <button type="submit" class="btn btn-primary text-center" id="submit">Submit</button>
                 </form>
+                </div>
+                <div class="col-md-6 col-lg-5">
+                  <img src="../../Images/review.avif" class="img-fluid moving-image" alt="">
                 </div>
               </div>
               

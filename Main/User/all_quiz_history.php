@@ -12,7 +12,8 @@
     <title>View Profile</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" >
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link type="image/png" sizes="16x16" rel="icon" href="../../Images/logo.PNG" />
+    <link type="image/png" sizes="16x16" rel="icon" href="https://tse3.mm.bing.net/th?id=OIP.8W1AqXk8aZfMEIyeyOwvAwAAAA&pid=Api&P=0&h=180" />
+
     <style>
         .question-answer {
         font-size: 18px;
@@ -74,8 +75,8 @@
                                  <h2 class="text-center" style="font-size:20px;font-weight:bold">Quiz Preview</h2>
                                 <div class="quiz-summary">
                                     <p  class="text-center"><strong >Score:</strong> <?php echo $scores[$counter]; ?></p>
-                                    <p  class="text-center"><strong>Attained Questions:</strong> <?php echo $attained_questions[$counter]; ?></p>
-                                    <p  class="text-center"><strong >Incorrect Questions:</strong> <?php echo $incorrect_ans[$counter]; ?></p>
+                                    <!-- <p  class="text-center"><strong>Attained Questions:</strong> <?php // echo $attained_questions[$counter]; ?></p> -->
+                                    <p  class="text-center"><strong >Incorrect Answers:</strong> <?php echo $incorrect_ans[$counter]; ?></p>
                                 </div>
                         <?php
                             while($row_of_question_id=mysqli_fetch_assoc($result_of_question_id)){

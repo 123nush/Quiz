@@ -21,9 +21,10 @@
     body {
   margin: 0;
   height: 100vh;
+  width: 100%;
   background: linear-gradient(to right, #073763, #0e5a8a, #0984e3, #00a8e8, #00c6ff);
   position: relative;
-  /* overflow: hidden; */
+  overflow-x: hidden;
 }
 
 body::before {
@@ -32,7 +33,7 @@ body::before {
   top: 0;
   left: 0;
   width: 100%; /* Cover the entire width */
-  height: 100vh; /* Cover the entire height */
+  height:100%; /* Cover the entire height */
   background: url('https://tse1.mm.bing.net/th?id=OIP.d7G07Ll9HOV5jav9wJ1FDAHaFj&pid=Api&P=0&h=180') no-repeat left top;
   background-size: cover;
   mix-blend-mode: overlay;

@@ -26,7 +26,17 @@
 <!-- link for various effects with shape -->
 <link rel="stylesheet" href="../../Css/shape.css">
 <script src="../../JavaScript/quiz_time.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <style>
+.quiz-wrapper {
+    display: flex;
+    align-items: flex-start; /* Align children at the start of the cross axis (vertical alignment) */
+}
+/* #quizImage {
+    margin-right: 20px;
+    height: auto;
+    width: 9;
+} */
 .option-container {
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -136,22 +146,33 @@
             ?>
            <div class="d-flex row" style="display: none;">
                 <div class="col-lg-7 col-md-7 justify-content-center align-item-center m-auto my-0" >
-                    <h1 class="fs-1 text-center m-auto" id="quiz_job_profile"></h1><br>
+                    <h1 class="fs-1 fw-50 text-center m-auto animate__animated animate__backInDown animate__delay-1s" id="quiz_job_profile"></h1><br>
                     <h2 class="fs-2" id="username" style="display: none;"><?php echo($user_name); ?> </h2>
                 </div>
                 <div id="countdown" class="fs-5 fw-10 text-center col-lg-7 col-md-7 m-auto my-0"></div>
             </div>
             <!-- question and options div -->
-            <div id="quizContainer" class="col-lg-6 col-md-8 m-auto " style="border-radius: 10px;background-color:white;color:black;display:none">
-                <div id="question" class="mt-2 fs-4 fw-50 text-center fw-bold"></div>
-                <div id="options" class="mt-2 mx-5 fs-6 fw-50"></div>
-                <div class="d-flex">
-                    <button id="prevButton" class="btn btn-primary m-auto" style="display: none;">Previous</button>
-                    <button id="nextButton" class="btn btn-primary m-auto"  style="display: none;">Next</button>
-                    <button id="submitButton" class="btn btn-primary m-auto" style="display: none;">Submit</button>
+            <!-- doiong changes for displaying image aside -->
+            
+                <div id="quizContainer" class="col-lg-6 col-md-8 m-auto " style="border-radius: 10px;background-color:white;color:black;display:none">
+                    <div class="quiz-wrapper row justify-content-center align-items-center ">
+                        <div class="col-md-6 col-lg-8">    
+                            <div id="question" class="mt-2 fs-4 fw-50 text-center fw-bold"></div>
+                            <div id="options" class="mt-2 mx-5 fs-6 fw-50"></div>
+                            <div class="d-flex">
+                                <button id="prevButton" class="btn btn-primary m-auto" style="display: none;">Previous</button>
+                                <button id="nextButton" class="btn btn-primary m-auto"  style="display: none;">Next</button>
+                                <button id="submitButton" class="btn btn-primary m-auto" style="display: none;">Submit</button>
+                            </div>
+                        </div>
+                        <div id="quizImage" class="col-md-6 col-lg-4">
+                             <img id="image" src="../../Images/question_durin_quiz.avif" 
+                             alt="Quiz Image" class="img-fluid">
+                        </div>
+                    </div>    
                 </div>
-            </div>
-        <!--   preview div -->
+                <!--   preview div -->
+                <!-- doing changes for appearence of preview -->
                 <div id="quizPreview" class="col-lg-7 col-md-8 m-auto bg-light" style="display: none;border-radius:10px">
                     <!-- <div id="score_result_image"> -->
                         <!-- <div id="result_image" class="circle-image"> </div> -->
@@ -176,6 +197,24 @@ startingQuizCheckbox.addEventListener('change', function() {
         startButton.style.display = 'none';
     }
 });
+
+
+var imageUrls = ['../../Images/question_durin_quiz.avif',
+ '../../Images/question_durin_quiz1.avif', '../../Images/question_durin_quiz2.avif',
+'../../Images/question_durin_quiz3.avif','../../Images/question_durin_quiz4.avif'];
+var currentIndex = 0;
+
+// Function to update the image source
+function changeImage() {
+    document.getElementById('image').src = imageUrls[currentIndex];
+    currentIndex = (currentIndex + 1) % imageUrls.length; // Move to the next image, looping back to the first if needed
+}
+
+// Call the changeImage function initially
+changeImage();
+
+// Set an interval to call the changeImage function every 10 seconds (10000 milliseconds)
+setInterval(changeImage, 10000);
 </script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 <?php
 session_start();
+// phpinfo();
 require "../connection/connect.php";
 //code to insert registered data
 if (!empty($_POST['full_name']) &&
@@ -152,13 +153,16 @@ if(!empty($_POST['job_profile_name_for_quiz']) && !empty($_POST['difficulty_leve
     }
 }
 //code to insert data in result table and quiz , quiz_question table
-if(!empty($_POST['score']) 
-&& !empty($_POST['IncorrectQuestions']) 
-&& !empty($_POST['attainedQuestions'])
-&& !empty($_POST['job_profile_name_for_quiz'])
-&& !empty($_POST['no_of_questions'])
-&& !empty($_POST['questionids'])
-&& !empty($_POST['username_for_quiz'])
+$json_data = file_get_contents('php://input');
+$data = json_decode($json_data, true); 
+if(!empty($data['score']) 
+&& !empty($data['IncorrectQuestions']) 
+&& !empty($data['attainedQuestions'])
+&& !empty($data['job_profile_name_for_quiz'])
+&& !empty($data['no_of_questions'])
+&& !empty($data['questionids'])
+&& !empty($data['all_question_track'])
+&& !empty($data['username_for_quiz'])
 ){
     function generateUniqueResultID() {
         $id = mt_rand(1, 4999);
@@ -177,18 +181,20 @@ if(!empty($_POST['score'])
         return $id;
     }
     $quiz_id=generateUniqueQuizID();
-    $score=mysqli_real_escape_string($con,$_POST['score']);
-    $IncorrectQuestions=mysqli_real_escape_string($con,$_POST['IncorrectQuestions']);
-    $attainedQuestions=mysqli_real_escape_string($con,$_POST['attainedQuestions']);
-    $job_profile_name_for_quiz=mysqli_real_escape_string($con,$_POST['job_profile_name_for_quiz']);
-    $no_of_questions=mysqli_real_escape_string($con,$_POST['no_of_questions']);
-    $questionids=$_POST['questionids'];
+    $score=mysqli_real_escape_string($con,$data['score']);
+    $IncorrectQuestions=mysqli_real_escape_string($con,$data['IncorrectQuestions']);
+    $attainedQuestions=mysqli_real_escape_string($con,$data['attainedQuestions']);
+    $job_profile_name_for_quiz=mysqli_real_escape_string($con,$data['job_profile_name_for_quiz']);
+    $no_of_questions=mysqli_real_escape_string($con,$data['no_of_questions']);
+    $questionids=$data['questionids'];
     $result_id = generateUniqueResultID();
-    $username=mysqli_real_escape_string($con,$_POST['username_for_quiz']);
+    $total_real_questions=intval($score)+intval($IncorrectQuestions);
+    $username=mysqli_real_escape_string($con,$data['username_for_quiz']);
+    $all_question_track = $data['all_question_track'];
     $query_to_insert_result="INSERT into `result`(result_id,score,user_name,correct_ans,incorrect_ans,attained_questions)
-     values ('$result_id','$score','$username','$score','$IncorrectQuestions','$attainedQuestions')";
+     values ('$result_id','$score','$username','$score','$IncorrectQuestions','$total_real_questions')";
      $currentdate = date('Y-m-d');
-    //  echo("hello I will work");
+     echo("hello I will work here only");
     if(mysqli_query($con,$query_to_insert_result)){
         // echo ("result set");
         $query_to_insert_quiz_data="INSERT INTO `quiz` (quiz_id,quiz_date,no_of_questions,result_id,job_profile_name,user_name) 
@@ -196,11 +202,12 @@ if(!empty($_POST['score'])
         if(mysqli_query($con,$query_to_insert_quiz_data)){
             // echo(" quiz data set");
             foreach( $questionids as $question_id){
-            $query_to_insert_quiz_question_data="INSERT into `quiz_questions`(quiz_id,question_id) 
-            values ('$quiz_id','$question_id')";
-            mysqli_query($con,$query_to_insert_quiz_question_data);
-            }
-            echo("result, quiz,quiz_question data set");
+                $category_result=$all_question_track[$question_id];
+                $query_to_insert_quiz_question_data="INSERT into `quiz_questions`(quiz_id,question_id,category_result) 
+                values ('$quiz_id','$question_id','$category_result')";
+                mysqli_query($con,$query_to_insert_quiz_question_data);
+                }
+                echo("result, quiz,quiz_question data set");
         }
     }
     else{
@@ -296,6 +303,10 @@ if(!empty($_POST['job_profile_from_which_date_retrived'])
     }
 }
 //code to return total score and attained questions when user selects job profile
+// if(!empty($_POST['ka_nahi_hot_he'])){
+//     $var=mysqli_real_escape_string($con,$_POST['ka_nahi_hot_he']);
+//     echo($var);
+// }
 if(!empty($_POST['job_profile_view_analysis'])
 && !empty($_POST['view_analysis_user'])){
     $job_profile=mysqli_real_escape_string($con,$_POST['job_profile_view_analysis']);
@@ -303,11 +314,14 @@ if(!empty($_POST['job_profile_view_analysis'])
     //query for getting results id
     $total_questions_array=[];
     $total_score_array=[];
+    //storing result id for getting analysis data
+    $result_id_array=[];
     $query_to_get_result_id="SELECT result_id FROM `quiz` WHERE `job_profile_name` ='$job_profile' and user_name='$username'";
     if(mysqli_query($con,$query_to_get_result_id)){
         $result_id_result=mysqli_query($con,$query_to_get_result_id);
         if(mysqli_num_rows($result_id_result)>0){
             while($result_id=mysqli_fetch_assoc($result_id_result)){
+                $result_id_array[]=$result_id['result_id'];
                 $id=$result_id['result_id'];
                 //query for getting score and total questions
                 $query_score_questions="SELECT attained_questions,score from `result` where result_id='$id' ";
@@ -318,14 +332,80 @@ if(!empty($_POST['job_profile_view_analysis'])
                     $total_score_array[]=$row_for_data['score'];
                 }
             }
-            
+           
         }
-        
         $score_question_data = array(
             'attained_questions' => array_sum($total_questions_array),
             'acheived_score' => array_sum($total_score_array)
         );
-        echo json_encode($score_question_data);
+        
+        // print_r($result_id_array);
+        //from each result id find quiz id and from quiz id find category and category_result
+        $question_id_array=[];
+        //array for storing question_id as key and category_result as value
+        $question_result_array=[];
+        
+            foreach($result_id_array as $analysis_result){
+                //query for quiz id
+                $query_for_quiz_id="SELECT quiz_id from `quiz` where result_id='$analysis_result' ";
+                $result_of_quiz=mysqli_query($con,$query_for_quiz_id);
+                if(mysqli_num_rows($result_of_quiz)>0){
+                    while($quiz_id_row=mysqli_fetch_assoc($result_of_quiz)){
+                        $quiz_id=$quiz_id_row['quiz_id'];
+                        //query for question id and category result
+                        $query_for_question_id="SELECT question_id,category_result from `quiz_questions` where quiz_id='$quiz_id' ";     
+                        $result_for_question_category=mysqli_query($con,$query_for_question_id);
+                        while($question_category=mysqli_fetch_assoc($result_for_question_category)){
+                           $question_result_array[$question_category["question_id"]]= $question_category["category_result"];
+                            $question_id_array[]=$question_category['question_id'];
+                        }
+                    }
+                }
+            }
+            $categories_question_id=[];
+            foreach($question_id_array as $question_id){
+                $query_for_getting_category="SELECT category,question_id from `question_answer` where question_id='$question_id' ";
+                $result_for_categoty=mysqli_query($con,$query_for_getting_category);
+                while($row=mysqli_fetch_assoc($result_for_categoty)){
+                    $categories_question_id[$row['question_id']]=$row['category'];
+                }
+            }
+            // print_r($question_result_array);
+            // print_r($categories_question_id);
+            //Now deal with category and it's count
+            // Initialize an associative array to store counts for each category
+            $category_counts = [];
+
+                // Iterate over the question result array
+            foreach ($question_result_array as $question_id => $correctness) {
+                // Retrieve the category for the current question ID
+                $category = $categories_question_id[$question_id];
+                // If the category is not already initialized in $category_counts, initialize it
+                if (!isset($category_counts[$category])) {
+                    $category_counts[$category] = ['Y' => 0, 'N' => 0, 'total' => 0];
+                }
+                // Increment the count based on the correctness
+                if ($correctness === 'Y') {
+                    $category_counts[$category]['Y']++;
+                } else {
+                    $category_counts[$category]['N']++;
+                }
+                // Increment the total count for the category
+                $category_counts[$category]['total']++;
+            }
+            // print_r($category_counts);
+            // echo json_encode($score_question_data); //must uncomment
+            // print_r($category_counts);
+            $data_to_send = [
+                'score_question_data' => $score_question_data,
+                'category_counts' => $category_counts
+            ];
+            // Encode the data to JSON format
+            $json_data = json_encode($data_to_send);
+            // Send the JSON data to the client
+            echo $json_data;
+       
+
     }
     }
     else{
@@ -334,22 +414,27 @@ if(!empty($_POST['job_profile_view_analysis'])
    
 }
 //code to request render.com
-if (!empty($_POST['job_profile_analysis']) && !empty($_POST['total_question']) && !empty($_POST['total_score'])) {
+if (!empty($_POST['job_profile_analysis']) 
+&& !empty($_POST['total_question']) 
+&& !empty($_POST['total_score'])
+&& !empty($_POST['categoryData'])) {
     $job_profile = $_POST['job_profile_analysis'];
     $total_questions = $_POST['total_question'];
     $total_score = $_POST['total_score'];
-
+    $category_wise_data=$_POST['categoryData'];
     // Debugging: Log received data
     error_log("Received data: job_profile=$job_profile, total_question=$total_questions, total_score=$total_score");
 
     $data_to_send = array(
         'job_profile_name_analysis' => $job_profile,
         'attained_questions_analysis' => $total_questions,
-        'score_analysis' => $total_score
+        'score_analysis' => $total_score,
+        'category_performance_analysis' => json_encode($category_wise_data)
     );
 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, 'https://ml-640d.onrender.com/predict');
+    // curl_setopt($ch, CURLOPT_URL, 'http://127.0.0.1:5000/predict');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data_to_send));
@@ -361,11 +446,10 @@ if (!empty($_POST['job_profile_analysis']) && !empty($_POST['total_question']) &
         echo 'Error: Internal server error'; // Return generic error message
     } else {
         echo $response; // Return the response from the Flask app
+        // print_r($data_to_send);
     }
-
+    // echo "Average";
     curl_close($ch);
 } 
-// else {
-//     echo 'Required form fields are missing';
-// }
+
 ?>

@@ -53,6 +53,7 @@ $('document').ready(function(){
                 }
                 var parsedData = JSON.parse(data);
                         // console.log(parsedData);
+                        var all_question_track=[];
                         var totalCorrect;
                         let countdown; // Declare the countdown variable outside the interval function
                         var userAnswers = [];
@@ -70,10 +71,12 @@ $('document').ready(function(){
                             var currentQuizData = parsedData.questions[currentQuestion];
                             questionDiv.textContent = currentQuizData.question;
                             optionsDiv.innerHTML = '';
-                            questionids[currentQuestion]=currentQuizData.question_id;
-                            if (questionids.length < totalQuestions) {
-                                questionids[currentQuestion] =currentQuizData.question_id;
-                            }
+                            //dealing with question id issue
+                            // questionids[currentQuestion]=currentQuizData.question_id;
+                            // if (questionids.length < totalQuestions) {
+                            //     console.log(questionids.length);
+                            //     questionids[currentQuestion] =currentQuizData.question_id;
+                            // }
                             for (var i = 1; i <= 4; i++) {
                                 var optionContainer = document.createElement('div');
                                 optionContainer.classList.add('option-container');
@@ -165,8 +168,10 @@ $('document').ready(function(){
                             // resultimage.style.display='block';
                             // var score_result_image=document.getElementById('score_result_image');
                             // score_result_image.style.display='block';
+                           
                             for (let i = 0; i < totalQuestions; i++) {
                                 var currentQuizData = parsedData.questions[i];
+                                questionids.push(currentQuizData.question_id);
                                 var questionDiv = document.createElement('div');
                                 questionDiv.classList.add('preview-question');
                                 var questionTitle = document.createElement('h2');
@@ -175,6 +180,7 @@ $('document').ready(function(){
                                 var correctAnswerIndex = parseInt(currentQuizData.answer_option.trim().match(/\d+/));
                                 var userSelectedOption = userAnswers[i];
                                 if (!userSelectedOption) {
+                                    all_question_track[currentQuizData.question_id]="N";
                                     var noSelectionText = document.createElement('p');
                                     noSelectionText.innerHTML = `<b>Your Answer</b>: You did not select any option`;
                                     noSelectionText.style.color = 'red';
@@ -193,14 +199,19 @@ $('document').ready(function(){
                                         var correctAnswerColor = 'green'; // Default color for correct answer
                             
                                         if (j === correctAnswerIndex) {
+                                            
                                             optionItem.innerHTML = `<b>Correct Option</b>: ${optionText}`;
                                             if (userSelectedOption && parseInt(userSelectedOption) === j) {
                                                 optionItem.style.color = 'green'; // User selected the correct option
+                                                // console.log(currentQuizData.question_id);
+                                                all_question_track[currentQuizData.question_id]="Y";
                                             } else {
+                                                all_question_track[currentQuizData.question_id]="N";
                                                 optionItem.style.color = 'green'; // Only correct option displayed, others are red
                                             }
                                         } else {
                                             if (userSelectedOption && parseInt(userSelectedOption) === j) {
+                                                all_question_track[currentQuizData.question_id]="N";
                                                 optionItem.innerHTML = `<b>Your Answer</b>: ${optionText}`;
                                                 optionItem.style.color = 'red'; // Incorrect user selection
                                                 IncorrectQuestions++;
@@ -215,13 +226,18 @@ $('document').ready(function(){
                                 answerDescription.innerHTML = `<b>Answer Description</b>: ${correctAnswerDescription}`;
                                 questionDiv.appendChild(answerDescription);
                                 previewQuestionsDiv.appendChild(questionDiv);
+                                
                                 // console.log(questionids);
                             }
+                            // console.log("Track is here:"+ all_question_track[]);
+                            for (var key in all_question_track) {
+                                console.log("key " + key + " has value " + all_question_track[key]);
+                              }
                         }
                          //code to show countdown of time 
                          function startCountdown() {
                             document.getElementById('countdown').style.display = 'block';
-                            let duration = 300; // 10 minutes * 60 seconds = 600 seconds
+                            let duration = 30; // 10 minutes * 60 seconds = 600 seconds
                             const countdownElement = document.getElementById('countdown');
                             // Update the countdown timer every second
                             countdown = setInterval(function() {
@@ -266,29 +282,35 @@ $('document').ready(function(){
                                     console.log("Question " + (i + 1) + ": Incorrect Answer!");
                                 }
                             }
-                            console.log(userAnswers);
+                            // console.log(userAnswers);
                             console.log("Total correct answers: " + totalCorrect);
                             showQuizPreview();
                             var username=$('#username').text();
                             console.log(username);
+                            console.log(all_question_track);
+                            console.log(questionids);
                             //code to dynamically set attainedQuestion and incorectQuestion information in html
                             var attainedQ=document.getElementById("attainedQ");
                             var incorectQ=document.getElementById("incorrectQ");
                             attainedQ.textContent=`Attained Questions: ${attainedQuestions}`;
                             incorectQ.textContent=`Incorrect Questions: ${IncorrectQuestions}`
                             //code to set data in result as well as quiz, quiz_question table
+                            // total=attainedQuestions+IncorrectQuestions
                             $.ajax({
                                 type:'POST',
                                 url:'ajax_work.php',
-                                data:{score:totalCorrect,
+                                contentType: 'application/json',
+                                data:JSON.stringify({score:totalCorrect,
                                     IncorrectQuestions:IncorrectQuestions,
                                     attainedQuestions:attainedQuestions,
                                     job_profile_name_for_quiz:job_profile_name_for_quiz,
                                     no_of_questions:totalQuestions,
                                     questionids:questionids,
-                                    username_for_quiz:username},
+                                    all_question_track:all_question_track,
+                                    username_for_quiz:username}),
                                 success:function(data){
                                     console.log(data);
+                                    console.log("Hii");
                                 },
                                 error: function(xhr, status, error) {
                                     console.error("AJAX Error: ", error);

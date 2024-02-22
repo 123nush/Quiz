@@ -20,13 +20,24 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link type="image/png" sizes="16x16" rel="icon" href="https://tse3.mm.bing.net/th?id=OIP.8W1AqXk8aZfMEIyeyOwvAwAAAA&pid=Api&P=0&h=180" />
     <script src="../../JavaScript/analysis.js"></script>
+    <!-- link for chart making -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
 </head>
+<style>
+    #analyseModalLabel pre {
+        max-width: 100%;
+        overflow: auto;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+</style>
 <body>
 
         <!-- Modal for displaying Performance  -->
-                <div class="modal fade" id="analyseModal" tabindex="-1" aria-labelledby="analyseModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
+                <div class="modal fade text-light" id="analyseModal" tabindex="-1" aria-labelledby="analyseModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog modal-dialog-centered  modal-lg">
+                    <div class="modal-content" style="background-color: #100a4d;">
                     <div class="modal-header p-5">
                         <h5 class="modal-title text-center" id="analyseModalLabel">Username Your
                              Performance for Job Profile Name is Excellent</h5>
@@ -34,9 +45,9 @@
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <!-- <div class="modal-body">
-                        ...
-                    </div> -->
+                    <div class="modal-body">
+                    <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
                     </div>
@@ -78,7 +89,9 @@
                         <div class="mb-3">
                             <label  class="form-label fw-bold">Acheived Score </label>
                             <input type="text" class="form-control" id="acheived_score" name="acheived_score" autocomplete="off">
-                
+                        </div>
+                        <div class="mb-3">
+                            <h5 id="analysis_to_do_data" ></h5>
                         </div>
                         <div class="mb-3">
                            <button class="btn btn-primary"  type="button" id="submit_to_see_performance" 

@@ -15,149 +15,11 @@
     <!-- link for image that should be shown on address bar -->
     <link type="image/png" sizes="16x16" rel="icon" href="https://tse3.mm.bing.net/th?id=OIP.8W1AqXk8aZfMEIyeyOwvAwAAAA&pid=Api&P=0&h=180" />
     <!-- <link rel="stylesheet" href="../../Css/landing.css"> -->
-    <style>
-        .video-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: -1; /* Set z-index to 0 */
-        }
-        .content {
-        padding-top: 50vh; 
-        /* Adjust according to video height */
-        scroll-margin-top: 100vh; /* Adjust according to video height */
-        position: relative; /* Set position to relative */
-        z-index: 1; /* Set z-index to 1 to appear above the video */
-        }
-        video {
-            width: 100%;
-        }
-
-        @media only screen and (min-width: 768px) {
-            /* For screens wider than 768px (desktop) */
-            video {
-                width: 100vw; /* Set width to fill the entire viewport */
-                height: 100%; /* Maintain aspect ratio */
-            }
-        }
-        img{
-            height: 180px;
-            width: 350px;
-            align-items: center;
-        }
-        .center_img{
-            display: flex;
-            justify-content: center; /* Horizontally center the content */
-            align-items: center;
-        }
-        .container {
-        position: relative;
-        width: 100vw; /* Set width of container to viewport width */
-        height: 50vh; /* Set height of container to viewport height */
-        overflow: hidden; /* Hide any overflow */
-        }
-
-        .back-image {
-            margin-top: 20px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 700px !important;
-            height: 400px !important;
-            background-image: url('https://rodrigueeyecare.com/wp-content/uploads/2020/10/Shape.png');
-            /* background-size: cover; Cover the entire container */
-            transform: translate(-50%, -50%); /* Center the back image */
-            z-index: 1; /* Ensure the back image is behind the front image */
-            background-size: contain; /* Ensure the entire background image is visible */
-            background-position: center; /* Center the background image */
-            background-repeat: no-repeat; /* Prevent background image from repeating */
-            @media (max-width: 768px) {
-        /* Adjust styles for screens smaller than 768px (typical tablet and mobile sizes) */
-            width: 100%;
-            height: auto;
-        /* Adjust any other styles as needed */
-            }
-        }
-
-        
-        
-        .back-image1 {
-            margin-top: 20px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 700px !important;
-            height: 400px !important;
-            background-image: url('https://rodrigueeyecare.com/wp-content/uploads/2020/10/Shape.png');
-            /* background-size: cover; Cover the entire container */
-            transform: translate(-50%, -50%); /* Center the back image */
-            z-index: 1; /* Ensure the back image is behind the front image */
-            background-size: contain; /* Ensure the entire background image is visible */
-            background-position: center; /* Center the background image */
-            background-repeat: no-repeat; /* Prevent background image from repeating */
-        }
-        .back-image2 {
-            margin-top: 20px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 700px !important;
-            height: 400px !important;
-            background-image: url('https://rodrigueeyecare.com/wp-content/uploads/2020/10/Shape.png');
-            /* background-size: cover; Cover the entire container */
-            transform: translate(-50%, -50%); /* Center the back image */
-            z-index: 1; /* Ensure the back image is behind the front image */
-            background-size: contain; /* Ensure the entire background image is visible */
-            background-position: center; /* Center the background image */
-            background-repeat: no-repeat; /* Prevent background image from repeating */
+    <link rel="stylesheet" href="../../Css/custmize_user.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+   <style>
     
-        }
-        .back-image3 {
-            margin-top: 20px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 700px !important;
-            height: 400px !important;
-            background-image: url('https://rodrigueeyecare.com/wp-content/uploads/2020/10/Shape.png');
-            /* background-size: cover; Cover the entire container */
-            transform: translate(-50%, -50%); /* Center the back image */
-            z-index: 1; /* Ensure the back image is behind the front image */
-            background-size: contain; /* Ensure the entire background image is visible */
-            background-position: center; /* Center the background image */
-            background-repeat: no-repeat; /* Prevent background image from repeating */
-    
-        }
-       
-        .back-image4 {
-            margin-top: 20px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 700px !important;
-            height: 400px !important;
-            background-image: url('https://rodrigueeyecare.com/wp-content/uploads/2020/10/Shape.png');
-            /* background-size: cover; Cover the entire container */
-            transform: translate(-50%, -50%); /* Center the back image */
-            z-index: 1; /* Ensure the back image is behind the front image */
-            background-size: contain; /* Ensure the entire background image is visible */
-            background-position: center; /* Center the background image */
-            background-repeat: no-repeat; /* Prevent background image from repeating */
-        }
-
-        .front-image {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            max-width: 100%; /* Ensure front image fits within back image */
-            max-height: 100%; /* Ensure front image fits within back image */
-            z-index: 2; /* Ensure the front image is on top of the back image */
-            border-radius: 20px;
-        }
-
-    </style>
-   
+   </style>
 </head>
 <body>
     <div id='main'>
@@ -168,11 +30,13 @@
             </video>
         </div>
         <div class="content">
-            <div class="d-flex justify-content-center align-items-center">
-                <button onclick="location.href='register.php'" type="button" class="btn btn-lg text-dark btn-info  font-bold h-12 w-32 me-2">Sign Up</button>
-                <button onclick="location.href='login.php'" type="button" class="btn btn-lg text-dark btn-info font-bold h-12 w-32">Sign In</button>
+            <div class="button-container">
+                <div class="d-flex justify-content-end">
+                    <button onclick="location.href='register.php'" type="button" class="btn btn-lg text-dark btn-info  font-bold h-12 w-32 me-2">Sign Up</button>
+                    <button onclick="location.href='login.php'" type="button" class="btn btn-lg text-dark btn-info font-bold h-12 w-32">Sign In</button>
+                </div>
             </div>
-            <div class="row justify-content-center align-items-center d-flex bg-white " >
+            <div class="row justify-content-center align-items-center d-flex bg-white animate__animated animate__backInDown animate__delay-1s " >
                 <h2 class="text-center">Accessible</h2>
                 <div class="com-md-6 col-lg-6 m-auto p-5 center_img">
                     <div class="container">
@@ -191,7 +55,7 @@
                     </p>
                 </div>
             </div>
-            <div class="row justify-content-center align-items-center  d-flex" style="background: linear-gradient(to bottom right, #FFA500, #FF4500);">
+            <div  class="row justify-content-center align-items-center  d-flex bg-white animate__animated animate__backInDown animate__delay-2s">
                 <h2 class="text-center">Enriching</h2>
                 <div class="col-md-6 col-lg-6 m-auto p-5">
                     <p class="fw-bold" style="font-size: large;">
@@ -212,7 +76,7 @@
                     <!-- <img src="https://cdn-icons-png.flaticon.com/128/4370/4370748.png" alt="" class="img-fluid"> -->
                 </div>
             </div>
-            <div class="row justify-content-center align-items-center  d-flex" style="background: linear-gradient(to bottom right,#ff69b4, #ff0000)">
+            <div class="row justify-content-center align-items-center  d-flex bg-white animate__animated animate__backInDown animate__delay-3s">
                 <h2 class="text-center">Innovative</h2>
                 <div class="col-md-6 col-lg-6 m-auto p-5 center_img">
                     <div class="container">
@@ -234,7 +98,7 @@
                     </p>
                 </div>
             </div>
-            <div class="row justify-content-center align-items-center d-flex" style="background: linear-gradient(to bottom right,#87CEEB, #0000FF)">
+            <div class="row justify-content-center align-items-center d-flex bg-white animate__animated animate__backInDown animate__delay-4s" >
                 <h2 class="text-center">Diverse</h2>
                 <div class="col-md-6 col-lg-6 m-auto p-5">
                     <p class="fw-bold" style="font-size: large;">Dive into a wide array of quiz categories that encompass 
@@ -255,7 +119,7 @@
                     <!-- <img src="https://cdn-icons-png.flaticon.com/128/5691/5691422.png" class="img-fluid" alt=""> -->
                 </div>
             </div>
-            <div class="row justify-content-center align-items-centerd-flex" style="background: linear-gradient(to bottom right,#ccff66, #54d911)">
+            <div class="row justify-content-center align-items-centerd-flex bg-white animate__animated animate__backInDown animate__delay-5s" >
                 <h2 class="text-center">Evaluative</h2>
                 <div class="col-md-6 col-lg-6 m-auto p-5 center_img">
                     <div class="container">
@@ -279,7 +143,5 @@
     </div>
     
 </body>
-<script>
-    
-</script>
+
 </html>

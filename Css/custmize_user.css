@@ -1,0 +1,169 @@
+
+        .animation {
+            transform: scale(1);
+            transition:transform 0.5s ease-in-out;
+        }
+        .animation:hover{
+            transform: scale(1.1);
+        }
+        .show {
+            opacity: 1;
+        }
+       .video-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .video-container video {
+            width: 100%;
+        }
+
+        .button-container {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 10px; /* Adjust padding as needed */
+            z-index: 1; /* Ensure buttons appear above the video */
+        }
+        
+        /* Media query for smaller screens */
+        @media (max-width: 576px) {
+            .btn {
+                font-size: 14px; /* Decrease font size */
+                padding: 6px 12px; /* Adjust padding */
+                min-width: unset; /* Remove min-width */
+                width: auto; /* Allow button width to adjust based on content */
+            }
+        }
+        video {
+            width: 100%;
+        }
+
+        @media only screen and (min-width: 768px) {
+            /* For screens wider than 768px (desktop) */
+            video {
+                width: 100vw; /* Set width to fill the entire viewport */
+                height: 100%; /* Maintain aspect ratio */
+            }
+        }
+        img{
+            height: 180px;
+            width: 350px;
+            align-items: center;
+        }
+       
+        .center_img{
+            display: flex;
+            justify-content: center; /* Horizontally center the content */
+            align-items: center;
+        }
+        .container {
+        position: relative;
+        width: 100vw; /* Set width of container to viewport width */
+        height: 50vh; /* Set height of container to viewport height */
+        overflow: hidden; /* Hide any overflow */
+        }
+
+        .back-image {
+            margin-top: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 700px !important;
+            height: 400px !important;
+            border-radius: 20px;
+            background-image: url('../Images/access_back.jpg');
+            /* background-size: cover; Cover the entire container */
+            transform: translate(-50%, -50%); /* Center the back image */
+            z-index: 1; /* Ensure the back image is behind the front image */
+            background-size: contain; /* Ensure the entire background image is visible */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Prevent background image from repeating */
+            @media (max-width: 768px) {
+        /* Adjust styles for screens smaller than 768px (typical tablet and mobile sizes) */
+            width: 100%;
+            height: auto;
+        /* Adjust any other styles as needed */
+            }
+        }
+
+        
+        
+        .back-image1 {
+            margin-top: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 700px !important;
+            height: 400px !important;
+            border-radius: 20px;
+            background-image: url('../Images/Untitled.png');
+            /* background-size: cover; Cover the entire container */
+            transform: translate(-50%, -50%); /* Center the back image */
+            z-index: 1; /* Ensure the back image is behind the front image */
+            background-size: contain; /* Ensure the entire background image is visible */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Prevent background image from repeating */
+        }
+        .back-image2 {
+            margin-top: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 700px !important;
+            height: 400px !important;
+            border-radius: 20px;
+            background-image: url('../Images/Untitled1.png');
+            /* background-size: cover; Cover the entire container */
+            transform: translate(-50%, -50%); /* Center the back image */
+            z-index: 1; /* Ensure the back image is behind the front image */
+            background-size: contain; /* Ensure the entire background image is visible */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Prevent background image from repeating */
+    
+        }
+        .back-image3 {
+            margin-top: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 700px !important;
+            height: 400px !important;
+            border-radius: 20px;
+            background-image: url('../Images/Untitled2.png');
+            /* background-size: cover; Cover the entire container */
+            transform: translate(-50%, -50%); /* Center the back image */
+            z-index: 1; /* Ensure the back image is behind the front image */
+            background-size: contain; /* Ensure the entire background image is visible */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Prevent background image from repeating */
+    
+        }
+       
+        .back-image4 {
+            margin-top: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 700px !important;
+            height: 400px !important;
+            border-radius: 20px;
+            background-image: url('../Images/Untitled3.png');
+            /* background-size: cover; Cover the entire container */
+            transform: translate(-50%, -50%); /* Center the back image */
+            z-index: 1; /* Ensure the back image is behind the front image */
+            background-size: contain; /* Ensure the entire background image is visible */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Prevent background image from repeating */
+        }
+
+        .front-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 100%; /* Ensure front image fits within back image */
+            max-height: 100%; /* Ensure front image fits within back image */
+            z-index: 2; /* Ensure the front image is on top of the back image */
+            border-radius: 20px;
+        }
