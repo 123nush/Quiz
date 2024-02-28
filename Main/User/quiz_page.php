@@ -28,15 +28,20 @@
 <script src="../../JavaScript/quiz_time.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <style>
+/* .question-highlight {
+    background-color: #f0f0f0;
+} */
+/* .preview-question {
+        transition: background-color 0.3s ease; 
+    }
+
+.preview-question:hover {
+        background-color: lightgray;
+} */
 .quiz-wrapper {
     display: flex;
-    align-items: flex-start; /* Align children at the start of the cross axis (vertical alignment) */
+    align-items: flex-start; 
 }
-/* #quizImage {
-    margin-right: 20px;
-    height: auto;
-    width: 9;
-} */
 .option-container {
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -80,7 +85,7 @@
 #userScore {
     font-weight: bold;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 .circle-image {
     width: 100px;
@@ -172,11 +177,17 @@
                     </div>    
                 </div>
                 <!--   preview div -->
-                <!-- doing changes for appearence of preview -->
+                <!-- doing changes for appearence of preview !!-->
                 <div id="quizPreview" class="col-lg-7 col-md-8 m-auto bg-light" style="display: none;border-radius:10px">
                     <!-- <div id="score_result_image"> -->
                         <!-- <div id="result_image" class="circle-image"> </div> -->
-                        <div id="userScore" class="text-center"></div>
+                        <div>
+                            <div class="col-lg-12 col-md-6 justify-content-center align-item-center m-auto my-0">
+                            <img src="../../Images/winner.png" style="width: 100%; height: auto;">
+                            </div>
+                            <div id="userScore" class="text-center">
+                            </div>
+                        </div>
                         <div id="attainedQ" class="text-center"></div>
                         <div id="incorrectQ" class="text-center"></div>
                     <!-- </div> -->

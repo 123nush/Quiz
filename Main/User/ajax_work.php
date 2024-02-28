@@ -422,19 +422,26 @@ if (!empty($_POST['job_profile_analysis'])
     $total_questions = $_POST['total_question'];
     $total_score = $_POST['total_score'];
     $category_wise_data=$_POST['categoryData'];
+    if($total_questions=='0'){
+        $total_questions=1;
+    }
+    if($total_score=='0'){
+        $total_score=1;
+    }
+    // echo((float)$total_questions);
+    // echo  nl2br ((float)$total_questions," \n ");
     // Debugging: Log received data
     error_log("Received data: job_profile=$job_profile, total_question=$total_questions, total_score=$total_score");
-
+   // error_log(print_r($total_questions, true));
     $data_to_send = array(
         'job_profile_name_analysis' => $job_profile,
         'attained_questions_analysis' => $total_questions,
         'score_analysis' => $total_score,
         'category_performance_analysis' => json_encode($category_wise_data)
     );
-
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'https://ml-640d.onrender.com/predict');
-    // curl_setopt($ch, CURLOPT_URL, 'http://127.0.0.1:5000/predict');
+    // curl_setopt($ch, CURLOPT_URL, 'https://ml-640d.onrender.com/predict');
+    curl_setopt($ch, CURLOPT_URL, 'http://127.0.0.1:5000/predict');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data_to_send));
@@ -443,8 +450,9 @@ if (!empty($_POST['job_profile_analysis'])
     if ($response === false) {
         // Debugging: Log cURL error
         error_log('cURL Error: ' . curl_error($ch));
-        echo 'Error: Internal server error'; // Return generic error message
+        echo 'Error: Internal server error occured'; // Return generic error message
     } else {
+        
         echo $response; // Return the response from the Flask app
         // print_r($data_to_send);
     }

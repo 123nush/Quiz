@@ -41,15 +41,16 @@
                     <div class="modal-header p-5">
                         <h5 class="modal-title text-center" id="analyseModalLabel">Username Your
                              Performance for Job Profile Name is Excellent</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
+                        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+                        <!-- <span aria-hidden="true">&times;</span> -->
+                        <!-- </button> -->
                     </div>
+                    <div id='modalBody'></div>
                     <div class="modal-body">
                     <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                    <button type="button" class="btn btn-outline-primary text-light" data-bs-dismiss="modal">OK</button>
                     </div>
                     </div>
                 </div>
@@ -95,7 +96,7 @@
                         </div>
                         <div class="mb-3">
                            <button class="btn btn-primary"  type="button" id="submit_to_see_performance" 
-                           data-toggle="modal" data-target="#analyseModal">Analyse</button>
+                           data-toggle="modal" >Analyse</button>
                         </div>
                     </form>
                     

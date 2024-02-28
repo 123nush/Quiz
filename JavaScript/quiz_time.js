@@ -162,6 +162,7 @@ $('document').ready(function(){
                             quizPreviewSection.style.display = 'block';
                             var previewQuestionsDiv = document.getElementById('previewQuestions');
                             previewQuestionsDiv.innerHTML = '';
+                            // previewQuestionsDiv.classList.add('preview-questions-container');
                             var userScoreDiv = document.getElementById('userScore');
                             userScoreDiv.textContent = `Total Score: ${totalCorrect}`;
                             // var resultimage=document.getElementById('result_image');
@@ -237,7 +238,7 @@ $('document').ready(function(){
                          //code to show countdown of time 
                          function startCountdown() {
                             document.getElementById('countdown').style.display = 'block';
-                            let duration = 30; // 10 minutes * 60 seconds = 600 seconds
+                            let duration = 10; // 10 minutes * 60 seconds = 600 seconds
                             const countdownElement = document.getElementById('countdown');
                             // Update the countdown timer every second
                             countdown = setInterval(function() {
