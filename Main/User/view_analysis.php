@@ -84,12 +84,12 @@
                         </div>
                         <div class="mb-3">
                             <label  class="form-label fw-bold">Attained Questions </label>
-                            <input type="text" class="form-control" id="attained_questions" name="attained_questions" autocomplete="off">
+                            <input type="text"  readonly class="form-control" id="attained_questions" name="attained_questions" autocomplete="off">
                             
                         </div>
                         <div class="mb-3">
                             <label  class="form-label fw-bold">Acheived Score </label>
-                            <input type="text" class="form-control" id="acheived_score" name="acheived_score" autocomplete="off">
+                            <input type="text" readonly class="form-control" id="acheived_score" name="acheived_score" autocomplete="off">
                         </div>
                         <div class="mb-3">
                             <h5 id="analysis_to_do_data" ></h5>

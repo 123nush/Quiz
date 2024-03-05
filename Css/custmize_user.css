@@ -1,14 +1,4 @@
 
-
-/* .api-connect-bg {
-    background-image: url(/assets/images/api-mobileconnect.svg);
-    width: 100%;
-    height: 178.2px;
-    margin-top: 10px;
-    background-repeat: no-repeat;
-    background-size: 101% 111%;
-} */
-/* code from nuvama */
         .animation {
             transform: scale(1);
             transition:transform 0.5s ease-in-out;
@@ -70,7 +60,7 @@
         .container {
         position: relative;
         width: 100vw; /* Set width of container to viewport width */
-        height: 50vh; /* Set height of container to viewport height */
+        height: 35vh; /* Set height of container to viewport height */
         overflow: hidden; /* Hide any overflow */
         }
 
@@ -90,11 +80,10 @@
             background-position: center; /* Center the background image */
             background-repeat: no-repeat; /* Prevent background image from repeating */
             @media (max-width: 768px) {
-        /* Adjust styles for screens smaller than 768px (typical tablet and mobile sizes) */
             width: 100%;
             height: auto;
-        /* Adjust any other styles as needed */
             }
+           
         }
 
         

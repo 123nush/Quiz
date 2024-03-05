@@ -58,13 +58,13 @@ function moveClass()
 
       function sendEmail(send_email,otp,send_username)
       {
-        console.log("calling sendEmail()");
+        // console.log("calling sendEmail()");
         $.ajax({
             type: 'POST',
             url:'email.php',
             data:{send_email:send_email,send_username:send_username,otp:otp},
             success: function(data){
-                console.log(data);
+                // console.log(data);
                 $('#emailTemp').html(data);
                 setInterval(moveClass, 0); 
             },
@@ -204,7 +204,7 @@ $('#resetpassword').on('click',function(e){
                     url: 'ajax_work.php',
                     data: {reset_password : $password,user_name:$username},
                     success: function(data) {
-                        console.log(data);
+                        // console.log(data);
                         if(data=='Password Reset')
                         {
                             $('#success').modal('show');

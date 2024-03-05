@@ -27,6 +27,7 @@
     text-align: center;
         }
     </style>
+   
 </head>
 <body>
 <?php
@@ -82,12 +83,12 @@
                         </div>
                         <div class="mb-3 pt-3 col-lg-12">
                             <label for="username" class="form-label">Username </label>
-                            <input type="text" name="username" class="form-control" id="username" autocomplete="on" aria-describedby="usernameVerify" placeholder="e.g.123nush" required />
+                            <input type="text" name="username" class="form-control" id="username" autocomplete="off" aria-describedby="usernameVerify" placeholder="e.g.123nush" required />
                         
                         </div>
                         <div class="mb-3  col-lg-12">
                             <label for="email" class="form-label">Email address</label>
-                            <input type="email" name="email" class="form-control" id="email" autocomplete="on" aria-describedby="emailVerify" placeholder="Enter email which is registered" required />
+                            <input type="email" name="email" class="form-control" id="email" autocomplete="off" aria-describedby="emailVerify" placeholder="Enter email which is registered" required />
                             <div id="verify" class="form-text"></div>
                         </div>
                         <button type="button"  name="CrossCheckUser" id="CrossCheckUser" class="btn btn-primary px-5 py-2 mt-3 w-100">
@@ -140,7 +141,7 @@
                             <label for="confirm_password" class="form-label">Confirm Password</label>
                             <div class="input-group">
                                 <input type="password" name="confirm_password" class="form-control" id="confirm_password" autocomplete="off" aria-describedby="cpass_verify" placeholder="Password" >
-                                <span class="input-group-text cpass_icon" id="basic-addon1">
+                                <span class="input-group-text confirm_pass_icon" id="basic-addon1">
                                     <i class="bi bi-eye-fill cpass_open_eye"></i>
                                     <i class="bi bi-eye-slash-fill cpass_close_eye"></i>
                                 </span>

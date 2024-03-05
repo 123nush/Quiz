@@ -404,8 +404,6 @@ if(!empty($_POST['job_profile_view_analysis'])
             $json_data = json_encode($data_to_send);
             // Send the JSON data to the client
             echo $json_data;
-       
-
     }
     }
     else{
@@ -415,8 +413,8 @@ if(!empty($_POST['job_profile_view_analysis'])
 }
 //code to request render.com
 if (!empty($_POST['job_profile_analysis']) 
-&& !empty($_POST['total_question']) 
-&& !empty($_POST['total_score'])
+&& isset($_POST['total_question']) 
+&& isset($_POST['total_score'])
 && !empty($_POST['categoryData'])) {
     $job_profile = $_POST['job_profile_analysis'];
     $total_questions = $_POST['total_question'];
@@ -428,8 +426,6 @@ if (!empty($_POST['job_profile_analysis'])
     if($total_score=='0'){
         $total_score=1;
     }
-    // echo((float)$total_questions);
-    // echo  nl2br ((float)$total_questions," \n ");
     // Debugging: Log received data
     error_log("Received data: job_profile=$job_profile, total_question=$total_questions, total_score=$total_score");
    // error_log(print_r($total_questions, true));
@@ -440,8 +436,8 @@ if (!empty($_POST['job_profile_analysis'])
         'category_performance_analysis' => json_encode($category_wise_data)
     );
     $ch = curl_init();
-    // curl_setopt($ch, CURLOPT_URL, 'https://ml-640d.onrender.com/predict');
-    curl_setopt($ch, CURLOPT_URL, 'http://127.0.0.1:5000/predict');
+    curl_setopt($ch, CURLOPT_URL, 'https://ml-640d.onrender.com/predict');
+    // curl_setopt($ch, CURLOPT_URL, 'http://127.0.0.1:5000/predict');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data_to_send));
@@ -450,12 +446,13 @@ if (!empty($_POST['job_profile_analysis'])
     if ($response === false) {
         // Debugging: Log cURL error
         error_log('cURL Error: ' . curl_error($ch));
-        echo 'Error: Internal server error occured'; // Return generic error message
+        echo 'Error: Internal server error occured here'; // Return generic error message
     } else {
         
         echo $response; // Return the response from the Flask app
-        // print_r($data_to_send);
+       
     }
+    // print_r($data_to_send);
     // echo "Average";
     curl_close($ch);
 } 

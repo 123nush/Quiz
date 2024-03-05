@@ -145,7 +145,9 @@ $(document).ready(function(){
                                 $.ajax({
                                     type: 'POST',
                                     url: 'ajax_work.php',
-                                    data: {full_name : $full_name, email: $email, password : $password,username_register:$username_register},
+                                    data: {full_name : $full_name, 
+                                        email: $email, password : $password,
+                                        username_register:$username_register},
                                     success: function(data) {
                                         console.log(data);
                                         if(data=='Register')

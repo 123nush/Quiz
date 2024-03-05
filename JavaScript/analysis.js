@@ -58,9 +58,9 @@ $('document').ready(function(){
 
     $('#submit_to_see_performance').on('click',function(e){
         e.preventDefault();
-       var  job_profile_analysis=$('#job_profile_view_analysis').val();
-        var total_question= $('#attained_questions').val();
-        var total_score= $('#acheived_score').val();
+       let  job_profile_analysis=$('#job_profile_view_analysis').val();
+       let total_question= $('#attained_questions').val();
+        let  total_score= $('#acheived_score').val();
         // total_question=0;
         // total_score=0;
         e.preventDefault();
@@ -82,19 +82,27 @@ $('document').ready(function(){
                     const xValues = [];
                     const yValues = [];
                     const barColors = [];
+                    const predefinedColors = ['#cc0099', '#0066ff', '#ff9933', '#00ffcc', '#3366cc', '#99ff33', '#9900cc', '#ff6699', '#66ff99', '#ffccff'];
                     categoryData.forEach(function(category_info) {
                         var y_count = category_info.Y;
                         var n_count = category_info.N;
                         var total_count = category_info.total;
                         var category_name = category_info.category;
                         var percent=Math.round((parseInt(y_count)/parseInt(total_count))*100,2)
-                        const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
-                        barColors.push(randomColor);
+                        function shuffleArray(array) {
+                            for (let i = array.length - 1; i > 0; i--) {
+                                const j = Math.floor(Math.random() * (i + 1));
+                                [array[i], array[j]] = [array[j], array[i]]; // Swap elements randomly
+                            }
+                        }
+                        shuffleArray(predefinedColors);
+                        for (let i = 0; i < categoryData.length; i++) {
+                            const color = predefinedColors[i % predefinedColors.length]; // Use colors in a repeating pattern
+                            barColors.push(color);
+                        }
                         xValues.push(category_name);
                         yValues.push(percent);
                     });
-                //    console.log(xValues);
-                //    console.log(yValues);
                 function drawChart(chartType, xValues, yValues, barColors, title) {
                     var ctx = document.getElementById('myChart').getContext('2d');
                     if (myChart) {
@@ -132,7 +140,5 @@ $('document').ready(function(){
             alert("Select Job Profile for which you want to see analysis");
             $('#analyseModal').modal('hide');
         }
-        
-       
     });
 });
