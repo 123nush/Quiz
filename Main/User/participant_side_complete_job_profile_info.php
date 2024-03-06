@@ -13,7 +13,7 @@
     <title>Job Profile</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" >
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link type="image/png" sizes="16x16" rel="icon" href="https://tse3.mm.bing.net/th?id=OIP.8W1AqXk8aZfMEIyeyOwvAwAAAA&pid=Api&P=0&h=180" />
+    <link type="image/png" sizes="16x16" rel="icon" href="../../Images/logo.PNG" />
     <style>
      .card-text-container {
     display: flex;
@@ -50,10 +50,10 @@ img {
 }
 
     /* For hovering */
-    .rounded:hover {
+    /* .rounded:hover {
         transform: translateY(-10px); 
         box-shadow: 0 5px 15px rgba(0, 0, 0.3, 0.3); 
-    }
+    } */
     /* For arrow shape containers */
     .arrow-box {
     position: relative;
@@ -137,14 +137,14 @@ img {
                         ?>
                         <div class="d-flex justify-content-center parent-container">
                         <div class="go-back-container"><a href="javascript:history.back()"><img src="https://tse3.mm.bing.net/th?id=OIP.3WDg3dO3K_fFvzpULWYoIgHaHa&pid=Api&P=0&h=180" alt="" style="height:50px;width:50px"></a></div>
-                        <div class="col-lg-8  col-md-6 mb-5" id="infoColumn">
+                        <div class="col-lg-10 col-md-6 mb-5" id="infoColumn">
                             <div class="rounded p-3  text-dark" style="cursor: pointer; transition: all 0.3s;background-color:white">
-                                <div style="color:black;background-color:yellow" class="d-flex justify-content-center align-items-center" >
+                                <div style="color:black;background-color:#3887BE" class="d-flex justify-content-center align-items-center" >
                                     <h4 class="card-title" style="text-align: center;" ><?php echo $row_of_query['job_profile_name']; ?></h4>
                                     <img src="../../Images/database administrator.png" alt="job_profile_related_image" style="height:150px;width:150px" >
                                 </div>
-                                <p class="card-text">
-                                    <span  style="font-size:large;" class="fw-bolder">Description:</span>
+                                <p class="card-text p-5">
+                                    <span  style="font-size:large;" class="fw-bolder">Role:</span>
                                     <?php echo $row_of_query['role']; ?>
                                 </p>
                             
@@ -157,12 +157,12 @@ img {
                                 <?php
                                 if(mysqli_num_rows($result_of_job_tasks_info) > 0) {
                                     $index = 0;
-                                    $backgrounds = [
-                                        'linear-gradient(to bottom right, #FFA500, #FF4500)',
-                                        'linear-gradient(to bottom right, #ff69b4, #ff0000)',
-                                        'linear-gradient(to bottom right, #ba55d3, #da70d6 ,#9932cc,#8a2be2, #9400d3)',
-                                        'linear-gradient(to bottom right, #87CEEB, #0000FF)',
-                                        'linear-gradient(to bottom right, #ccff66, #54d911)'
+                                    $backgrounds = ['#52D3D8','#86B6F6','#38419D','#3887BE'
+                                        // 'linear-gradient(to bottom right, #FFA500, #FF4500)',
+                                        // 'linear-gradient(to bottom right, #ff69b4, #ff0000)',
+                                        // 'linear-gradient(to bottom right, #ba55d3, #da70d6 ,#9932cc,#8a2be2, #9400d3)',
+                                        // 'linear-gradient(to bottom right, #87CEEB, #0000FF)',
+                                        // 'linear-gradient(to bottom right, #ccff66, #54d911)'
                                     ];
                                     while($row_of_tasks = mysqli_fetch_assoc($result_of_job_tasks_info)) {
                                         $background_style = isset($backgrounds[$index]) ? $backgrounds[$index] : $backgrounds[0];
@@ -176,7 +176,7 @@ img {
                                 }
                                 ?>
                             <!-- Now styling skills -->
-                            <div class="card-text-container">
+                            <div class="card-text-container p-5">
                                     <div class="left-content">
                                         <span class="fw-bolder">Skills Required:</span><br>
                                         <ul>

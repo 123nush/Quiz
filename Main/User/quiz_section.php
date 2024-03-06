@@ -16,7 +16,7 @@
     <title>User Home Page</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" >
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link type="image/png" sizes="16x16" rel="icon" href="https://tse3.mm.bing.net/th?id=OIP.8W1AqXk8aZfMEIyeyOwvAwAAAA&pid=Api&P=0&h=180" />
+    <link type="image/png" sizes="16x16" rel="icon" href="../../Images/logo.PNG" />
     <script src='../../JavaScript/job_profile.js'></script>
     <!-- link for text animation -->
   <link href="https://cdn.jsdelivr.net/gh/yesiamrocks/cssanimation.io@1.0.3/cssanimation.min.css" rel="stylesheet">
@@ -33,7 +33,7 @@
         width: 0; /* Hide scrollbar */
     }
     .rounded:hover {
-        transform: translateY(-10px); /* Example of a pop-up effect */
+        transform: translateY(-5px); /* Example of a pop-up effect */
         box-shadow: 0 5px 15px rgba(0, 0, 0.3, 0.3); /* Example of a shadow effect */
         /* background-color: #073763; Example of a color change on hover */
     }
@@ -130,9 +130,9 @@
                                 </div>          
                                 <div class="col-md-6 col-lg-6  d-flex justify-content-between" >
                                     <a href="participant_side_complete_job_profile_info.php?profile_job=<?php echo $profile_job?>" ><button type="button" 
-                                    class="btn rounded btn-info text-dark mx-2 " 
+                                    class="btn  btn-info text-dark mx-2 " 
                                     name="view_more_info" >More Info</button></a>
-                                    <button type="button" class="btn rounded btn-info text-dark mx-2" data-bs-toggle="modal" 
+                                    <button type="button" class="btn  btn-info text-dark mx-2" data-bs-toggle="modal" 
                                     data-bs-target="#difficulty_level_selection_modal" id="take_a_quiz<?php echo $row_of_query['job_profile_name']; ?>" name="take_a_quiz">Take A Quiz
                                     </button>
                                 </div>

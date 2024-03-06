@@ -14,7 +14,7 @@
     <script src="../../JavaScript/logout.js"></script>
     <script src="../../JavaScript/login.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" >
-    <link type="image/png" sizes="16x16" rel="icon" href="https://tse3.mm.bing.net/th?id=OIP.8W1AqXk8aZfMEIyeyOwvAwAAAA&pid=Api&P=0&h=180" />
+    <link type="image/png" sizes="16x16" rel="icon" href="../../Images/logo.PNG" />
     <link rel="stylesheet" href="../../Css/landing.css">
     
 </head>
@@ -44,6 +44,26 @@
   height: 200px; /* Example height */
   border: 1px solid #ccc; /* Example border */
   }
+}
+
+.oval-button {
+    width: 100px; 
+    height: 50px; 
+    border-radius: 25px; 
+    background-color: transparent; 
+    color: black; 
+    text-align: center; 
+    text-decoration: none;
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    border: 2px solid  #1976d2; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+}
+
+.oval-button:hover {
+    background-image: linear-gradient(to right, #1976d2, #2196f3); /* Gradient color effect on hover */
 }
 </style>
 <body >
@@ -81,24 +101,15 @@
             </div>
         </div>
     
-    <div class="container sizing mt-5 mb-5 shadowmb-5 bg-body " style="border-radius: 20px">
+    <div class="container sizing mt-5 mb-5 shadowmb-5 bg-body h-50" style="border-radius: 20px">
     <!-- content -->
             <div class="row text-dark ">
-                <div class=" col-md-5 col-lg-6 mx-auto" style="background-color:#1a75ff;">
-                    <!-- <img src="https://1.bp.blogspot.com/-aGY128_uhLA/YOiVbVdX-DI/AAAAAAAAAFI/wqvpHrmEgK86934cxNkOS9jbDFwh9rkTQCLcBGAsYHQ/s720/bigstock-Man-Having-an-Online-Registrat-73738582-720x537.jpg"
-                    alt="Registraion Image" class="img-fluid h-auto" > -->
-                    <!-- <img src="../../Images/register.PNG"
-                    alt="Registraion Image" class="img-fluid h-auto"  id="i1"> -->
-                    <h3 class="p-3 text-center fw-bolder mt-5 text-light">Welcome Back!</h3>
-                    <h5 class="p-3 text-center fw-bolder mt-3 text-light"> Discover your tech strengths and weaknesses with our quiz
-                    </h5>
-                    <p class="text-center mt-3 text-light">
-                    
-                            <!-- Enter your personal details and start your journey with us -->
-                            <a href="register.php"  class="text-light m-2 p-3" >Don't have an account?<br><br>
-                                <button class="btn btn-outline-light ">Register</button> </a>
+            <!-- https://tse4.mm.bing.net/th?id=OIP.O92CMGCWaSC5DnkiX0vVagHaHa&pid=Api&P=0&h=180 -->
+                <div class="p-4 col-lg-6 mt-1">
+                    <img src="https://tse3.mm.bing.net/th?id=OIP.GYQtzKBvzOpRlniZt6cC_wHaFa&pid=Api&P=0&h=180" alt="" class="img-fluid h-75 w-100" />
+                    <p class="text-center mt-5">
+                        <a href="../User/register.php" class="link-dark">Don't have an account? Sign up</a>
                     </p>
-                    
                 </div>
                 <div class="col-md-5 col-lg-6 p-3 mb-5 mt-5 mx-auto align-items-center justify-content-center">
                 <form>
@@ -123,7 +134,7 @@
                        <a href="../User/forgot.php">Forgot password ?</a>
 
                     </div>  
-                    <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                    <button type="submit" class="btn oval-button" id="submit">Submit</button>
                 </form>
             </div>
          

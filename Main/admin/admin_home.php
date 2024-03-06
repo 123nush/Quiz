@@ -31,7 +31,7 @@
         width: 0; /* Hide scrollbar */
     }
     .rounded:hover {
-        transform: translateY(-10px); /* Example of a pop-up effect */
+        transform: translateY(-5px); /* Example of a pop-up effect */
         box-shadow: 0 5px 15px rgba(0, 0, 0.3, 0.3); /* Example of a shadow effect */
         /* background-color: #073763; Example of a color change on hover */
     }
@@ -315,14 +315,14 @@
                         </form>
                         <div class="row justify-content-center">
                             <div class="col-md-6 col-lg-6  d-flex justify-content-between">
-                                <a href="complete_job_profile_info.php?profile_job=<?php echo $profile_job?>" ><button type="button" class="btn rounded btn-info text-dark mx-2"   id="view_more_info<?php echo $row_of_query['job_profile_name']; ?>" 
+                                <a href="complete_job_profile_info.php?profile_job=<?php echo $profile_job?>" ><button type="button" class="btn  btn-info text-dark mx-2"   id="view_more_info<?php echo $row_of_query['job_profile_name']; ?>" 
                                 name="view_more_info" >More Info</button></a>
-                                <button type="button"  class="btn rounded btn-info text-dark mx-2" id="update_job_profile_info<?php echo $row_of_query['job_profile_name']; ?>" name="update_job_profile_info" >Update Info</button>
+                                <button type="button"  class="btn  btn-info text-dark mx-2" id="update_job_profile_info<?php echo $row_of_query['job_profile_name']; ?>" name="update_job_profile_info" >Update Info</button>
                             </div>
                             <div class="col-md-6 col-lg-6  d-flex justify-content-between mt-md-0 mt-3">
-                                <button type="button" class="btn rounded btn-info text-dark mx-2 delete-job-profile" data-profile-id="<?php echo $row_of_query['job_profile_name']; ?>" data-bs-toggle="modal" data-bs-target="#delete_job_profile_modal">Delete Info</button>
+                                <button type="button" class="btn  btn-info text-dark mx-2 delete-job-profile" data-profile-id="<?php echo $row_of_query['job_profile_name']; ?>" data-bs-toggle="modal" data-bs-target="#delete_job_profile_modal">Delete Info</button>
                         
-                                <button type="button"  class="btn rounded btn-info text-dark mx-2" id="view_questions<?php echo $row_of_query['job_profile_name']; ?>" 
+                                <button type="button"  class="btn  btn-info text-dark mx-2" id="view_questions<?php echo $row_of_query['job_profile_name']; ?>" 
                                 data-bs-toggle="modal" data-bs-target="#difficulty_level_selection_modal_to_view_questions" name="view_questions">
                                 View Questions
                                 </button>

@@ -238,7 +238,7 @@ $('document').ready(function(){
                          //code to show countdown of time 
                          function startCountdown() {
                             document.getElementById('countdown').style.display = 'block';
-                            let duration = 10; // 10 minutes * 60 seconds = 600 seconds
+                            let duration = 600; // 10 minutes * 60 seconds = 600 seconds
                             const countdownElement = document.getElementById('countdown');
                             // Update the countdown timer every second
                             countdown = setInterval(function() {

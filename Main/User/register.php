@@ -13,7 +13,7 @@
     <title>Registration Page</title>
     <script src="../../JavaScript/register.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" >
-    <link type="image/png" sizes="16x16" rel="icon" href="https://tse3.mm.bing.net/th?id=OIP.8W1AqXk8aZfMEIyeyOwvAwAAAA&pid=Api&P=0&h=180" />
+    <link type="image/png" sizes="16x16" rel="icon" href="../../Images/logo.PNG" />
     <link rel="stylesheet" href="../../Css/landing.css">
 </head>
 <style>
@@ -30,6 +30,25 @@
   /* height: 200px; Example height */
   border: 1px solid #ccc; /* Example border */
   }
+}
+.oval-button {
+    width: 100px; 
+    height: 50px; 
+    border-radius: 25px; 
+    background-color: transparent; 
+    color: black; 
+    text-align: center; 
+    text-decoration: none;
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    border: 2px solid  #1976d2; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+}
+
+.oval-button:hover {
+    background-image: linear-gradient(to right, #1976d2, #2196f3); /* Gradient color effect on hover */
 }
 </style>
 <body>
@@ -78,7 +97,7 @@
                 </div>
             </div>
         </div>
-    
+    <!-- Doing changes for adding styling -->
     <!-- <div class="container w-75 mt-5 mb-5 shadow p-3 mb-5 bg-body" style="border-radius: 20px"> -->
     <div class="container sizing  shadow mt-5 mb-5 bg-body" style="border-radius: 20px">
 
@@ -86,21 +105,21 @@
     <!-- <h4 class="text-center fw-bolder">Create Your Account!!!</h4> -->
 
                 <div class="col-md-5 col-lg-6 mx-auto align-items-center justify-content-center p-3">
-                <form>
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Username:</label>
-                        <input type="text" class="form-control" id="username" placeholder="eg. nush123" autocomplete="off">
-                        <div id="usernameVerify" class="form-text"></div>  
-                    </div>
-                    <div class="mb-3">
-                        <label for="full_name" class="form-label">Name:</label>
-                        <input type="text" class="form-control" id="full_name" placeholder="eg. Anushka Dalvi" autocomplete="off" required>  
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email:</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter Valid Email Address" autocomplete="off">  
-                        <div id="emailVerify" class="form-text"></div>
-                    </div>
+                    <form>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username:</label>
+                            <input type="text" class="form-control" id="username" placeholder="eg. nush123" autocomplete="off">
+                            <div id="usernameVerify" class="form-text"></div>  
+                        </div>
+                        <div class="mb-3">
+                            <label for="full_name" class="form-label">Name:</label>
+                            <input type="text" class="form-control" id="full_name" placeholder="eg. Anushka Dalvi" autocomplete="off" required>  
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter Valid Email Address" autocomplete="off">  
+                            <div id="emailVerify" class="form-text"></div>
+                        </div>
                     
                         <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>
@@ -113,46 +132,36 @@
                                         </span>
                                     </div>
                                     <div id="pass_verify" class="form-text"></div>
-                    </div>
-                    <div class="mb-3">
-                                    <label for="password" class="form-label">Confirm Password</label>
-                                    <div class="input-group">
-                                        <input type="password" name="confirm_password" class="form-control"
-                                        id="confirm_password" aria-describedby="pass_verify" placeholder="Confirm Password" 
-                                        autocomplete="off" required>
-                                        <span class="input-group-text confirm_pass_icon" id="basic-addon1">
-                                            <i class="bi bi-eye-fill cpass_open_eye"></i>
-                                            <i class="bi bi-eye-slash-fill cpass_close_eye"></i>
-                                        </span>
-                                    </div>
-                                    <div id="confirm_password_verify" class="form-text"></div>
-                    </div>
-                
-                    <button type="submit" class="btn btn-primary" id="submit">Submit</button>
-                </form>
-            </div>
-            <div class=" col-md-5 col-lg-6 mx-auto" style="background-color:#1a75ff;">
-                <!-- <img src="https://1.bp.blogspot.com/-aGY128_uhLA/YOiVbVdX-DI/AAAAAAAAAFI/wqvpHrmEgK86934cxNkOS9jbDFwh9rkTQCLcBGAsYHQ/s720/bigstock-Man-Having-an-Online-Registrat-73738582-720x537.jpg"
-                alt="Registraion Image" class="img-fluid h-auto" > -->
-                <!-- <img src="../../Images/register.PNG"
-                alt="Registraion Image" class="img-fluid h-auto"  id="i1"> -->
-                <h3 class="p-3 text-center fw-bolder mt-5 text-light">Hello, Friend!</h3>
-                <h5 class="p-3 text-center fw-bolder mt-5 text-light">Enter your personal details and start your journey with us</h5>
-                <p class="text-center mt-5 text-light">
-                
-                        <!-- Enter your personal details and start your journey with us -->
-                        <a href="login.php"  class="text-light p-3">Already have an account?<br><br>
-                            <button class="btn btn-light">Login</button> </a>
-                </p>
-                
-            </div>
+                        </div>
+                        <div class="mb-3">
+                                        <label for="password" class="form-label">Confirm Password</label>
+                                        <div class="input-group">
+                                            <input type="password" name="confirm_password" class="form-control"
+                                            id="confirm_password" aria-describedby="pass_verify" placeholder="Confirm Password" 
+                                            autocomplete="off" required>
+                                            <span class="input-group-text confirm_pass_icon" id="basic-addon1">
+                                                <i class="bi bi-eye-fill cpass_open_eye"></i>
+                                                <i class="bi bi-eye-slash-fill cpass_close_eye"></i>
+                                            </span>
+                                        </div>
+                                        <div id="confirm_password_verify" class="form-text"></div>
+                        </div>
+                        <button type="submit" class="btn oval-button" id="submit">Submit</button>
+                    </form>
+                </div>
+                <div class="p-4 col-lg-6">
+                    <img src="https://img.freepik.com/premium-vector/online-registration-sign-up-with-man-sitting-near-smartphone_268404-95.jpg?w=1480" alt="" class="img-fluid h-auto" />
+                    <p class="text-center mt-5">
+                        <a href="../User/login.php"  class="link-dark">Already have an account? Sign in</a>
+                    </p>
+                </div>
         <!-- <p class="text-center mt-5">
                         <a href="login.php"  class="link-dark">Already have an account? Login</a>
                     </p> -->
         </div>
     </div>
 </div>
-    <script>
+    <!-- <script>
     $(document).ready(function () {
         $("#loader-container").load("../User/loader.html", function () {
                 // Once loader.html is loaded, show the main content
@@ -172,7 +181,7 @@
             animateImage();
         });
     });
-</script>
+</script> -->
 
 
 </body>
